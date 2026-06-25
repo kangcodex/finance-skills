@@ -38,10 +38,10 @@
     {
       "skill": "daily-market-watch",
       "eval_name": "default-global-7day-report",
-      "with_skill_pass_rate": 0.7,
+      "with_skill_pass_rate": 0.8,
       "without_skill_pass_rate": 0.3,
-      "delta": 0.39999999999999997,
-      "with_skill_passed": 7,
+      "delta": 0.5,
+      "with_skill_passed": 8,
       "with_skill_total": 10,
       "without_skill_passed": 3,
       "without_skill_total": 10
@@ -60,10 +60,10 @@
     {
       "skill": "daily-market-watch",
       "eval_name": "executive-summary-only",
-      "with_skill_pass_rate": 0.5,
+      "with_skill_pass_rate": 1.0,
       "without_skill_pass_rate": 0.75,
-      "delta": -0.25,
-      "with_skill_passed": 2,
+      "delta": 0.25,
+      "with_skill_passed": 4,
       "with_skill_total": 4,
       "without_skill_passed": 3,
       "without_skill_total": 4
@@ -71,10 +71,10 @@
     {
       "skill": "thematic-stock-picker",
       "eval_name": "default-5-themes-2031",
-      "with_skill_pass_rate": 0.75,
+      "with_skill_pass_rate": 0.8333333333333334,
       "without_skill_pass_rate": 0.4166666666666667,
-      "delta": 0.3333333333333333,
-      "with_skill_passed": 9,
+      "delta": 0.4166666666666667,
+      "with_skill_passed": 10,
       "with_skill_total": 12,
       "without_skill_passed": 5,
       "without_skill_total": 12
@@ -82,10 +82,10 @@
     {
       "skill": "thematic-stock-picker",
       "eval_name": "single-theme-ai-infrastructure",
-      "with_skill_pass_rate": 0.4,
+      "with_skill_pass_rate": 0.8,
       "without_skill_pass_rate": 0.2,
-      "delta": 0.2,
-      "with_skill_passed": 2,
+      "delta": 0.6000000000000001,
+      "with_skill_passed": 4,
       "with_skill_total": 5,
       "without_skill_passed": 1,
       "without_skill_total": 5

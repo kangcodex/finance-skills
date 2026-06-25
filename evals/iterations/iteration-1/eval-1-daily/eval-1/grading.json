@@ -11,27 +11,27 @@
       {
         "text": "scope_declared_as_china",
         "passed": true,
-        "evidence": "any of 2 needles: 2 present"
+        "evidence": "any of 2: 2 present"
       },
       {
         "text": "uses_china_specific_sources",
         "passed": true,
-        "evidence": "2/7 present (need 2)"
+        "evidence": "2/7 present (need >=2)"
       },
       {
         "text": "covers_chinese_assets",
         "passed": true,
-        "evidence": "any of 12 needles: 5 present"
+        "evidence": "any of 12: 5 present"
       },
       {
         "text": "all_main_sections_present",
         "passed": false,
-        "evidence": "any of 1 needles: 1 present | unparsed: at least 2 of: 'Value', 'Momentum', 'Allocation', 'Options', 'Trends' or 'Risks'"
+        "evidence": "'Market Overview' present | unparsed: at least 2 of: 'Value', 'Momentum', 'Allocation', 'Options', 'Trends' or 'Risks'"
       },
       {
         "text": "disclaimer_present",
         "passed": true,
-        "evidence": "all 2 needles present"
+        "evidence": "'**Disclaimer:**' present | 'not constitute financial advice' present"
       }
     ],
     "passed": 4,
@@ -46,27 +46,27 @@
       {
         "text": "scope_declared_as_china",
         "passed": false,
-        "evidence": "any of 2 needles: 0 present"
+        "evidence": "any of 2: 0 present"
       },
       {
         "text": "uses_china_specific_sources",
         "passed": false,
-        "evidence": "0/7 present (need 2)"
+        "evidence": "0/7 present (need >=2)"
       },
       {
         "text": "covers_chinese_assets",
         "passed": false,
-        "evidence": "any of 12 needles: 0 present"
+        "evidence": "any of 12: 0 present"
       },
       {
         "text": "all_main_sections_present",
         "passed": false,
-        "evidence": "any of 1 needles: 0 present | unparsed: at least 2 of: 'Value', 'Momentum', 'Allocation', 'Options', 'Trends' or 'Risks'"
+        "evidence": "'Market Overview' absent | unparsed: at least 2 of: 'Value', 'Momentum', 'Allocation', 'Options', 'Trends' or 'Risks'"
       },
       {
         "text": "disclaimer_present",
         "passed": false,
-        "evidence": "missing 2/2: ['**Disclaimer:**', 'not constitute financial advice']"
+        "evidence": "'**Disclaimer:**' absent | 'not constitute financial advice' absent"
       }
     ],
     "passed": 0,

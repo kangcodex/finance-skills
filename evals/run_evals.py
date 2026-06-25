@@ -129,15 +129,19 @@ def evaluate_check(check: str, output: str) -> tuple[bool, str]:
             results.append((not present, f"'{needle}' {'present' if present else 'absent'}"))
             continue
 
-        m_n = re.match(r"^(?:output\s+)?contains at least (\d+) (?:mentions )?of:\s*(.+)$", part, re.IGNORECASE)
+        m_n = re.match(r"^(?:output\s+)?contains at least (\d+) (?:and at most (\d+) )?(?:mentions )?of:\s*(.+)$", part, re.IGNORECASE)
         if m_n:
-            n = int(m_n.group(1))
-            list_str = m_n.group(2)
+            n_min = int(m_n.group(1))
+            n_max_str = m_n.group(2)
+            n_max = int(n_max_str) if n_max_str else None
+            list_str = m_n.group(3)
             items = re.findall(r"'([^']*)'", list_str)
             if not items:
                 items = re.findall(r"\b([A-Z][A-Za-z][A-Za-z0-9]+)\b", list_str)
             count = sum(1 for item in items if item.lower() in output.lower())
-            results.append((count >= n, f"{count}/{len(items)} present (need {n})"))
+            ok = count >= n_min and (n_max is None or count <= n_max)
+            rng = f"[{n_min}-{n_max}]" if n_max is not None else f">={n_min}"
+            results.append((ok, f"{count}/{len(items)} present (need {rng})"))
             continue
 
         m_r = re.match(r"^output contains (\d+) instances of '([^']*)'$", part, re.IGNORECASE)
@@ -164,29 +168,30 @@ def evaluate_check(check: str, output: str) -> tuple[bool, str]:
         m_or = re.match(r"^output contains\s+(.+)$", part, re.IGNORECASE)
         if m_or:
             tail = m_or.group(1)
-            needles = re.findall(r"'([^']*)'", tail)
-            if not needles:
-                results.append((False, f"unparsed: {part}"))
-                continue
-            ops = re.findall(r"'\s+(AND|or)\s+'", tail, flags=re.IGNORECASE)
-            if not ops:
-                ops = re.findall(r"'\s+or\s+'", tail, flags=re.IGNORECASE)
-                if ops:
-                    ops = ["or"] * len(ops)
-            has_and = any(op.lower() == "and" for op in ops)
-            has_or = any(op.lower() == "or" for op in ops)
-            if has_and and has_or:
-                results.append((False, f"unparsed: mixed AND/or in {part}"))
-                continue
-            if has_or or not has_and:
-                present = [n for n in needles if n.lower() in output.lower()]
-                results.append((bool(present), f"any of {len(needles)} needles: {len(present)} present"))
-            else:
-                missing = [n for n in needles if n.lower() not in output.lower()]
-                if missing:
-                    results.append((False, f"missing {len(missing)}/{len(needles)}: {missing[:3]}"))
+            segments = re.split(r"\s+(?:AND|and)\s+", tail)
+            seg_results = []
+            for seg in segments:
+                seg = seg.strip()
+                seg_needles = re.findall(r"'([^']*)'", seg)
+                if not seg_needles:
+                    seg_results.append((False, f"unparsed segment: {seg}"))
+                    continue
+                if len(seg_needles) == 1:
+                    present = seg_needles[0].lower() in output.lower()
+                    seg_results.append((present, f"'{seg_needles[0]}' {'present' if present else 'absent'}"))
                 else:
-                    results.append((True, f"all {len(needles)} needles present"))
+                    has_or = re.search(r"'\s+or\s+'", seg, re.IGNORECASE) is not None
+                    if has_or:
+                        present = [n for n in seg_needles if n.lower() in output.lower()]
+                        seg_results.append((bool(present), f"any of {len(seg_needles)}: {len(present)} present"))
+                    else:
+                        missing = [n for n in seg_needles if n.lower() not in output.lower()]
+                        if missing:
+                            seg_results.append((False, f"missing {len(missing)}/{len(seg_needles)}: {missing[:3]}"))
+                        else:
+                            seg_results.append((True, f"all {len(seg_needles)} present"))
+            ok = all(r[0] for r in seg_results)
+            results.append((ok, " | ".join(r[1] for r in seg_results)))
             continue
 
         m_dnc_or = re.match(r"^output does NOT contain\s+(.+)$", part, re.IGNORECASE)

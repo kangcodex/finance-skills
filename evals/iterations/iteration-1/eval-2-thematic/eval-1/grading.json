@@ -11,32 +11,32 @@
       {
         "text": "ai_infrastructure_focus",
         "passed": true,
-        "evidence": "any of 3 needles: 3 present"
+        "evidence": "any of 3: 2 present"
       },
       {
         "text": "5_to_8_tickers",
-        "passed": false,
-        "evidence": "any of 1 needles: 1 present | unparsed: at least 5  AND at most 8 of: '1. **', '2. **', '3. **', '4. **', '5. **', '6. **', '7. **', '8. **'"
+        "passed": true,
+        "evidence": "6/8 present (need >=5)"
       },
       {
         "text": "screening_workings",
-        "passed": false,
-        "evidence": "unparsed: mixed AND/or in output contains 'universe'  AND 'screen'  AND 'survivor' or 'filter'"
+        "passed": true,
+        "evidence": "'universe' present | 'screen' present | any of 2: 1 present"
       },
       {
         "text": "sources_cited",
         "passed": false,
-        "evidence": "missing 1/2: ['## Sources']"
+        "evidence": "'## Sources' absent | 'http' present"
       },
       {
         "text": "dd_disclaimer",
         "passed": true,
-        "evidence": "all 2 needles present"
+        "evidence": "'Always do your own DD' present | 'this is not financial advice' present"
       }
     ],
-    "passed": 2,
+    "passed": 4,
     "total": 5,
-    "pass_rate": 0.4
+    "pass_rate": 0.8
   },
   "without_skill": {
     "run_id": "eval-2-thematic-eval-1-without_skill",
@@ -46,32 +46,32 @@
       {
         "text": "ai_infrastructure_focus",
         "passed": true,
-        "evidence": "any of 3 needles: 2 present"
+        "evidence": "any of 3: 2 present"
       },
       {
         "text": "5_to_8_tickers",
         "passed": false,
-        "evidence": "any of 1 needles: 0 present | unparsed: at least 5  AND at most 8 of: '1. **', '2. **', '3. **', '4. **', '5. **', '6. **', '7. **', '8. **'"
+        "evidence": "0/8 present (need >=5)"
       },
       {
         "text": "screening_workings",
         "passed": false,
-        "evidence": "unparsed: mixed AND/or in output contains 'universe'  AND 'screen'  AND 'survivor' or 'filter'"
+        "evidence": "'universe' absent | 'screen' present | any of 2: 0 present"
       },
       {
         "text": "sources_cited",
         "passed": false,
-        "evidence": "missing 2/2: ['## Sources', 'http']"
+        "evidence": "'## Sources' absent | 'http' absent"
       },
       {
         "text": "dd_disclaimer",
         "passed": false,
-        "evidence": "missing 2/2: ['Always do your own DD', 'this is not financial advice']"
+        "evidence": "'Always do your own DD' absent | 'this is not financial advice' absent"
       }
     ],
     "passed": 1,
     "total": 5,
     "pass_rate": 0.2
   },
-  "delta_pass_rate": 0.2
+  "delta_pass_rate": 0.6000000000000001
 }

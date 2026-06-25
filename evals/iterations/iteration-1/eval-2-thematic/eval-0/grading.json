@@ -11,47 +11,47 @@
       {
         "text": "macro_policy_backdrop_present",
         "passed": true,
-        "evidence": "any of 1 needles: 1 present"
+        "evidence": "'policy' present"
       },
       {
         "text": "screening_workings_with_counts",
         "passed": false,
-        "evidence": "all 2 needles present | unparsed: at least 2 numeric counts"
+        "evidence": "'universe' present | 'screen' present | unparsed: at least 2 numeric counts"
       },
       {
         "text": "exactly_5_themes",
         "passed": true,
-        "evidence": "all 5 needles present"
+        "evidence": "'5-Year Prediction 1' present | '5-Year Prediction 2' present | '5-Year Prediction 3' present | '5-Year Prediction 4' present | '5-Year Prediction 5' present"
       },
       {
         "text": "per_ticker_4_bullets",
         "passed": true,
-        "evidence": "all 4 needles present"
+        "evidence": "'Thesis fit' present | 'Catalyst' present | 'Valuation' present | 'conviction' present"
       },
       {
         "text": "conviction_tier_per_ticker",
         "passed": true,
-        "evidence": "5/5 present (need 5)"
+        "evidence": "5/5 present (need >=5)"
       },
       {
         "text": "top_convictions_section",
         "passed": true,
-        "evidence": "any of 3 needles: 1 present"
+        "evidence": "any of 3: 1 present"
       },
       {
         "text": "cross_cutting_risks",
-        "passed": false,
-        "evidence": "unparsed: mixed AND/or in output contains 'risk'  AND 'mitigation' or 'cross-cutting'"
+        "passed": true,
+        "evidence": "'risk' present | any of 2: 2 present"
       },
       {
         "text": "sources_grouped",
         "passed": false,
-        "evidence": "any of 1 needles: 0 present | unparsed: at least 2 of: '**Policy' or '**Company' or '**Data' or '**Industry'"
+        "evidence": "'## Sources' absent | unparsed: at least 2 of: '**Policy' or '**Company' or '**Data' or '**Industry'"
       },
       {
         "text": "dd_disclaimer_verbatim",
         "passed": true,
-        "evidence": "all 2 needles present"
+        "evidence": "'Always do your own DD' present | 'this is not financial advice' present"
       },
       {
         "text": "no_buy_sell_imperative",
@@ -66,12 +66,12 @@
       {
         "text": "small_mid_cap_mcap_range",
         "passed": true,
-        "evidence": "any of 4 needles: 3 present"
+        "evidence": "any of 4: 3 present"
       }
     ],
-    "passed": 9,
+    "passed": 10,
     "total": 12,
-    "pass_rate": 0.75
+    "pass_rate": 0.8333333333333334
   },
   "without_skill": {
     "run_id": "eval-2-thematic-eval-0-without_skill",
@@ -81,47 +81,47 @@
       {
         "text": "macro_policy_backdrop_present",
         "passed": true,
-        "evidence": "any of 1 needles: 1 present"
+        "evidence": "'policy' present"
       },
       {
         "text": "screening_workings_with_counts",
         "passed": false,
-        "evidence": "all 2 needles present | unparsed: at least 2 numeric counts"
+        "evidence": "'universe' present | 'screen' present | unparsed: at least 2 numeric counts"
       },
       {
         "text": "exactly_5_themes",
         "passed": false,
-        "evidence": "missing 5/5: ['5-Year Prediction 1', '5-Year Prediction 2', '5-Year Prediction 3']"
+        "evidence": "'5-Year Prediction 1' absent | '5-Year Prediction 2' absent | '5-Year Prediction 3' absent | '5-Year Prediction 4' absent | '5-Year Prediction 5' absent"
       },
       {
         "text": "per_ticker_4_bullets",
         "passed": true,
-        "evidence": "all 4 needles present"
+        "evidence": "'Thesis fit' present | 'Catalyst' present | 'Valuation' present | 'conviction' present"
       },
       {
         "text": "conviction_tier_per_ticker",
         "passed": false,
-        "evidence": "0/5 present (need 5)"
+        "evidence": "0/5 present (need >=5)"
       },
       {
         "text": "top_convictions_section",
         "passed": false,
-        "evidence": "any of 3 needles: 0 present"
+        "evidence": "any of 3: 0 present"
       },
       {
         "text": "cross_cutting_risks",
         "passed": false,
-        "evidence": "unparsed: mixed AND/or in output contains 'risk'  AND 'mitigation' or 'cross-cutting'"
+        "evidence": "'risk' present | any of 2: 0 present"
       },
       {
         "text": "sources_grouped",
         "passed": false,
-        "evidence": "any of 1 needles: 0 present | unparsed: at least 2 of: '**Policy' or '**Company' or '**Data' or '**Industry'"
+        "evidence": "'## Sources' absent | unparsed: at least 2 of: '**Policy' or '**Company' or '**Data' or '**Industry'"
       },
       {
         "text": "dd_disclaimer_verbatim",
         "passed": false,
-        "evidence": "missing 2/2: ['Always do your own DD', 'this is not financial advice']"
+        "evidence": "'Always do your own DD' absent | 'this is not financial advice' absent"
       },
       {
         "text": "no_buy_sell_imperative",
@@ -136,12 +136,12 @@
       {
         "text": "small_mid_cap_mcap_range",
         "passed": true,
-        "evidence": "any of 4 needles: 1 present"
+        "evidence": "any of 4: 1 present"
       }
     ],
     "passed": 5,
     "total": 12,
     "pass_rate": 0.4166666666666667
   },
-  "delta_pass_rate": 0.3333333333333333
+  "delta_pass_rate": 0.4166666666666667
 }

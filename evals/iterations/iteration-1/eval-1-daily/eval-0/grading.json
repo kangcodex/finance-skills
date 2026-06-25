@@ -11,7 +11,7 @@
       {
         "text": "market_overview_section_present",
         "passed": true,
-        "evidence": "any of 3 needles: 1 present"
+        "evidence": "any of 3: 1 present"
       },
       {
         "text": "value_section_with_5_tickers_each",
@@ -21,47 +21,47 @@
       {
         "text": "momentum_section_present",
         "passed": true,
-        "evidence": "any of 3 needles: 3 present"
+        "evidence": "any of 3: 3 present"
       },
       {
         "text": "allocation_section_present",
         "passed": true,
-        "evidence": "any of 3 needles: 3 present"
+        "evidence": "any of 3: 3 present"
       },
       {
         "text": "options_section_present",
         "passed": false,
-        "evidence": "any of 2 needles: 2 present | unparsed: at least 3 mentions of: 'Wheel', 'Covered Call', 'Protective Put', 'Iron Condor', 'Collar', 'Straddle', 'Strangle', 'Spread'"
+        "evidence": "any of 2: 2 present | unparsed: at least 3 mentions of: 'Wheel', 'Covered Call', 'Protective Put', 'Iron Condor', 'Collar', 'Straddle', 'Strangle', 'Spread'"
       },
       {
         "text": "trends_risks_events_section",
-        "passed": false,
-        "evidence": "unparsed: mixed AND/or in output contains '## E.' or 'Trends'  AND 'Risks' AND"
+        "passed": true,
+        "evidence": "any of 2: 2 present | 'Risks' present"
       },
       {
         "text": "sources_block_grouped",
         "passed": false,
-        "evidence": "any of 1 needles: 1 present | unparsed: at least 2 of: '**Policy' or '**Company' or '**Data' or '**Industry'"
+        "evidence": "'## Sources' present | unparsed: at least 2 of: '**Policy' or '**Company' or '**Data' or '**Industry'"
       },
       {
         "text": "disclaimer_present",
         "passed": true,
-        "evidence": "any of 1 needles: 1 present"
+        "evidence": "'**Disclaimer:**' present"
       },
       {
         "text": "fed_signals_referenced",
         "passed": true,
-        "evidence": "any of 6 needles: 3 present"
+        "evidence": "any of 6: 3 present"
       },
       {
         "text": "time_window_7_days",
         "passed": true,
-        "evidence": "any of 6 needles: 2 present"
+        "evidence": "any of 6: 2 present"
       }
     ],
-    "passed": 7,
+    "passed": 8,
     "total": 10,
-    "pass_rate": 0.7
+    "pass_rate": 0.8
   },
   "without_skill": {
     "run_id": "eval-1-daily-eval-0-without_skill",
@@ -71,7 +71,7 @@
       {
         "text": "market_overview_section_present",
         "passed": false,
-        "evidence": "any of 3 needles: 0 present"
+        "evidence": "any of 3: 0 present"
       },
       {
         "text": "value_section_with_5_tickers_each",
@@ -81,47 +81,47 @@
       {
         "text": "momentum_section_present",
         "passed": false,
-        "evidence": "any of 3 needles: 0 present"
+        "evidence": "any of 3: 0 present"
       },
       {
         "text": "allocation_section_present",
         "passed": false,
-        "evidence": "any of 3 needles: 0 present"
+        "evidence": "any of 3: 0 present"
       },
       {
         "text": "options_section_present",
         "passed": false,
-        "evidence": "any of 2 needles: 0 present | unparsed: at least 3 mentions of: 'Wheel', 'Covered Call', 'Protective Put', 'Iron Condor', 'Collar', 'Straddle', 'Strangle', 'Spread'"
+        "evidence": "any of 2: 0 present | unparsed: at least 3 mentions of: 'Wheel', 'Covered Call', 'Protective Put', 'Iron Condor', 'Collar', 'Straddle', 'Strangle', 'Spread'"
       },
       {
         "text": "trends_risks_events_section",
         "passed": false,
-        "evidence": "unparsed: mixed AND/or in output contains '## E.' or 'Trends'  AND 'Risks' AND"
+        "evidence": "any of 2: 0 present | 'Risks' absent"
       },
       {
         "text": "sources_block_grouped",
         "passed": false,
-        "evidence": "any of 1 needles: 0 present | unparsed: at least 2 of: '**Policy' or '**Company' or '**Data' or '**Industry'"
+        "evidence": "'## Sources' absent | unparsed: at least 2 of: '**Policy' or '**Company' or '**Data' or '**Industry'"
       },
       {
         "text": "disclaimer_present",
         "passed": false,
-        "evidence": "any of 1 needles: 0 present"
+        "evidence": "'**Disclaimer:**' absent"
       },
       {
         "text": "fed_signals_referenced",
         "passed": true,
-        "evidence": "any of 6 needles: 1 present"
+        "evidence": "any of 6: 1 present"
       },
       {
         "text": "time_window_7_days",
         "passed": true,
-        "evidence": "any of 6 needles: 1 present"
+        "evidence": "any of 6: 1 present"
       }
     ],
     "passed": 3,
     "total": 10,
     "pass_rate": 0.3
   },
-  "delta_pass_rate": 0.39999999999999997
+  "delta_pass_rate": 0.5
 }

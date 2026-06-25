@@ -11,22 +11,22 @@
       {
         "text": "filters_by_member_name",
         "passed": true,
-        "evidence": "any of 2 needles: 2 present"
+        "evidence": "any of 2: 2 present"
       },
       {
         "text": "uses_congress_data_source",
         "passed": true,
-        "evidence": "any of 4 needles: 4 present"
+        "evidence": "any of 4: 4 present"
       },
       {
         "text": "time_window_specified",
         "passed": true,
-        "evidence": "any of 6 needles: 5 present"
+        "evidence": "any of 6: 5 present"
       },
       {
         "text": "mentions_transaction_or_ticker",
         "passed": true,
-        "evidence": "any of 11 needles: 8 present"
+        "evidence": "any of 11: 8 present"
       }
     ],
     "passed": 4,
@@ -41,22 +41,22 @@
       {
         "text": "filters_by_member_name",
         "passed": true,
-        "evidence": "any of 2 needles: 1 present"
+        "evidence": "any of 2: 1 present"
       },
       {
         "text": "uses_congress_data_source",
         "passed": false,
-        "evidence": "any of 4 needles: 0 present"
+        "evidence": "any of 4: 0 present"
       },
       {
         "text": "time_window_specified",
         "passed": false,
-        "evidence": "any of 6 needles: 0 present"
+        "evidence": "any of 6: 0 present"
       },
       {
         "text": "mentions_transaction_or_ticker",
         "passed": true,
-        "evidence": "any of 11 needles: 6 present"
+        "evidence": "any of 11: 6 present"
       }
     ],
     "passed": 2,

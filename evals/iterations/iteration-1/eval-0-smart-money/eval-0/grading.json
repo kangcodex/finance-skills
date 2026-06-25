@@ -16,12 +16,12 @@
       {
         "text": "mentions_specific_whales",
         "passed": true,
-        "evidence": "15/23 present (need 2)"
+        "evidence": "15/23 present (need >=2)"
       },
       {
         "text": "references_net_volume_or_conviction",
         "passed": true,
-        "evidence": "any of 6 needles: 3 present"
+        "evidence": "any of 6: 3 present"
       },
       {
         "text": "no_trade_execution_imperative",
@@ -46,12 +46,12 @@
       {
         "text": "mentions_specific_whales",
         "passed": false,
-        "evidence": "1/23 present (need 2)"
+        "evidence": "1/23 present (need >=2)"
       },
       {
         "text": "references_net_volume_or_conviction",
         "passed": false,
-        "evidence": "any of 6 needles: 0 present"
+        "evidence": "any of 6: 0 present"
       },
       {
         "text": "no_trade_execution_imperative",
