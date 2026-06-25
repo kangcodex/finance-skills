@@ -289,5 +289,8 @@ design/
 issue/
 prd/
 
+# docs/design/ is the per-skill design notes directory — allow it
+!/docs/design/
+
 # Test runs / working artifacts (not part of any skill)
 test-runs/

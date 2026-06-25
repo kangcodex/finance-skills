@@ -55,5 +55,5 @@ Negative:
 
 ## See also
 
-- `daily-market-watch/SKILL.md` — the Guardrails section that operationalises this rule
-- `daily-market-watch/references/regional-sources.md` — the canonical source map
+- `skills/daily-market-watch/SKILL.md` — the Guardrails section that operationalises this rule
+- `skills/daily-market-watch/references/regional-sources.md` — the canonical source map

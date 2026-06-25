@@ -6,9 +6,9 @@ A collection of agent skills for financial markets analysis, portfolio construct
 
 | Skill | Folder | What it does |
 |-------|--------|--------------|
-| `smart-money-tracker` | [`smart-money-tracker/`](smart-money-tracker/) | Track SEC 13F institutional holdings + congressional STOCK Act trades + House Clerk disclosures. Convergence analysis between whales, politicians, retail flows. |
-| `daily-market-watch` | [`daily-market-watch/`](daily-market-watch/) | Global finance news report — 6 sections (Market Overview, Value, Momentum, Allocation, Options, Trends/Risks/Events), 12 region zoom-ins, Fed signals integration. |
-| `thematic-stock-picker` | [`thematic-stock-picker/`](thematic-stock-picker/) | High-conviction 5-year thematic stock picker — 5 distinct policy-anchored themes × 5-8 screened small/mid-cap US/ADR names, with screening workings + sources + DD disclaimer. |
+| `smart-money-tracker` | [`skills/smart-money-tracker/`](skills/smart-money-tracker/) | Track SEC 13F institutional holdings + congressional STOCK Act trades + House Clerk disclosures. Convergence analysis between whales, politicians, retail flows. |
+| `daily-market-watch` | [`skills/daily-market-watch/`](skills/daily-market-watch/) | Global finance news report — 6 sections (Market Overview, Value, Momentum, Allocation, Options, Trends/Risks/Events), 12 region zoom-ins, Fed signals integration. |
+| `thematic-stock-picker` | [`skills/thematic-stock-picker/`](skills/thematic-stock-picker/) | High-conviction 5-year thematic stock picker — 5 distinct policy-anchored themes × 5-8 screened small/mid-cap US/ADR names, with screening workings + sources + DD disclaimer. |
 
 All three skills produce **source-cited Markdown reports** and follow a common contract: each has a `SKILL.md` workflow, a `references/` directory with curated source maps or screening criteria, and an `examples/` directory with a sample output for verification.
 
@@ -57,7 +57,7 @@ npx skills add kangcodex/finance-skills
 npx skills add kangcodex/finance-skills --skill thematic-stock-picker
 
 # Direct subpath (works for any agent that resolves GitHub tree URLs)
-npx skills add https://github.com/kangcodex/finance-skills/tree/main/thematic-stock-picker
+npx skills add https://github.com/kangcodex/finance-skills/tree/main/skills/thematic-stock-picker
 ```
 
 ### Install for a specific agent only
@@ -98,7 +98,7 @@ cd finance-skills
 
 # Copy the skill into your agent's skills directory
 mkdir -p ~/.claude/skills
-cp -r thematic-stock-picker ~/.claude/skills/thematic-stock-picker
+cp -r skills/thematic-stock-picker ~/.claude/skills/thematic-stock-picker
 ```
 
 ## Development
@@ -118,24 +118,24 @@ finance-skills/
 ├── README.md
 ├── Makefile
 ├── LICENSE
-├── smart-money-tracker/      # skill 1 (script-driven)
-│   ├── SKILL.md
-│   ├── scripts/               # 4 thin entrypoint wrappers
-│   ├── src/smart_money_tracker/  # importable package
-│   ├── references/            # (none — scripts embed the workflow)
-│   ├── examples/              # canonical output structure
-│   ├── data/, reports/        # runtime caches and outputs
-│   └── tests/                 # skill-level tests
-├── daily-market-watch/        # skill 2 (research-driven)
-│   ├── SKILL.md
-│   ├── references/regional-sources.md
-│   ├── references/fed-signals.md
-│   └── examples/              # sample-report.md, sample-lite.md
-├── thematic-stock-picker/     # skill 3 (research-driven)
-│   ├── SKILL.md
-│   ├── references/screening-criteria.md
-│   ├── references/sector-themes.md
-│   └── examples/              # sample-report.md, sample-ai-infra.md
+├── skills/                    # all three skills live here
+│   ├── smart-money-tracker/   # skill 1 (script-driven)
+│   │   ├── SKILL.md
+│   │   ├── scripts/            # 4 thin entrypoint wrappers
+│   │   ├── src/smart_money_tracker/  # importable package
+│   │   ├── examples/           # canonical output structure
+│   │   ├── data/, reports/     # runtime caches and outputs
+│   │   └── tests/              # skill-level tests
+│   ├── daily-market-watch/     # skill 2 (research-driven)
+│   │   ├── SKILL.md
+│   │   ├── references/regional-sources.md
+│   │   ├── references/fed-signals.md
+│   │   └── examples/           # sample-report.md, sample-lite.md
+│   └── thematic-stock-picker/  # skill 3 (research-driven)
+│       ├── SKILL.md
+│       ├── references/screening-criteria.md
+│       ├── references/sector-themes.md
+│       └── examples/           # sample-report.md, sample-ai-infra.md
 ├── evals/                     # cross-skill eval infrastructure
 │   ├── run_evals.py           # programmatic grader
 │   └── iterations/            # per-iteration benchmark data
@@ -143,7 +143,8 @@ finance-skills/
     ├── CHANGELOG.md
     ├── ORCHESTRATION.md
     ├── decisions/             # ADRs
-    └── api/                   # canonical source maps
+    ├── api/                   # canonical source maps
+    └── design/                # per-skill design notes
 ```
 
 ## Documentation
@@ -152,7 +153,7 @@ finance-skills/
 - [`docs/ORCHESTRATION.md`](docs/ORCHESTRATION.md) — how the three skills work together
 - [`docs/decisions/`](docs/decisions/) — architectural decision records (ADRs)
 - [`docs/api/`](docs/api/) — canonical source maps (Fed/CME/EDGAR/regional news)
-- [`smart-money-tracker/AGENTS.md`](smart-money-tracker/AGENTS.md) — skill testing framework
+- [`skills/smart-money-tracker/AGENTS.md`](skills/smart-money-tracker/AGENTS.md) — skill testing framework
 
 ## Disclaimer
 

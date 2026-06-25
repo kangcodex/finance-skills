@@ -4,7 +4,7 @@ PYTHON ?= python3
 # canonical interpreter for that skill. If SMT_VENV_PYTHON is not set,
 # fall back to system python3 — which will work for `--help` only if
 # the user has installed requests separately.
-SMT_VENV_PYTHON ?= smart-money-tracker/.venv/bin/python
+SMT_VENV_PYTHON ?= skills/smart-money-tracker/.venv/bin/python
 
 # Daily Market Watch + Thematic Stock Picker are research/analysis-driven
 # (no scripts; the SKILL.md is the contract). Their canonical outputs live
@@ -46,12 +46,12 @@ evals-thematic:
 # --- smoke test for the one script-driven skill ---
 
 smoke-smart-money:
-	@echo "--- smart-money-tracker/scripts/smart_money.py --help ---"
+	@echo "--- skills/smart-money-tracker/scripts/smart_money.py --help ---"
 	@if [ -x "$(SMT_VENV_PYTHON)" ]; then \
-		$(SMT_VENV_PYTHON) smart-money-tracker/scripts/smart_money.py --help 2>&1 | head -30; \
+		$(SMT_VENV_PYTHON) skills/smart-money-tracker/scripts/smart_money.py --help 2>&1 | head -30; \
 	else \
-		echo "  (smart-money-tracker/.venv/bin/python not found)"; \
-		echo "  Run 'make install-smt' or 'cd smart-money-tracker && uv sync' to create the venv."; \
+		echo "  (skills/smart-money-tracker/.venv/bin/python not found)"; \
+		echo "  Run 'make install-smt' or 'cd skills/smart-money-tracker && uv sync' to create the venv."; \
 	fi
 
 # --- housekeeping ---

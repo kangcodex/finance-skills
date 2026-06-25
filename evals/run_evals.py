@@ -282,7 +282,7 @@ def main() -> int:
             if not with_skill:
                 # Fall back to the skill's examples/sample-report.md
                 # (this is the canonical "with_skill" output we want to grade)
-                skill_dir = root.parent / meta["skill"]
+                skill_dir = root.parent.parent / "skills" / meta["skill"]
                 example = skill_dir / "examples" / "sample-report.md"
                 if example.exists():
                     with_skill = example.read_text(encoding="utf-8")
