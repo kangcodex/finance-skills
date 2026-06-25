@@ -108,3 +108,59 @@ class TestSkillMetadataModel:
         metadata = SkillMetadata(name="test", description="test")
         assert metadata.contracts.required_sections == []
         assert not metadata.contracts.verification_required
+
+
+class TestProductionSkillsValid:
+    """Regression: every production SKILL.md in the repo must have parseable YAML frontmatter.
+
+    Catches the bug where unquoted `:` in `description:` (e.g. "Do NOT use for: x")
+    broke YAML parsing for opencode/claude-code skill loaders. Originally caught only
+    when an external loader rejected the file with:
+      "mapping values are not allowed in this context at line 2 column 1026"
+    """
+
+    # tests/skills/unit/test_skill_schema.py -> finance-skills/skills/
+    PROD_SKILLS_DIR = Path(__file__).resolve().parents[4]
+
+    def _production_skill_files(self) -> list[Path]:
+        """Direct child dirs only — excludes the nested test fixtures."""
+        return sorted(self.PROD_SKILLS_DIR.glob("*/SKILL.md"))
+
+    def test_production_skills_directory_exists(self):
+        assert self.PROD_SKILLS_DIR.is_dir(), (
+            f"Production skills dir not found: {self.PROD_SKILLS_DIR}"
+        )
+        assert len(self._production_skill_files()) >= 1, (
+            "No production SKILL.md files found — did the layout change?"
+        )
+
+    def test_every_production_skill_frontmatter_parses(self):
+        """Each production SKILL.md must have parseable YAML with name + description.
+
+        Regression for: unquoted `:` in description breaking opencode skill loading.
+        """
+        errors: list[str] = []
+        for skill_file in self._production_skill_files():
+            try:
+                metadata, body = load_skill(skill_file)
+            except Exception as e:  # noqa: BLE001 — we want to surface any parse failure
+                errors.append(f"{skill_file.parent.name}: {type(e).__name__}: {e}")
+                continue
+
+            if not metadata.name:
+                errors.append(f"{skill_file}: missing 'name' in frontmatter")
+            if not metadata.description:
+                errors.append(f"{skill_file}: missing 'description' in frontmatter")
+            # Directory name must match the declared skill name (loader uses both)
+            if metadata.name and metadata.name != skill_file.parent.name:
+                errors.append(
+                    f"{skill_file}: name={metadata.name!r} != dir={skill_file.parent.name!r}"
+                )
+            # Description must remain human-readable (not collapsed to empty by bad YAML)
+            if metadata.description and len(metadata.description) < 50:
+                errors.append(
+                    f"{skill_file}: description suspiciously short "
+                    f"({len(metadata.description)} chars) — possible YAML truncation"
+                )
+
+        assert not errors, "Production SKILL.md frontmatter errors:\n  " + "\n  ".join(errors)
