@@ -1,0 +1,39 @@
+{
+  "eval_id": 1,
+  "skill": "daily-market-watch",
+  "eval_name": "china-region-zoom",
+  "prompt": "Zoom into China markets this week — finance news, market outlook, sources please",
+  "expected_output": "Region-zoom report focused on China + HK, using Caixin/SCMP/PBoC sources, all sections present",
+  "assertions": [
+    {
+      "id": "A1",
+      "name": "scope_declared_as_china",
+      "description": "Output must declare scope as China (or China + HK) at the top",
+      "check": "output contains 'Scope:' or '**Scope' and ('China' or 'CN' or 'Greater China')"
+    },
+    {
+      "id": "A2",
+      "name": "uses_china_specific_sources",
+      "description": "Output must reference China-specific sources (Caixin, SCMP, PBoC, NBS, CSRC)",
+      "check": "output contains at least 2 of: Caixin, scmp.com, PBoC, pbc.gov.cn, stats.gov.cn, NBS, CSRC, NDRC, Nikkei Asia"
+    },
+    {
+      "id": "A3",
+      "name": "covers_chinese_assets",
+      "description": "Output must cover Chinese equities and at least 1 of: yuan (USD/CNY), Hang Seng, Shanghai Composite, CSI 300",
+      "check": "output contains ('Hang Seng' or 'HSI' or 'Shanghai' or 'SHCOMP' or 'CSI 300' or 'A-shares' or 'H-shares' or 'KWEB' or 'BABA' or 'JD' or 'PDD' or 'TCEHY') AND ('yuan' or 'CNY' or 'USD/CNY' or 'PBOC' or 'LPR' or 'PBoC')"
+    },
+    {
+      "id": "A4",
+      "name": "all_main_sections_present",
+      "description": "Output must contain Market Overview + at least 2 of the 5 sections (A-E)",
+      "check": "output contains 'Market Overview' AND at least 2 of: 'Value', 'Momentum', 'Allocation', 'Options', 'Trends' or 'Risks'"
+    },
+    {
+      "id": "A5",
+      "name": "disclaimer_present",
+      "description": "Output must include the mandatory disclaimer",
+      "check": "output contains '**Disclaimer:**' and 'not constitute financial advice'"
+    }
+  ]
+}

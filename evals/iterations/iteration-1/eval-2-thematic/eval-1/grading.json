@@ -1,0 +1,77 @@
+{
+  "eval_id": 1,
+  "skill": "thematic-stock-picker",
+  "eval_name": "single-theme-ai-infrastructure",
+  "prompt": "Thematic picks for the AI infrastructure theme \u2014 2026-2031, small/mid-cap, with screening workings and citations",
+  "with_skill": {
+    "run_id": "eval-2-thematic-eval-1-with_skill",
+    "skill": "thematic-stock-picker",
+    "prompt": "Thematic picks for the AI infrastructure theme \u2014 2026-2031, small/mid-cap, with screening workings and citations",
+    "expectations": [
+      {
+        "text": "ai_infrastructure_focus",
+        "passed": true,
+        "evidence": "any of 3 needles: 3 present"
+      },
+      {
+        "text": "5_to_8_tickers",
+        "passed": false,
+        "evidence": "any of 1 needles: 1 present | unparsed: at least 5  AND at most 8 of: '1. **', '2. **', '3. **', '4. **', '5. **', '6. **', '7. **', '8. **'"
+      },
+      {
+        "text": "screening_workings",
+        "passed": false,
+        "evidence": "unparsed: mixed AND/or in output contains 'universe'  AND 'screen'  AND 'survivor' or 'filter'"
+      },
+      {
+        "text": "sources_cited",
+        "passed": false,
+        "evidence": "missing 1/2: ['## Sources']"
+      },
+      {
+        "text": "dd_disclaimer",
+        "passed": true,
+        "evidence": "all 2 needles present"
+      }
+    ],
+    "passed": 2,
+    "total": 5,
+    "pass_rate": 0.4
+  },
+  "without_skill": {
+    "run_id": "eval-2-thematic-eval-1-without_skill",
+    "skill": "thematic-stock-picker",
+    "prompt": "Thematic picks for the AI infrastructure theme \u2014 2026-2031, small/mid-cap, with screening workings and citations",
+    "expectations": [
+      {
+        "text": "ai_infrastructure_focus",
+        "passed": true,
+        "evidence": "any of 3 needles: 2 present"
+      },
+      {
+        "text": "5_to_8_tickers",
+        "passed": false,
+        "evidence": "any of 1 needles: 0 present | unparsed: at least 5  AND at most 8 of: '1. **', '2. **', '3. **', '4. **', '5. **', '6. **', '7. **', '8. **'"
+      },
+      {
+        "text": "screening_workings",
+        "passed": false,
+        "evidence": "unparsed: mixed AND/or in output contains 'universe'  AND 'screen'  AND 'survivor' or 'filter'"
+      },
+      {
+        "text": "sources_cited",
+        "passed": false,
+        "evidence": "missing 2/2: ['## Sources', 'http']"
+      },
+      {
+        "text": "dd_disclaimer",
+        "passed": false,
+        "evidence": "missing 2/2: ['Always do your own DD', 'this is not financial advice']"
+      }
+    ],
+    "passed": 1,
+    "total": 5,
+    "pass_rate": 0.2
+  },
+  "delta_pass_rate": 0.2
+}

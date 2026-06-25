@@ -1,0 +1,33 @@
+{
+  "eval_id": 0,
+  "skill": "smart-money-tracker",
+  "eval_name": "show-me-whales-buying-this-quarter",
+  "prompt": "Show me what whales are buying this quarter",
+  "expected_output": "13F-only mode run, sorted by net volume, with whale conviction scores",
+  "assertions": [
+    {
+      "id": "A1",
+      "name": "uses_13f_only_mode",
+      "description": "Output must reference or invoke 13F-only mode (not full tracker, not congress)",
+      "check": "output mentions '13F' or '13f-only' or 'institutional whales' or 'sec13f'"
+    },
+    {
+      "id": "A2",
+      "name": "mentions_specific_whales",
+      "description": "Output must name at least 2 named institutional whales (e.g. Berkshire, Bridgewater)",
+      "check": "output contains at least 2 of: 'Berkshire', 'Bridgewater', 'Pershing', 'Soros', 'ARK', 'Tiger', 'Citadel', 'Two Sigma', 'Baupost', 'Renaissance', 'Lone Pine', 'Maverick', 'Coatue', 'Viking', 'D1 Capital', 'Third Point', 'Druckenmiller', 'Whale Rock', 'Greenlight', 'Appaloosa', 'ValueAct', 'Trian', 'Duquesne'"
+    },
+    {
+      "id": "A3",
+      "name": "references_net_volume_or_conviction",
+      "description": "Output must include net volume or conviction metric for ranking picks",
+      "check": "output contains 'net volume' or 'conviction' or 'purchases' or 'sales' or 'BULLISH' or 'BEARISH'"
+    },
+    {
+      "id": "A4",
+      "name": "no_trade_execution_imperative",
+      "description": "Output must NOT include 'buy' or 'sell' imperative language directed at the user",
+      "check": "output does NOT contain 'you should buy' or 'you should sell' or 'I recommend' or 'I would buy' or 'I would sell' (case-insensitive)"
+    }
+  ]
+}

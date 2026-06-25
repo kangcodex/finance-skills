@@ -1,0 +1,77 @@
+{
+  "eval_id": 1,
+  "skill": "daily-market-watch",
+  "eval_name": "china-region-zoom",
+  "prompt": "Zoom into China markets this week \u2014 finance news, market outlook, sources please",
+  "with_skill": {
+    "run_id": "eval-1-daily-eval-1-with_skill",
+    "skill": "daily-market-watch",
+    "prompt": "Zoom into China markets this week \u2014 finance news, market outlook, sources please",
+    "expectations": [
+      {
+        "text": "scope_declared_as_china",
+        "passed": true,
+        "evidence": "any of 2 needles: 2 present"
+      },
+      {
+        "text": "uses_china_specific_sources",
+        "passed": true,
+        "evidence": "2/7 present (need 2)"
+      },
+      {
+        "text": "covers_chinese_assets",
+        "passed": true,
+        "evidence": "any of 12 needles: 5 present"
+      },
+      {
+        "text": "all_main_sections_present",
+        "passed": false,
+        "evidence": "any of 1 needles: 1 present | unparsed: at least 2 of: 'Value', 'Momentum', 'Allocation', 'Options', 'Trends' or 'Risks'"
+      },
+      {
+        "text": "disclaimer_present",
+        "passed": true,
+        "evidence": "all 2 needles present"
+      }
+    ],
+    "passed": 4,
+    "total": 5,
+    "pass_rate": 0.8
+  },
+  "without_skill": {
+    "run_id": "eval-1-daily-eval-1-without_skill",
+    "skill": "daily-market-watch",
+    "prompt": "Zoom into China markets this week \u2014 finance news, market outlook, sources please",
+    "expectations": [
+      {
+        "text": "scope_declared_as_china",
+        "passed": false,
+        "evidence": "any of 2 needles: 0 present"
+      },
+      {
+        "text": "uses_china_specific_sources",
+        "passed": false,
+        "evidence": "0/7 present (need 2)"
+      },
+      {
+        "text": "covers_chinese_assets",
+        "passed": false,
+        "evidence": "any of 12 needles: 0 present"
+      },
+      {
+        "text": "all_main_sections_present",
+        "passed": false,
+        "evidence": "any of 1 needles: 0 present | unparsed: at least 2 of: 'Value', 'Momentum', 'Allocation', 'Options', 'Trends' or 'Risks'"
+      },
+      {
+        "text": "disclaimer_present",
+        "passed": false,
+        "evidence": "missing 2/2: ['**Disclaimer:**', 'not constitute financial advice']"
+      }
+    ],
+    "passed": 0,
+    "total": 5,
+    "pass_rate": 0.0
+  },
+  "delta_pass_rate": 0.8
+}

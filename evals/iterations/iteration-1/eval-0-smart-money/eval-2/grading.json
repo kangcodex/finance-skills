@@ -1,0 +1,67 @@
+{
+  "eval_id": 2,
+  "skill": "smart-money-tracker",
+  "eval_name": "q1-2026-smart-money-report",
+  "prompt": "Run the smart money report for Q1 2026 (Jan 1 - Mar 31)",
+  "with_skill": {
+    "run_id": "eval-0-smart-money-eval-2-with_skill",
+    "skill": "smart-money-tracker",
+    "prompt": "Run the smart money report for Q1 2026 (Jan 1 - Mar 31)",
+    "expectations": [
+      {
+        "text": "uses_date_range_filter",
+        "passed": true,
+        "evidence": "any of 7 needles: 1 present"
+      },
+      {
+        "text": "includes_convergence_signals",
+        "passed": true,
+        "evidence": "any of 4 needles: 3 present"
+      },
+      {
+        "text": "report_file_produced",
+        "passed": false,
+        "evidence": "any of 5 needles: 0 present"
+      },
+      {
+        "text": "all_three_trackers_referenced",
+        "passed": true,
+        "evidence": "any of 3 needles: 3 present"
+      }
+    ],
+    "passed": 3,
+    "total": 4,
+    "pass_rate": 0.75
+  },
+  "without_skill": {
+    "run_id": "eval-0-smart-money-eval-2-without_skill",
+    "skill": "smart-money-tracker",
+    "prompt": "Run the smart money report for Q1 2026 (Jan 1 - Mar 31)",
+    "expectations": [
+      {
+        "text": "uses_date_range_filter",
+        "passed": true,
+        "evidence": "any of 7 needles: 4 present"
+      },
+      {
+        "text": "includes_convergence_signals",
+        "passed": false,
+        "evidence": "any of 4 needles: 0 present"
+      },
+      {
+        "text": "report_file_produced",
+        "passed": true,
+        "evidence": "any of 5 needles: 1 present"
+      },
+      {
+        "text": "all_three_trackers_referenced",
+        "passed": false,
+        "evidence": "any of 3 needles: 0 present"
+      }
+    ],
+    "passed": 2,
+    "total": 4,
+    "pass_rate": 0.5
+  },
+  "delta_pass_rate": 0.25
+}

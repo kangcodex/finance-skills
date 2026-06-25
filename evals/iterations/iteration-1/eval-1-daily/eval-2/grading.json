@@ -1,0 +1,67 @@
+{
+  "eval_id": 2,
+  "skill": "daily-market-watch",
+  "eval_name": "executive-summary-only",
+  "prompt": "Quick market overview for today, just the TL;DR + key takeaways \u2014 no full report",
+  "with_skill": {
+    "run_id": "eval-1-daily-eval-2-with_skill",
+    "skill": "daily-market-watch",
+    "prompt": "Quick market overview for today, just the TL;DR + key takeaways \u2014 no full report",
+    "expectations": [
+      {
+        "text": "tldr_present",
+        "passed": true,
+        "evidence": "any of 4 needles: 1 present"
+      },
+      {
+        "text": "market_overview_present",
+        "passed": true,
+        "evidence": "any of 2 needles: 2 present"
+      },
+      {
+        "text": "disclaimer_still_present",
+        "passed": false,
+        "evidence": "unparsed: mixed AND/or in output contains '**Disclaimer:**' or 'Disclaimer:' and 'not constitute financial advice'"
+      },
+      {
+        "text": "respects_lite_scope",
+        "passed": false,
+        "evidence": "len=12682"
+      }
+    ],
+    "passed": 2,
+    "total": 4,
+    "pass_rate": 0.5
+  },
+  "without_skill": {
+    "run_id": "eval-1-daily-eval-2-without_skill",
+    "skill": "daily-market-watch",
+    "prompt": "Quick market overview for today, just the TL;DR + key takeaways \u2014 no full report",
+    "expectations": [
+      {
+        "text": "tldr_present",
+        "passed": true,
+        "evidence": "any of 4 needles: 3 present"
+      },
+      {
+        "text": "market_overview_present",
+        "passed": true,
+        "evidence": "any of 2 needles: 2 present"
+      },
+      {
+        "text": "disclaimer_still_present",
+        "passed": false,
+        "evidence": "unparsed: mixed AND/or in output contains '**Disclaimer:**' or 'Disclaimer:' and 'not constitute financial advice'"
+      },
+      {
+        "text": "respects_lite_scope",
+        "passed": true,
+        "evidence": "len=502"
+      }
+    ],
+    "passed": 3,
+    "total": 4,
+    "pass_rate": 0.75
+  },
+  "delta_pass_rate": -0.25
+}

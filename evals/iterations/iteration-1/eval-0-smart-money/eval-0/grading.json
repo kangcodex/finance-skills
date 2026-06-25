@@ -1,0 +1,67 @@
+{
+  "eval_id": 0,
+  "skill": "smart-money-tracker",
+  "eval_name": "show-me-whales-buying-this-quarter",
+  "prompt": "Show me what whales are buying this quarter",
+  "with_skill": {
+    "run_id": "eval-0-smart-money-eval-0-with_skill",
+    "skill": "smart-money-tracker",
+    "prompt": "Show me what whales are buying this quarter",
+    "expectations": [
+      {
+        "text": "uses_13f_only_mode",
+        "passed": true,
+        "evidence": "any of 4 needles: 3 present"
+      },
+      {
+        "text": "mentions_specific_whales",
+        "passed": true,
+        "evidence": "15/23 present (need 2)"
+      },
+      {
+        "text": "references_net_volume_or_conviction",
+        "passed": true,
+        "evidence": "any of 6 needles: 3 present"
+      },
+      {
+        "text": "no_trade_execution_imperative",
+        "passed": true,
+        "evidence": "any of 5 forbidden needles: 0 present"
+      }
+    ],
+    "passed": 4,
+    "total": 4,
+    "pass_rate": 1.0
+  },
+  "without_skill": {
+    "run_id": "eval-0-smart-money-eval-0-without_skill",
+    "skill": "smart-money-tracker",
+    "prompt": "Show me what whales are buying this quarter",
+    "expectations": [
+      {
+        "text": "uses_13f_only_mode",
+        "passed": false,
+        "evidence": "any of 4 needles: 0 present"
+      },
+      {
+        "text": "mentions_specific_whales",
+        "passed": false,
+        "evidence": "1/23 present (need 2)"
+      },
+      {
+        "text": "references_net_volume_or_conviction",
+        "passed": false,
+        "evidence": "any of 6 needles: 0 present"
+      },
+      {
+        "text": "no_trade_execution_imperative",
+        "passed": true,
+        "evidence": "any of 5 forbidden needles: 0 present"
+      }
+    ],
+    "passed": 1,
+    "total": 4,
+    "pass_rate": 0.25
+  },
+  "delta_pass_rate": 0.75
+}

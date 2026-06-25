@@ -1,0 +1,45 @@
+{
+  "eval_id": 2,
+  "skill": "thematic-stock-picker",
+  "eval_name": "screen-defense-stocks",
+  "prompt": "Screen me small-cap defense stocks for the next 5 years — show me the workings and the picks",
+  "expected_output": "Defense-themed report with explicit screening funnel, small/mid-cap only, 4-bullet picks, sources",
+  "assertions": [
+    {
+      "id": "A1",
+      "name": "defense_focus",
+      "description": "Output must focus on defense theme",
+      "check": "output contains 'defense' AND ('missile' or 'munitions' or 'NDO' or 'backlog' or 'primes' or 'DoD' or 'Pentagon' or 'NDAA')"
+    },
+    {
+      "id": "A2",
+      "name": "small_cap_mcap_filter",
+      "description": "Output must explicitly apply small-cap mcap filter",
+      "check": "output contains 'small' or 'mid-cap' or 'small/mid' or a market cap range"
+    },
+    {
+      "id": "A3",
+      "name": "screening_funnel_shown",
+      "description": "Output must show the screening funnel with explicit counts",
+      "check": "output contains 'universe' AND 'screen' AND at least 2 numeric values"
+    },
+    {
+      "id": "A4",
+      "name": "4_bullets_per_ticker",
+      "description": "Output must have all 4 sub-bullets per ticker",
+      "check": "output contains 'Thesis fit' AND 'Catalyst' AND 'Valuation' AND 'conviction'"
+    },
+    {
+      "id": "A5",
+      "name": "sources_present",
+      "description": "Output must have Sources block with URLs",
+      "check": "output contains '## Sources' AND 'http'"
+    },
+    {
+      "id": "A6",
+      "name": "dd_disclaimer_present",
+      "description": "Output must end with DD disclaimer",
+      "check": "output contains 'Always do your own DD' and 'this is not financial advice'"
+    }
+  ]
+}

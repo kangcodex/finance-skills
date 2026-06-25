@@ -1,0 +1,69 @@
+{
+  "eval_id": 0,
+  "skill": "daily-market-watch",
+  "eval_name": "default-global-7day-report",
+  "prompt": "Give me a daily market watch for the last 7 days, global coverage, full report please",
+  "expected_output": "Full report with all 6 sections (Market Overview, A: Value, B: Momentum, C: Allocation, D: Options, E: Trends/Risks/Events), sources grouped, disclaimer",
+  "assertions": [
+    {
+      "id": "A1",
+      "name": "market_overview_section_present",
+      "description": "Output must contain the Market Overview section (## 0. Market Overview)",
+      "check": "output contains '## 0. Market Overview' or '## Market Overview' or '## 0\\. Market'"
+    },
+    {
+      "id": "A2",
+      "name": "value_section_with_5_tickers_each",
+      "description": "Output Section A must have 5 stocks + 5 ETFs + 5 crypto (15 ticker rows in tables)",
+      "check": "output contains 5 instances of '^| [A-Z]{1,5} ' in section A (regex)"
+    },
+    {
+      "id": "A3",
+      "name": "momentum_section_present",
+      "description": "Output must contain Section B (Top 5 Momentum Picks)",
+      "check": "output contains '## B.' or 'Top 5 Momentum' or 'Momentum Picks'"
+    },
+    {
+      "id": "A4",
+      "name": "allocation_section_present",
+      "description": "Output must contain Section C (Portfolio Allocation Insights)",
+      "check": "output contains '## C.' or 'Portfolio Allocation' or 'Allocation Insights'"
+    },
+    {
+      "id": "A5",
+      "name": "options_section_present",
+      "description": "Output must contain Section D (Options Strategies) with at least 3 strategies",
+      "check": "output contains '## D.' or 'Options Strategies' AND at least 3 mentions of: 'Wheel', 'Covered Call', 'Protective Put', 'Iron Condor', 'Collar', 'Straddle', 'Strangle', 'Spread'"
+    },
+    {
+      "id": "A6",
+      "name": "trends_risks_events_section",
+      "description": "Output must contain Section E (Trends/Risks/Upcoming Events)",
+      "check": "output contains '## E.' or 'Trends' AND 'Risks' AND ('Upcoming' or 'Events' or 'calendar')"
+    },
+    {
+      "id": "A7",
+      "name": "sources_block_grouped",
+      "description": "Output must contain a Sources block with at least 2 grouped categories",
+      "check": "output contains '## Sources' AND at least 2 of: '**Policy' or '**Company' or '**Data' or '**Industry'"
+    },
+    {
+      "id": "A8",
+      "name": "disclaimer_present",
+      "description": "Output must include the mandatory disclaimer verbatim",
+      "check": "output contains '**Disclaimer:**' and ('informational purposes only' or 'not constitute financial advice')"
+    },
+    {
+      "id": "A9",
+      "name": "fed_signals_referenced",
+      "description": "Output must reference Fed signals (CME FedWatch, Fed funds, FOMC, or rate-cut probability)",
+      "check": "output contains 'FedWatch' or 'FOMC' or 'rate cut' or 'Fed funds' or 'bps' or 'basis points'"
+    },
+    {
+      "id": "A10",
+      "name": "time_window_7_days",
+      "description": "Output must mention a 7-day or 1-week time window",
+      "check": "output contains '7 days' or '7-day' or 'last week' or '1W' or 'trailing 7' or 'past week'"
+    }
+  ]
+}

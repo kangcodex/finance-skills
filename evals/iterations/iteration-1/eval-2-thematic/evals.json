@@ -1,0 +1,26 @@
+{
+  "skill_name": "thematic-stock-picker",
+  "evals": [
+    {
+      "id": 1,
+      "name": "default-5-themes-2031",
+      "prompt": "Give me 5 thematic stock predictions for 2026-2031, US-listed and ADR small/mid-cap names only. Show your screening workings (universe → filters → survivors). Per ticker: thesis fit, catalyst, valuation/risk, edge + 5-year conviction. Cite sources for every pick and policy claim. End with the DD disclaimer.",
+      "expected_output": "5 distinct themes, screening workings with survivor counts, 5-8 tickers/theme with 4 bullets each, conviction tiers, sources grouped, DD disclaimer verbatim",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "single-theme-ai-infrastructure",
+      "prompt": "Thematic picks for the AI infrastructure theme — 2026-2031, small/mid-cap, with screening workings and citations",
+      "expected_output": "Single theme report focused on AI infrastructure, 5-8 tickers, full screening workings, citations",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "screen-defense-stocks",
+      "prompt": "Screen me small-cap defense stocks for the next 5 years — show me the workings and the picks",
+      "expected_output": "Defense-themed report with explicit screening funnel, small/mid-cap only, 4-bullet picks, sources",
+      "files": []
+    }
+  ]
+}

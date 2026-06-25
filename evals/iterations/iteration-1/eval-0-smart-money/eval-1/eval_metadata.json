@@ -1,0 +1,33 @@
+{
+  "eval_id": 1,
+  "skill": "smart-money-tracker",
+  "eval_name": "pelosi-tech-buys",
+  "prompt": "Did Pelosi buy any tech stocks recently?",
+  "expected_output": "Congress-only mode with --member 'Nancy Pelosi' filter, last 30-90 days, transaction list",
+  "assertions": [
+    {
+      "id": "A1",
+      "name": "filters_by_member_name",
+      "description": "Output must filter by Pelosi (or politician in general if Pelosi has no recent trades)",
+      "check": "output contains 'Pelosi' or 'Nancy' (case-insensitive)"
+    },
+    {
+      "id": "A2",
+      "name": "uses_congress_data_source",
+      "description": "Output must reference congress trades (STOCK Act, InsiderFinance, or Quiver Quant)",
+      "check": "output contains 'congress' or 'STOCK Act' or 'InsiderFinance' or 'disclosure'"
+    },
+    {
+      "id": "A3",
+      "name": "time_window_specified",
+      "description": "Output must specify a time window (last 30 / 60 / 90 days, or explicit dates)",
+      "check": "output contains 'days' or 'last' or '30' or '60' or '90' or '202' (year reference)"
+    },
+    {
+      "id": "A4",
+      "name": "mentions_transaction_or_ticker",
+      "description": "Output must include transaction type or ticker symbols",
+      "check": "output contains 'purchase' or 'sale' or 'buy' or 'sell' or any ticker pattern (1-5 uppercase letters) or 'NVDA' or 'AAPL' or 'MSFT' or 'TSLA' or 'GOOGL' or 'META' or 'AMZN'"
+    }
+  ]
+}

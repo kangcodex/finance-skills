@@ -1,0 +1,67 @@
+{
+  "eval_id": 1,
+  "skill": "smart-money-tracker",
+  "eval_name": "pelosi-tech-buys",
+  "prompt": "Did Pelosi buy any tech stocks recently?",
+  "with_skill": {
+    "run_id": "eval-0-smart-money-eval-1-with_skill",
+    "skill": "smart-money-tracker",
+    "prompt": "Did Pelosi buy any tech stocks recently?",
+    "expectations": [
+      {
+        "text": "filters_by_member_name",
+        "passed": true,
+        "evidence": "any of 2 needles: 2 present"
+      },
+      {
+        "text": "uses_congress_data_source",
+        "passed": true,
+        "evidence": "any of 4 needles: 4 present"
+      },
+      {
+        "text": "time_window_specified",
+        "passed": true,
+        "evidence": "any of 6 needles: 5 present"
+      },
+      {
+        "text": "mentions_transaction_or_ticker",
+        "passed": true,
+        "evidence": "any of 11 needles: 8 present"
+      }
+    ],
+    "passed": 4,
+    "total": 4,
+    "pass_rate": 1.0
+  },
+  "without_skill": {
+    "run_id": "eval-0-smart-money-eval-1-without_skill",
+    "skill": "smart-money-tracker",
+    "prompt": "Did Pelosi buy any tech stocks recently?",
+    "expectations": [
+      {
+        "text": "filters_by_member_name",
+        "passed": true,
+        "evidence": "any of 2 needles: 1 present"
+      },
+      {
+        "text": "uses_congress_data_source",
+        "passed": false,
+        "evidence": "any of 4 needles: 0 present"
+      },
+      {
+        "text": "time_window_specified",
+        "passed": false,
+        "evidence": "any of 6 needles: 0 present"
+      },
+      {
+        "text": "mentions_transaction_or_ticker",
+        "passed": true,
+        "evidence": "any of 11 needles: 6 present"
+      }
+    ],
+    "passed": 2,
+    "total": 4,
+    "pass_rate": 0.5
+  },
+  "delta_pass_rate": 0.5
+}

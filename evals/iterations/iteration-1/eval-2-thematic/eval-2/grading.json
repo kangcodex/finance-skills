@@ -1,0 +1,87 @@
+{
+  "eval_id": 2,
+  "skill": "thematic-stock-picker",
+  "eval_name": "screen-defense-stocks",
+  "prompt": "Screen me small-cap defense stocks for the next 5 years \u2014 show me the workings and the picks",
+  "with_skill": {
+    "run_id": "eval-2-thematic-eval-2-with_skill",
+    "skill": "thematic-stock-picker",
+    "prompt": "Screen me small-cap defense stocks for the next 5 years \u2014 show me the workings and the picks",
+    "expectations": [
+      {
+        "text": "defense_focus",
+        "passed": true,
+        "evidence": "any of 1 needles: 1 present"
+      },
+      {
+        "text": "small_cap_mcap_filter",
+        "passed": true,
+        "evidence": "any of 3 needles: 3 present"
+      },
+      {
+        "text": "screening_funnel_shown",
+        "passed": false,
+        "evidence": "all 2 needles present | unparsed: at least 2 numeric values"
+      },
+      {
+        "text": "4_bullets_per_ticker",
+        "passed": true,
+        "evidence": "all 4 needles present"
+      },
+      {
+        "text": "sources_present",
+        "passed": false,
+        "evidence": "missing 1/2: ['## Sources']"
+      },
+      {
+        "text": "dd_disclaimer_present",
+        "passed": true,
+        "evidence": "all 2 needles present"
+      }
+    ],
+    "passed": 4,
+    "total": 6,
+    "pass_rate": 0.6666666666666666
+  },
+  "without_skill": {
+    "run_id": "eval-2-thematic-eval-2-without_skill",
+    "skill": "thematic-stock-picker",
+    "prompt": "Screen me small-cap defense stocks for the next 5 years \u2014 show me the workings and the picks",
+    "expectations": [
+      {
+        "text": "defense_focus",
+        "passed": true,
+        "evidence": "any of 1 needles: 1 present"
+      },
+      {
+        "text": "small_cap_mcap_filter",
+        "passed": true,
+        "evidence": "any of 3 needles: 1 present"
+      },
+      {
+        "text": "screening_funnel_shown",
+        "passed": false,
+        "evidence": "missing 1/2: ['universe'] | unparsed: at least 2 numeric values"
+      },
+      {
+        "text": "4_bullets_per_ticker",
+        "passed": false,
+        "evidence": "missing 4/4: ['Thesis fit', 'Catalyst', 'Valuation']"
+      },
+      {
+        "text": "sources_present",
+        "passed": false,
+        "evidence": "missing 2/2: ['## Sources', 'http']"
+      },
+      {
+        "text": "dd_disclaimer_present",
+        "passed": false,
+        "evidence": "missing 2/2: ['Always do your own DD', 'this is not financial advice']"
+      }
+    ],
+    "passed": 2,
+    "total": 6,
+    "pass_rate": 0.3333333333333333
+  },
+  "delta_pass_rate": 0.3333333333333333
+}

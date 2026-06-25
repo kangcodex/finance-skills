@@ -1,0 +1,81 @@
+{
+  "eval_id": 0,
+  "skill": "thematic-stock-picker",
+  "eval_name": "default-5-themes-2031",
+  "prompt": "Give me 5 thematic stock predictions for 2026-2031, US-listed and ADR small/mid-cap names only. Show your screening workings (universe → filters → survivors). Per ticker: thesis fit, catalyst, valuation/risk, edge + 5-year conviction. Cite sources for every pick and policy claim. End with the DD disclaimer.",
+  "expected_output": "5 distinct themes, screening workings with survivor counts, 5-8 tickers/theme with 4 bullets each, conviction tiers, sources grouped, DD disclaimer verbatim",
+  "assertions": [
+    {
+      "id": "A1",
+      "name": "macro_policy_backdrop_present",
+      "description": "Output must include a Macro/Policy backdrop with policy drivers",
+      "check": "output contains 'policy' AND ('IRA' or 'CHIPS' or 'NDAA' or 'Fed' or 'PBoC' or 'EU' or 'Energy Transition' or 'tax credit')"
+    },
+    {
+      "id": "A2",
+      "name": "screening_workings_with_counts",
+      "description": "Output must show a screening funnel with survivor counts",
+      "check": "output contains 'universe' AND 'screen' AND at least 2 numeric counts (digits)"
+    },
+    {
+      "id": "A3",
+      "name": "exactly_5_themes",
+      "description": "Output must have exactly 5 thematic predictions (or 4-6 acceptable range)",
+      "check": "output contains '5-Year Prediction 1' AND '5-Year Prediction 2' AND '5-Year Prediction 3' AND '5-Year Prediction 4' AND '5-Year Prediction 5'"
+    },
+    {
+      "id": "A4",
+      "name": "per_ticker_4_bullets",
+      "description": "Output must have all 4 sub-bullets (thesis fit, catalyst, valuation/risk, edge+conviction) per ticker",
+      "check": "output contains 'Thesis fit' AND 'Catalyst' AND 'Valuation' AND 'conviction' (case-insensitive)"
+    },
+    {
+      "id": "A5",
+      "name": "conviction_tier_per_ticker",
+      "description": "Output must include conviction tiers (Med/High/Very High) — at least 5 distinct convictions",
+      "check": "output contains at least 5 of: 'Very High', 'High', 'Med-High', 'Med', 'Low'"
+    },
+    {
+      "id": "A6",
+      "name": "top_convictions_section",
+      "description": "Output must include a top 2-3 overall convictions section",
+      "check": "output contains 'Top conviction' or 'top 2-3' or 'highest conviction' (case-insensitive)"
+    },
+    {
+      "id": "A7",
+      "name": "cross_cutting_risks",
+      "description": "Output must include cross-cutting risks (2-3)",
+      "check": "output contains 'risk' AND 'mitigation' or 'cross-cutting'"
+    },
+    {
+      "id": "A8",
+      "name": "sources_grouped",
+      "description": "Output must have a Sources block grouped by category",
+      "check": "output contains '## Sources' AND at least 2 of: '**Policy' or '**Company' or '**Data' or '**Industry'"
+    },
+    {
+      "id": "A9",
+      "name": "dd_disclaimer_verbatim",
+      "description": "Output must end with the verbatim DD disclaimer",
+      "check": "output contains 'Always do your own DD' and 'this is not financial advice'"
+    },
+    {
+      "id": "A10",
+      "name": "no_buy_sell_imperative",
+      "description": "Output must NOT include 'buy' or 'sell' imperative language directed at the user",
+      "check": "output does NOT contain 'you should buy' or 'I recommend you buy' or 'I recommend buying' (case-insensitive)"
+    },
+    {
+      "id": "A11",
+      "name": "no_price_targets",
+      "description": "Output must NOT include specific price targets",
+      "check": "output does NOT contain 'price target' or 'target price' or 'PT $' or 'PT:'"
+    },
+    {
+      "id": "A12",
+      "name": "small_mid_cap_mcap_range",
+      "description": "Output must mention a market cap range consistent with small/mid-cap (300M-50B)",
+      "check": "output contains a market cap range like '$X–$Y' or 'small/mid' or '$300M' or '$50B'"
+    }
+  ]
+}

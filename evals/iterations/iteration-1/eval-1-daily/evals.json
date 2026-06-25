@@ -1,0 +1,26 @@
+{
+  "skill_name": "daily-market-watch",
+  "evals": [
+    {
+      "id": 1,
+      "name": "default-global-7day-report",
+      "prompt": "Give me a daily market watch for the last 7 days, global coverage, full report please",
+      "expected_output": "Full report with all 6 sections (Market Overview, A: Value, B: Momentum, C: Allocation, D: Options, E: Trends/Risks/Events), sources grouped, disclaimer",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "china-region-zoom",
+      "prompt": "Zoom into China markets this week — finance news, market outlook, sources please",
+      "expected_output": "Region-zoom report focused on China + HK, using Caixin/SCMP/PBoC sources, all sections present",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "executive-summary-only",
+      "prompt": "Quick market overview for today, just the TL;DR + key takeaways — no full report",
+      "expected_output": "Lite mode output: TL;DR + Market Overview only, sources for headline data points, disclaimer still included",
+      "files": []
+    }
+  ]
+}

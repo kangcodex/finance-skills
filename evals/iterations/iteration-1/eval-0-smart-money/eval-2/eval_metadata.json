@@ -1,0 +1,33 @@
+{
+  "eval_id": 2,
+  "skill": "smart-money-tracker",
+  "eval_name": "q1-2026-smart-money-report",
+  "prompt": "Run the smart money report for Q1 2026 (Jan 1 - Mar 31)",
+  "expected_output": "All-trackers run with --date-range 2026-01-01,2026-03-31, produces convergence signals section",
+  "assertions": [
+    {
+      "id": "A1",
+      "name": "uses_date_range_filter",
+      "description": "Output must use or reference date-range filter for Q1 2026",
+      "check": "output contains '2026-01-01' or '2026-03-31' or 'Q1 2026' or 'Q1' or 'Jan' or 'Mar' or 'date-range'"
+    },
+    {
+      "id": "A2",
+      "name": "includes_convergence_signals",
+      "description": "Output must reference or produce convergence signals (the value-add section)",
+      "check": "output contains 'convergence' or 'overlap' or 'cross-signal' or 'whale + congress' (case-insensitive)"
+    },
+    {
+      "id": "A3",
+      "name": "report_file_produced",
+      "description": "Output must reference a generated report file path or name",
+      "check": "output contains 'reports/' or 'smart-money-2026' or '.md' file reference or 'report' or 'saved'"
+    },
+    {
+      "id": "A4",
+      "name": "all_three_trackers_referenced",
+      "description": "Output must reference or invoke 13F, Congress, and House Reps (the 3 trackers)",
+      "check": "output contains '13F' AND ('congress' or 'STOCK Act') AND ('house' or 'House Reps' or 'clerk')"
+    }
+  ]
+}

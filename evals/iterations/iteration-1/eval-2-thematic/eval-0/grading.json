@@ -1,0 +1,147 @@
+{
+  "eval_id": 0,
+  "skill": "thematic-stock-picker",
+  "eval_name": "default-5-themes-2031",
+  "prompt": "Give me 5 thematic stock predictions for 2026-2031, US-listed and ADR small/mid-cap names only. Show your screening workings (universe \u2192 filters \u2192 survivors). Per ticker: thesis fit, catalyst, valuation/risk, edge + 5-year conviction. Cite sources for every pick and policy claim. End with the DD disclaimer.",
+  "with_skill": {
+    "run_id": "eval-2-thematic-eval-0-with_skill",
+    "skill": "thematic-stock-picker",
+    "prompt": "Give me 5 thematic stock predictions for 2026-2031, US-listed and ADR small/mid-cap names only. Show your screening workings (universe \u2192 filters \u2192 survivors). Per ticker: thesis fit, catalyst, valuation/risk, edge + 5-year conviction. Cite sources for every pick and policy claim. End with the DD disclaimer.",
+    "expectations": [
+      {
+        "text": "macro_policy_backdrop_present",
+        "passed": true,
+        "evidence": "any of 1 needles: 1 present"
+      },
+      {
+        "text": "screening_workings_with_counts",
+        "passed": false,
+        "evidence": "all 2 needles present | unparsed: at least 2 numeric counts"
+      },
+      {
+        "text": "exactly_5_themes",
+        "passed": true,
+        "evidence": "all 5 needles present"
+      },
+      {
+        "text": "per_ticker_4_bullets",
+        "passed": true,
+        "evidence": "all 4 needles present"
+      },
+      {
+        "text": "conviction_tier_per_ticker",
+        "passed": true,
+        "evidence": "5/5 present (need 5)"
+      },
+      {
+        "text": "top_convictions_section",
+        "passed": true,
+        "evidence": "any of 3 needles: 1 present"
+      },
+      {
+        "text": "cross_cutting_risks",
+        "passed": false,
+        "evidence": "unparsed: mixed AND/or in output contains 'risk'  AND 'mitigation' or 'cross-cutting'"
+      },
+      {
+        "text": "sources_grouped",
+        "passed": false,
+        "evidence": "any of 1 needles: 0 present | unparsed: at least 2 of: '**Policy' or '**Company' or '**Data' or '**Industry'"
+      },
+      {
+        "text": "dd_disclaimer_verbatim",
+        "passed": true,
+        "evidence": "all 2 needles present"
+      },
+      {
+        "text": "no_buy_sell_imperative",
+        "passed": true,
+        "evidence": "any of 3 forbidden needles: 0 present"
+      },
+      {
+        "text": "no_price_targets",
+        "passed": true,
+        "evidence": "any of 4 forbidden needles: 0 present"
+      },
+      {
+        "text": "small_mid_cap_mcap_range",
+        "passed": true,
+        "evidence": "any of 4 needles: 3 present"
+      }
+    ],
+    "passed": 9,
+    "total": 12,
+    "pass_rate": 0.75
+  },
+  "without_skill": {
+    "run_id": "eval-2-thematic-eval-0-without_skill",
+    "skill": "thematic-stock-picker",
+    "prompt": "Give me 5 thematic stock predictions for 2026-2031, US-listed and ADR small/mid-cap names only. Show your screening workings (universe \u2192 filters \u2192 survivors). Per ticker: thesis fit, catalyst, valuation/risk, edge + 5-year conviction. Cite sources for every pick and policy claim. End with the DD disclaimer.",
+    "expectations": [
+      {
+        "text": "macro_policy_backdrop_present",
+        "passed": true,
+        "evidence": "any of 1 needles: 1 present"
+      },
+      {
+        "text": "screening_workings_with_counts",
+        "passed": false,
+        "evidence": "all 2 needles present | unparsed: at least 2 numeric counts"
+      },
+      {
+        "text": "exactly_5_themes",
+        "passed": false,
+        "evidence": "missing 5/5: ['5-Year Prediction 1', '5-Year Prediction 2', '5-Year Prediction 3']"
+      },
+      {
+        "text": "per_ticker_4_bullets",
+        "passed": true,
+        "evidence": "all 4 needles present"
+      },
+      {
+        "text": "conviction_tier_per_ticker",
+        "passed": false,
+        "evidence": "0/5 present (need 5)"
+      },
+      {
+        "text": "top_convictions_section",
+        "passed": false,
+        "evidence": "any of 3 needles: 0 present"
+      },
+      {
+        "text": "cross_cutting_risks",
+        "passed": false,
+        "evidence": "unparsed: mixed AND/or in output contains 'risk'  AND 'mitigation' or 'cross-cutting'"
+      },
+      {
+        "text": "sources_grouped",
+        "passed": false,
+        "evidence": "any of 1 needles: 0 present | unparsed: at least 2 of: '**Policy' or '**Company' or '**Data' or '**Industry'"
+      },
+      {
+        "text": "dd_disclaimer_verbatim",
+        "passed": false,
+        "evidence": "missing 2/2: ['Always do your own DD', 'this is not financial advice']"
+      },
+      {
+        "text": "no_buy_sell_imperative",
+        "passed": true,
+        "evidence": "any of 3 forbidden needles: 0 present"
+      },
+      {
+        "text": "no_price_targets",
+        "passed": true,
+        "evidence": "any of 4 forbidden needles: 0 present"
+      },
+      {
+        "text": "small_mid_cap_mcap_range",
+        "passed": true,
+        "evidence": "any of 4 needles: 1 present"
+      }
+    ],
+    "passed": 5,
+    "total": 12,
+    "pass_rate": 0.4166666666666667
+  },
+  "delta_pass_rate": 0.3333333333333333
+}

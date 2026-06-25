@@ -1,0 +1,39 @@
+{
+  "eval_id": 1,
+  "skill": "thematic-stock-picker",
+  "eval_name": "single-theme-ai-infrastructure",
+  "prompt": "Thematic picks for the AI infrastructure theme — 2026-2031, small/mid-cap, with screening workings and citations",
+  "expected_output": "Single theme report focused on AI infrastructure, 5-8 tickers, full screening workings, citations",
+  "assertions": [
+    {
+      "id": "A1",
+      "name": "ai_infrastructure_focus",
+      "description": "Output must focus on AI infrastructure theme",
+      "check": "output contains 'AI infrastructure' or 'AI Infrastructure' or 'artificial intelligence' AND ('infrastructure' or 'optical' or 'cooling' or 'power' or 'networking' or 'HBM' or 'semiconductor')"
+    },
+    {
+      "id": "A2",
+      "name": "5_to_8_tickers",
+      "description": "Output must have 5-8 tickers (count occurrences of '1. **TICKER**' through '8. **TICKER**')",
+      "check": "output contains at least 5 numbered items like '1. **' AND at least 5 AND at most 8 of: '1. **', '2. **', '3. **', '4. **', '5. **', '6. **', '7. **', '8. **'"
+    },
+    {
+      "id": "A3",
+      "name": "screening_workings",
+      "description": "Output must show screening workings (universe, filter, survivors)",
+      "check": "output contains 'universe' AND 'screen' AND 'survivor' or 'filter'"
+    },
+    {
+      "id": "A4",
+      "name": "sources_cited",
+      "description": "Output must have a Sources block with URLs",
+      "check": "output contains '## Sources' AND 'http'"
+    },
+    {
+      "id": "A5",
+      "name": "dd_disclaimer",
+      "description": "Output must end with the DD disclaimer",
+      "check": "output contains 'Always do your own DD' and 'this is not financial advice'"
+    }
+  ]
+}

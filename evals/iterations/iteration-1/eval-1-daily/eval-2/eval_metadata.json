@@ -1,0 +1,33 @@
+{
+  "eval_id": 2,
+  "skill": "daily-market-watch",
+  "eval_name": "executive-summary-only",
+  "prompt": "Quick market overview for today, just the TL;DR + key takeaways — no full report",
+  "expected_output": "Lite mode output: TL;DR + Market Overview only, sources for headline data points, disclaimer still included",
+  "assertions": [
+    {
+      "id": "A1",
+      "name": "tldr_present",
+      "description": "Output must have a TL;DR or summary section",
+      "check": "output contains 'TL;DR' or 'tldr' or 'summary' or 'key takeaways' (case-insensitive)"
+    },
+    {
+      "id": "A2",
+      "name": "market_overview_present",
+      "description": "Output must still include a Market Overview (lite but present)",
+      "check": "output contains 'Market Overview' or 'market overview'"
+    },
+    {
+      "id": "A3",
+      "name": "disclaimer_still_present",
+      "description": "Even in lite mode, the disclaimer must be included",
+      "check": "output contains '**Disclaimer:**' or 'Disclaimer:' and 'not constitute financial advice'"
+    },
+    {
+      "id": "A4",
+      "name": "respects_lite_scope",
+      "description": "Output must respect the 'no full report' scope — should NOT include all 6 sections",
+      "check": "output should be shorter (lite mode); check that section markers for A/B/C/D/E are not all present. Specifically: NOT (all of '## A.', '## B.', '## C.', '## D.', '## E.' present)"
+    }
+  ]
+}

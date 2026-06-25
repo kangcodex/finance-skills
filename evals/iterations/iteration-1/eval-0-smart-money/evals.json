@@ -1,0 +1,26 @@
+{
+  "skill_name": "smart-money-tracker",
+  "evals": [
+    {
+      "id": 1,
+      "name": "show-me-whales-buying-this-quarter",
+      "prompt": "Show me what whales are buying this quarter",
+      "expected_output": "13F-only mode run, sorted by net volume, with whale conviction scores",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "pelosi-tech-buys",
+      "prompt": "Did Pelosi buy any tech stocks recently?",
+      "expected_output": "Congress-only mode with --member 'Nancy Pelosi' filter, last 30-90 days, transaction list",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "q1-2026-smart-money-report",
+      "prompt": "Run the smart money report for Q1 2026 (Jan 1 - Mar 31)",
+      "expected_output": "All-trackers run with --date-range 2026-01-01,2026-03-31, produces convergence signals section",
+      "files": []
+    }
+  ]
+}
