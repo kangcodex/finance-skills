@@ -1,6 +1,6 @@
 ---
 name: smart-money-tracker
-description: Track SEC 13F holdings + congressional STOCK Act trades, produce convergence analysis. Use for whales, 13F filings, politician trades, cross-signal analysis.
+description: Track SEC 13F institutional holdings + congressional STOCK Act trades + House Clerk disclosures, produce convergence analysis between whales, politicians, and retail flows. Use whenever the user asks about hedge fund 13F filings, Berkshire/Bridgewater/Pershing Square/Soros/ARK portfolio changes, what Michael Burry or any other major investor is buying, politician stock trades (Pelosi, Tuberville, Cruz, etc.), STOCK Act disclosures, congressional insider trading, "smart money" flows, institutional positioning, whale conviction, cross-signal analysis between 13F and congressional trades, or wants a "smart money report" / "follow the whales" / "what are insiders doing" report. Triggers on phrases like "13F", "whale trades", "politician trades", "congress trading", "Pelosi bought", "smart money", "institutional holdings", "hedge fund positions", "Soros fund", "Berkshire portfolio", "what are insiders buying", "congressional insider", "follow the smart money", "rerun smart money report". Do NOT use for: single-ticker technical analysis, trade execution, options strategies, market commentary without picks, or non-equity flow analysis (use daily-market-watch or thematic-stock-picker instead).
 ---
 
 # Smart Money Tracker
@@ -63,42 +63,43 @@ working_dir: <skill_dir>
 
 ### 2) Run tracker mode
 
-Set `working_dir` to `<skill_dir>/src/smart_money_tracker` + use filename-only commands.
+Two entrypoint styles are supported. **Prefer the `scripts/` wrappers** (they're the standard skill-format entrypoints and work from any cwd). Use the package entrypoints only when you need to import internals or run pytest.
 
-Entrypoint rule:
+**Recommended (scripts/ wrappers):**
 
-- Use `main.py` as default entrypoint.
-- Use module scripts (`sec13f.py`, `congress.py`, `house_reps.py`) only when user explicitly asks module-only output or targeted debugging.
-
-**Important:** When running `--13f-only` or `--congress-only`, always use timeout-safe flags below to avoid agent runtime timeouts.
-
-**Command reference:**
-
-All commands use `working_dir: <skill_dir>/src/smart_money_tracker`.
-
-**Agentic systems:** Use `python3 -m pip install "requests>=2.28.0"` (pip pre-installed).
-**Local/dev:** `uv run ...` also works after fixing `pyproject.toml` dependency-groups.
+All commands below work from the skill root directory. The wrappers add `src/` to `sys.path` and call the underlying entrypoint.
 
 ```text
-All trackers (fast):        python3 main.py --fast-13f
-13F only (recommended):    python3 main.py --13f-only --fast-13f
-13F only (full whale set):  python3 main.py --13f-only
-Congress only (recommended): python3 main.py --congress-only
-Skip House Reps:            python3 main.py --no-house-reps --fast-13f
-Verify sources only:        python3 main.py --verify-sources
-Congress member filter:     python3 congress.py --member "Nancy Pelosi" --days 90
-Congress party/chamber:     python3 congress.py --party Republican --chamber Senate
-Date range filter:          python3 main.py --date-range 2026-01-01,2026-03-31
-Sort by date:               python3 congress.py --sort datedesc
-Limit results:              python3 congress.py --limit 10
+All trackers (fast):        python3 scripts/smart_money.py --fast-13f
+13F only (recommended):    python3 scripts/smart_money.py --13f-only --fast-13f
+13F only (full whale set):  python3 scripts/smart_money.py --13f-only
+Congress only (recommended): python3 scripts/smart_money.py --congress-only
+Skip House Reps:            python3 scripts/smart_money.py --no-house-reps --fast-13f
+Verify sources only:        python3 scripts/source_audit.py
+Congress member filter:     python3 scripts/congress.py --member "Nancy Pelosi" --days 90
+Congress party/chamber:     python3 scripts/congress.py --party Republican --chamber Senate
+House Reps member filter:   python3 scripts/house_reps.py --member "Nancy Pelosi" --days 90
+Date range filter:          python3 scripts/smart_money.py --date-range 2026-01-01,2026-03-31
+Sort by date:               python3 scripts/congress.py --sort datedesc
+Limit results:              python3 scripts/congress.py --limit 10
+```
+
+**Package entrypoints (advanced):**
+
+Set `working_dir` to `<skill_dir>/src/smart_money_tracker` + use filename-only commands. Use this style only when you need direct access to the importable package (e.g. inside a test).
+
+```text
+python3 main.py --13f-only --fast-13f
+python3 congress.py --member "Nancy Pelosi" --days 90
+python3 house_reps.py --member "Nancy Pelosi" --days 90
 ```
 
 **Important:** Scripts support these CLI args:
 
-- `main.py`: `--13f-only`, `--congress-only`, `--no-house-reps`, `--fast-13f`, `--verify-sources`, `--force-download`, `--days`, `--member`, `--party`, `--chamber`, `--date-range`, `--sort`, `--limit`
-- `congress.py`: `--member`, `--days`, `--party`, `--chamber`, `--date-range`, `--sort`, `--limit`, `--force-download`
+- `scripts/smart_money.py` (wraps `main.py`): `--13f-only`, `--congress-only`, `--no-house-reps`, `--fast-13f`, `--verify-sources`, `--force-download`, `--days`, `--member`, `--party`, `--chamber`, `--date-range`, `--sort`, `--limit`
+- `scripts/congress.py`: `--member`, `--days`, `--party`, `--chamber`, `--date-range`, `--sort`, `--limit`, `--force-download`
 - `sec13f.py`: library only (no CLI). Configure 13F behavior via `main.py` flags (`--fast-13f`, `--13f-only`, `--date-range`, `--sort`, `--limit`) — `use_top_100` is a Python param on `run_13f_tracker()`, not a CLI flag.
-- `house_reps.py`: `--member`, `--days`, `--party`, `--date-range`, `--sort`, `--limit`
+- `scripts/house_reps.py`: `--member`, `--days`, `--party`, `--date-range`, `--sort`, `--limit`
 
 **Date range format:** `YYYY-MM-DD,YYYY-MM-DD` (e.g., `2026-01-01,2026-03-31`). Overrides `--days` when provided.
 
@@ -190,3 +191,12 @@ If user asks "top 5 increased/decreased", compute from generated report data + r
 - Caches stored in `data/` (13F: quarterly, Congress: daily, House Reps: quarterly)
 - Net Volume = Purchase Volume - Sales Volume (BULLISH/BEARISH)
 - Whale Conviction = % of whales holding a stock
+
+## Companion Skills
+
+- `daily-market-watch` (same repo) — for current macro tape / Fed signals to ground any "why are they buying this?" question.
+- `thematic-stock-picker` (same repo) — for theme-driven baskets; use the smart-money signal as a corroborating data point in Section C of the picker.
+
+## Examples
+
+A canonical output structure lives at `examples/sample-report.md`, with a guide to the real-data output format at `examples/README.md`. When this skill is the only one the user needs, the report's **Convergence Signals** section is the value-add — that's where whale + congressman overlap gets flagged.
