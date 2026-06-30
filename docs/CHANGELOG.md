@@ -5,6 +5,15 @@ All notable changes to this repo are documented here. Versions follow [Semantic 
 ## [Unreleased]
 
 ### Added
+- `sg-financial-advisor` — Singapore-licensed FA Rep skill (research-driven). MAS FAA 2001 / LIA / IBF / CMFAS (RES5, CM-LIP, M9A) grounded. Categorises portfolio into Hospitalisation/Death-TPD/CI/ECI/PA/Investment-Legacy buckets; computes LIA gap (×10 Death, ×4 CI, ×1 ECI, ×4 PA); injects RES5/FAA-N16 surrender warning with sunk-cost table before any termination recommendation; runs FAA-N20 Balanced Scorecard; flags ILPs via M9A keyword filter (Link/Flexi/Sub-Funds/Premium Allocation); diagnoses Premium Overhead Inefficiency; integrates National Protection stack (MediShield Life + Integrated Shield + CareShield Life + HPS); optimises CPF (OA vs SA, SA top-up S$8k, emergency fund 3-6/6-12 mo). Output: Sequence-style action checklist (risk-first), grouped sources, verbatim SG-FA disclaimer.
+- `evals/iterations/iteration-1/eval-3-sgfa/` — 3 prompts (default 29yo legacy ILP, mid-career 38yo family, lite 45yo no-legacy) with 41 graded assertions total. All 3 evals pass at 100% (41/41); mean delta +80% over baseline.
+- `docs/design/sg-financial-advisor.md` — design notes
+- `evals/` now runs 12 evals across 4 skills, mean delta +57%
+- `Makefile` — new `evals-sg-fa` target
+
+## [1.1.0] — 2026-06-30
+
+### Added
 - `docs/ORCHESTRATION.md` — cross-skill playbook
 - `docs/decisions/ADR-001-three-skills-not-one.md`
 - `docs/decisions/ADR-002-region-zoom-source-zoom.md`

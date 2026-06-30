@@ -1,6 +1,6 @@
 # finance-skills
 
-A collection of agent skills for financial markets analysis, portfolio construction, and smart-money tracking. Each skill bundles a workflow, a curated source map, and reference docs so the agent (Claude Code, Codex, OpenCode, Cursor, etc.) can answer finance questions without making things up.
+A collection of agent skills for financial markets analysis, portfolio construction, smart-money tracking, and Singapore-licensed financial advisory. Each skill bundles a workflow, a curated source map, and reference docs so the agent (Claude Code, Codex, OpenCode, Cursor, etc.) can answer finance questions without making things up.
 
 ## Skills in this repo
 
@@ -9,8 +9,9 @@ A collection of agent skills for financial markets analysis, portfolio construct
 | `smart-money-tracker` | [`skills/smart-money-tracker/`](skills/smart-money-tracker/) | Track SEC 13F institutional holdings + congressional STOCK Act trades + House Clerk disclosures. Convergence analysis between whales, politicians, retail flows. |
 | `daily-market-watch` | [`skills/daily-market-watch/`](skills/daily-market-watch/) | Global finance news report — 6 sections (Market Overview, Value, Momentum, Allocation, Options, Trends/Risks/Events), 12 region zoom-ins, Fed signals integration. |
 | `thematic-stock-picker` | [`skills/thematic-stock-picker/`](skills/thematic-stock-picker/) | High-conviction 5-year thematic stock picker — 5 distinct policy-anchored themes × 5-8 screened small/mid-cap US/ADR names, with screening workings + sources + DD disclaimer. |
+| `sg-financial-advisor` | [`skills/sg-financial-advisor/`](skills/sg-financial-advisor/) | Singapore-licensed FA Rep skill — diagnose an insurance + CPF portfolio, compute the LIA gap, apply RES5 surrender warning + FAA-N20 BSC + M9A ILP filter, prioritise a Sequence-style action checklist, integrate with the National Protection stack. |
 
-All three skills produce **source-cited Markdown reports** and follow a common contract: each has a `SKILL.md` workflow, a `references/` directory with curated source maps or screening criteria, and an `examples/` directory with a sample output for verification.
+All four skills produce **source-cited Markdown reports** and follow a common contract: each has a `SKILL.md` workflow, a `references/` directory with curated source maps or screening criteria, and an `examples/` directory with a sample output for verification.
 
 ## Companion skills (cross-skill orchestration)
 
@@ -19,12 +20,14 @@ All three skills produce **source-cited Markdown reports** and follow a common c
 | `smart-money-tracker` | `thematic-stock-picker` | When picking a theme, corroborate the basket against institutional positioning (13F) and congressional trades (STOCK Act). |
 | `daily-market-watch` | `thematic-stock-picker` | When picking a theme, ground the macro/policy backdrop in the current market tape (Fed signals, rate path, sentiment). |
 | `thematic-stock-picker` | `smart-money-tracker` | When the convergence report flags a ticker, add it to the watchlist and pull a deeper thematic context. |
+| `sg-financial-advisor` | `thematic-stock-picker` | When the LIA gap analysis flags freed-up cashflow (e.g. surrender of legacy plans), direct the surplus to a screened thematic basket. |
+| `sg-financial-advisor` | `daily-market-watch` | When the action checklist calls for deploying surplus to investments, ground the entry in current macro/market context. |
 
 See [`docs/ORCHESTRATION.md`](docs/ORCHESTRATION.md) for the full cross-skill playbook.
 
 ## Eval coverage
 
-All three skills are evaluated against a 9-prompt test suite with a programmatic grader (`evals/run_evals.py`). Current state: **9/9 evals beat baseline, mean delta +43%**.
+All four skills are evaluated against a 12-prompt test suite with a programmatic grader (`evals/run_evals.py`). Current state: **12/12 evals beat baseline, mean delta +57% (99% with-skill pass rate)**.
 
 | Skill | Eval | with_skill | baseline | delta |
 |-------|------|-----------|----------|-------|
@@ -37,6 +40,9 @@ All three skills are evaluated against a 9-prompt test suite with a programmatic
 | thematic-stock-picker | default-5-themes-2031 | 10/12 | 5/12 | +42% |
 | thematic-stock-picker | single-theme-ai-infrastructure | 4/5 | 1/5 | +60% |
 | thematic-stock-picker | screen-defense-stocks | 4/6 | 2/6 | +33% |
+| sg-financial-advisor | default-29yo-legacy-ilp | 16/16 | 3/16 | +81% |
+| sg-financial-advisor | mid-career-38yo-family-ilp-cleanup | 15/15 | 3/15 | +80% |
+| sg-financial-advisor | lite-portfolio-no-legacy | 10/10 | 2/10 | +80% |
 
 Run the grader: `make evals`. See [`evals/`](evals/) and [`evals/iterations/benchmark.md`](evals/iterations/benchmark.md).
 
@@ -107,7 +113,7 @@ This repo uses a Makefile for common tasks. See [`Makefile`](Makefile) for the f
 
 ```bash
 make help       # list all targets
-make evals      # run all 9 evals against the canonical examples
+make evals      # run all 12 evals against the canonical examples
 make verify     # evals + smoke-test the smart-money-tracker scripts
 ```
 
@@ -131,11 +137,18 @@ finance-skills/
 │   │   ├── references/regional-sources.md
 │   │   ├── references/fed-signals.md
 │   │   └── examples/           # sample-report.md, sample-lite.md
-│   └── thematic-stock-picker/  # skill 3 (research-driven)
+│   ├── thematic-stock-picker/  # skill 3 (research-driven)
+│   │   ├── SKILL.md
+│   │   ├── references/screening-criteria.md
+│   │   ├── references/sector-themes.md
+│   │   └── examples/           # sample-report.md, sample-ai-infra.md
+│   └── sg-financial-advisor/   # skill 4 (research-driven, SG-licensed FA Rep)
 │       ├── SKILL.md
-│       ├── references/screening-criteria.md
-│       ├── references/sector-themes.md
-│       └── examples/           # sample-report.md, sample-ai-infra.md
+│       ├── references/sg-regulatory-map.md
+│       ├── references/lia-gap-formulas.md
+│       ├── references/national-protection.md
+│       ├── references/compliance-engine.md
+│       └── examples/           # sample-report.md, sample-assessment.md, sample-portfolio-review.md
 ├── evals/                     # cross-skill eval infrastructure
 │   ├── run_evals.py           # programmatic grader
 │   └── iterations/            # per-iteration benchmark data
@@ -150,7 +163,7 @@ finance-skills/
 ## Documentation
 
 - [`docs/CHANGELOG.md`](docs/CHANGELOG.md) — version history of the repo
-- [`docs/ORCHESTRATION.md`](docs/ORCHESTRATION.md) — how the three skills work together
+- [`docs/ORCHESTRATION.md`](docs/ORCHESTRATION.md) — how the four skills work together
 - [`docs/decisions/`](docs/decisions/) — architectural decision records (ADRs)
 - [`docs/api/`](docs/api/) — canonical source maps (Fed/CME/EDGAR/regional news)
 - [`skills/smart-money-tracker/AGENTS.md`](skills/smart-money-tracker/AGENTS.md) — skill testing framework
