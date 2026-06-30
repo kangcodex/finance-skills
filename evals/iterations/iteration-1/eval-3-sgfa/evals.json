@@ -1,0 +1,26 @@
+{
+  "skill_name": "sg-financial-advisor",
+  "evals": [
+    {
+      "id": 1,
+      "name": "default-29yo-legacy-ilp",
+      "prompt": "I'm 29 years old, non-smoker, employed, single, no kids, no mortgage. I pay about S$5,747 a year in premiums across these policies: MediShield Life (auto), a 1997 GE WholeLife Premier (S$1,800/yr, cash value S$18k), a 2001 GE GreatLink Supreme (S$1,440/yr, cash value S$42k), and a 2014 GE GreatLink FlexiPlan (S$2,077/yr, account value S$31k). Income S$60k/yr. CPF: OA S$45k, SA S$28k, MA S$8k. Cash S$12k. Is my plan good or not? Should I surrender any of the legacy plans?",
+      "expected_output": "Categorized portfolio, FAA-N16 surrender warning with sunk-cost math, LIA gap analysis (Income x 10 Death, Income x 4 CI), M9A ILP flag on FlexiPlan, Premium Overhead Inefficiency diagnosis, FAA-N20 BSC, CPF optimisation, National Protection integration (MediShield + CareShield + HPS), prioritised action checklist (Sequence-style, risk-first), sources block, SG-FA disclaimer",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "mid-career-38yo-family-ilp-cleanup",
+      "prompt": "I'm 38, self-employed consultant, S$120k/yr, married with 1 kid (age 4). HDB loan S$280k outstanding. I have: NTUC IncomeShield Plan A + rider, AIA Term Life S$500k, HPS active, PRUlife Vantage 100 Multi-pay CI S$100k base + 4x ECI, and a Manulife ReadyBuilder ILP from 2010 paying S$3,520/yr (account value S$58k). Total premiums S$8,400/yr. CPF OA S$62k / SA S$40k / MA S$10k. Cash S$24k. Should I surrender the Manulife ILP?",
+      "expected_output": "Categorized portfolio, FAA-N16 surrender warning for the ILP, sunk-cost math, M9A ILP flag, LIA gap analysis with mortgage adjustment, FAA-N20 BSC, Premium Overhead Inefficiency diagnosis (ILP drag quantified), National Protection integration, CPF optimisation, prioritised action checklist (risk-first), sources, SG-FA disclaimer",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "lite-portfolio-no-legacy",
+      "prompt": "I'm 45, employed, S$90k/yr, married with 2 kids, HDB loan fully paid. Policies: AIA HealthShield Gold Max A, NTUC Income Term Life S$500k level to 65, AIA Multipay CI S$200k base + 3x ECI. Total premiums S$3,200/yr. No whole life, endowment, or ILP. CPF OA S$90k / SA S$55k / MA S$12k. Cash S$30k. Just give me a quick portfolio review — am I covered?",
+      "expected_output": "Categorized portfolio (no surrender warning needed), LIA gap analysis, National Protection integration, Premium Overhead Inefficiency check (negative — no ILP), short Sequence-style action checklist, sources, SG-FA disclaimer",
+      "files": []
+    }
+  ]
+}

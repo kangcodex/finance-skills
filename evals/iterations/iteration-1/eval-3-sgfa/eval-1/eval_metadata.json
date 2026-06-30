@@ -1,0 +1,99 @@
+{
+  "eval_id": 1,
+  "skill": "sg-financial-advisor",
+  "eval_name": "mid-career-38yo-family-ilp-cleanup",
+  "prompt": "I'm 38, self-employed consultant, S$120k/yr, married with 1 kid (age 4). HDB loan S$280k outstanding. I have: NTUC IncomeShield Plan A + rider, AIA Term Life S$500k, HPS active, PRUlife Vantage 100 Multi-pay CI S$100k base + 4x ECI, and a Manulife ReadyBuilder ILP from 2010 paying S$3,520/yr (account value S$58k). Total premiums S$8,400/yr. CPF OA S$62k / SA S$40k / MA S$10k. Cash S$24k. Should I surrender the Manulife ILP?",
+  "expected_output": "Categorized portfolio, FAA-N16 surrender warning for the ILP, sunk-cost math, M9A ILP flag, LIA gap analysis with mortgage adjustment, FAA-N20 BSC, Premium Overhead Inefficiency diagnosis (ILP drag quantified), National Protection integration, CPF optimisation, prioritised action checklist (risk-first), sources, SG-FA disclaimer",
+  "assertions": [
+    {
+      "id": "B1",
+      "name": "portfolio_categorised_into_buckets",
+      "description": "Output must categorise policies into Hospitalisation / Death-TPD / CI / PA / Investment-Legacy buckets",
+      "check": "output contains 'Hospitalisation' AND 'Death' AND 'Investment-Legacy'"
+    },
+    {
+      "id": "B2",
+      "name": "fAA_N16_surrender_warning_present",
+      "description": "Output must include the FAA-N16 / RES5 surrender warning with required language",
+      "check": "output contains 'Surrender warning' AND 'FAA-N16' AND 'you may receive less than the total premiums paid'"
+    },
+    {
+      "id": "B3",
+      "name": "m9a_ilp_flag_on_readybuilder",
+      "description": "Output must flag the Manulife ReadyBuilder as an ILP conflict (M9A)",
+      "check": "output contains 'M9A' AND 'ILP' AND ('Manulife' or 'ReadyBuilder' or 'Link' or 'Sub-Funds')"
+    },
+    {
+      "id": "B4",
+      "name": "mortgage_adjusted_death_target",
+      "description": "Output must adjust Death target for outstanding HDB loan",
+      "check": "output contains 'mortgage' AND 'Death' AND 'HDB'"
+    },
+    {
+      "id": "B5",
+      "name": "LIA_gap_table",
+      "description": "Output must show LIA gap analysis with target and aggregated columns",
+      "check": "output contains 'Target' AND 'Aggregated' AND 'Net gap' AND 'CI'"
+    },
+    {
+      "id": "B6",
+      "name": "FAA_N20_BSC",
+      "description": "Output must include FAA-N20 Balanced Scorecard with 4 quadrants",
+      "check": "output contains 'FAA-N20' AND 'Balanced Scorecard' AND 'Q1' AND 'Q2' AND 'Q3' AND 'Q4'"
+    },
+    {
+      "id": "B7",
+      "name": "premium_overhead_quantified",
+      "description": "Output must quantify the Premium Overhead Inefficiency in dollars or percentage",
+      "check": "output contains 'Premium Overhead' AND ('S$' or 'IRR' or '%' or 'drag')"
+    },
+    {
+      "id": "B8",
+      "name": "national_protection_integration",
+      "description": "Output must verify National Protection stack: MediShield + CareShield + HPS",
+      "check": "output contains 'MediShield Life' AND 'CareShield Life' AND 'HPS'"
+    },
+    {
+      "id": "B9",
+      "name": "self_employed_emergency_fund_target",
+      "description": "Output must apply self-employed emergency fund target (6-12 months)",
+      "check": "output contains 'self-employed' AND ('6 month' or '6-12 month' or '12 month' or '6 mo')"
+    },
+    {
+      "id": "B10",
+      "name": "cpf_sa_top_up_lever",
+      "description": "Output must include CPF SA top-up as a lever",
+      "check": "output contains 'SA top-up' AND 'tax relief' AND ('S$8,000' or '8000')"
+    },
+    {
+      "id": "B11",
+      "name": "action_checklist_risk_first",
+      "description": "Output must include a Sequence-style prioritised action checklist with risk as the first step",
+      "check": "output contains 'Action Checklist' AND 'Risk' AND 'Sequence'"
+    },
+    {
+      "id": "B12",
+      "name": "no_buy_imperative",
+      "description": "Output must NOT include 'you should buy' or 'I recommend you buy' imperative language",
+      "check": "output does NOT contain 'you should buy' or 'I recommend you buy' or 'I recommend buying'"
+    },
+    {
+      "id": "B13",
+      "name": "no_guaranteed_return",
+      "description": "Output must NOT include guaranteed return claims",
+      "check": "output does NOT contain 'guaranteed return' or 'guaranteed 5%' or 'guaranteed 6%' or 'guaranteed 7%'"
+    },
+    {
+      "id": "B14",
+      "name": "sources_grouped",
+      "description": "Output must have a Sources block grouped by category",
+      "check": "output contains '## Sources' AND output contains at least 2 of: '**MAS', '**LIA', '**CPF', '**Insurer'"
+    },
+    {
+      "id": "B15",
+      "name": "sg_fa_disclaimer_verbatim",
+      "description": "Output must end with the verbatim SG-FA disclaimer (surrender-irreversible language required)",
+      "check": "output contains 'Surrendering a life policy is an irreversible decision' AND 'not personalised financial advice'"
+    }
+  ]
+}

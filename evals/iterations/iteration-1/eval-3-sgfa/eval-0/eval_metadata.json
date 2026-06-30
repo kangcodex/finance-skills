@@ -1,0 +1,105 @@
+{
+  "eval_id": 0,
+  "skill": "sg-financial-advisor",
+  "eval_name": "default-29yo-legacy-ilp",
+  "prompt": "I'm 29 years old, non-smoker, employed, single, no kids, no mortgage. I pay about S$5,747 a year in premiums across these policies: MediShield Life (auto), a 1997 GE WholeLife Premier (S$1,800/yr, cash value S$18k), a 2001 GE GreatLink Supreme (S$1,440/yr, cash value S$42k), and a 2014 GE GreatLink FlexiPlan (S$2,077/yr, account value S$31k). Income S$60k/yr. CPF: OA S$45k, SA S$28k, MA S$8k. Cash S$12k. Is my plan good or not? Should I surrender any of the legacy plans?",
+  "expected_output": "Categorized portfolio, FAA-N16 surrender warning with sunk-cost math, LIA gap analysis (Income x 10 Death, Income x 4 CI), M9A ILP flag on FlexiPlan, Premium Overhead Inefficiency diagnosis, FAA-N20 BSC, CPF optimisation, National Protection integration (MediShield + CareShield + HPS), prioritised action checklist (Sequence-style, risk-first), sources block, SG-FA disclaimer",
+  "assertions": [
+    {
+      "id": "A1",
+      "name": "portfolio_categorised_into_buckets",
+      "description": "Output must categorise policies into Hospitalisation / Death-TPD / CI / PA / Investment-Legacy buckets",
+      "check": "output contains 'Hospitalisation' AND 'Death' AND 'Investment-Legacy'"
+    },
+    {
+      "id": "A2",
+      "name": "fAA_N16_surrender_warning_verbatim",
+      "description": "Output must include the FAA-N16 / RES5 surrender warning verbatim with the required language",
+      "check": "output contains 'Surrender warning' AND 'FAA-N16' AND 'you may receive less than the total premiums paid'"
+    },
+    {
+      "id": "A3",
+      "name": "sunk_cost_table_present",
+      "description": "Output must show a sunk-cost vs cash-value table for legacy policies",
+      "check": "output contains 'sunk-cost' AND 'cash value' AND 'Unrecoverable cost'"
+    },
+    {
+      "id": "A4",
+      "name": "LIA_gap_formulas_used",
+      "description": "Output must apply the LIA standard gap formulas (Income x 10 Death, Income x 4 CI)",
+      "check": "output contains 'Income' AND 'x 10' AND 'x 4' AND ('Death' or 'TPD') AND 'CI'"
+    },
+    {
+      "id": "A5",
+      "name": "gap_table_with_target_and_aggregated",
+      "description": "Output must show a gap table with target and aggregated sum assured columns",
+      "check": "output contains 'Target' AND 'Aggregated' AND 'Net gap'"
+    },
+    {
+      "id": "A6",
+      "name": "M9A_ILP_flag_on_FlexiPlan",
+      "description": "Output must flag the FlexiPlan as an ILP conflict using M9A keywords (Link / Flexi / Sub-Funds)",
+      "check": "output contains 'M9A' AND ('Link' or 'Flexi' or 'Sub-Funds' or 'Premium Allocation') AND 'ILP'"
+    },
+    {
+      "id": "A7",
+      "name": "premium_overhead_inefficiency_diagnosis",
+      "description": "Output must diagnose the Premium Overhead Inefficiency",
+      "check": "output contains 'Premium Overhead' AND ('Inefficiency' or 'drag' or 'overpaying' or 'overhead')"
+    },
+    {
+      "id": "A8",
+      "name": "FAA_N20_balanced_scorecard_present",
+      "description": "Output must include the FAA-N20 Balanced Scorecard (BSC) with 4 quadrants",
+      "check": "output contains 'FAA-N20' AND 'Balanced Scorecard' AND 'Q1' AND 'Q2' AND 'Q3' AND 'Q4'"
+    },
+    {
+      "id": "A9",
+      "name": "national_protection_stack_checked",
+      "description": "Output must verify the National Protection stack: MediShield Life, CareShield Life, HPS",
+      "check": "output contains 'MediShield Life' AND 'CareShield Life' AND 'HPS'"
+    },
+    {
+      "id": "A10",
+      "name": "CPF_optimisation_present",
+      "description": "Output must include CPF optimisation: OA vs SA, cashflow, emergency fund",
+      "check": "output contains 'CPF' AND 'SA' AND 'OA' AND 'Emergency Fund'"
+    },
+    {
+      "id": "A11",
+      "name": "sequence_style_action_checklist",
+      "description": "Output must include a prioritised Sequence-style action checklist (risk-first)",
+      "check": "output contains 'Action Checklist' AND ('Sequence' or 'prioritised' or 'prioritized') AND 'Risk' AND 'Cashflow'"
+    },
+    {
+      "id": "A12",
+      "name": "no_buy_imperative",
+      "description": "Output must NOT include 'you should buy' or 'I recommend you buy' imperative language",
+      "check": "output does NOT contain 'you should buy' or 'I recommend you buy' or 'I recommend buying'"
+    },
+    {
+      "id": "A13",
+      "name": "no_price_targets",
+      "description": "Output must NOT include specific price targets or guaranteed returns",
+      "check": "output does NOT contain 'price target' or 'target price' or 'PT $' or 'guaranteed return' or 'guaranteed 5%'"
+    },
+    {
+      "id": "A14",
+      "name": "no_urgent_cancellation_of_national_layers",
+      "description": "Output must NOT recommend cancelling MediShield Life or CareShield Life",
+      "check": "output does NOT contain 'cancel MediShield' or 'opt out of CareShield' or 'cancel your CareShield'"
+    },
+    {
+      "id": "A15",
+      "name": "sources_grouped",
+      "description": "Output must have a Sources block grouped by category",
+      "check": "output contains '## Sources' AND output contains at least 2 of: '**MAS', '**LIA', '**CPF', '**Insurer'"
+    },
+    {
+      "id": "A16",
+      "name": "sg_fa_disclaimer_verbatim",
+      "description": "Output must end with the verbatim SG-FA disclaimer (surrender-irreversible language required)",
+      "check": "output contains 'Surrendering a life policy is an irreversible decision' AND 'LIA Consumer Guide' AND 'not personalised financial advice'"
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "eval_id": 0,
+  "skill": "sg-financial-advisor",
+  "eval_name": "default-29yo-legacy-ilp",
+  "prompt": "I'm 29 years old, non-smoker, employed, single, no kids, no mortgage. I pay about S$5,747 a year in premiums across these policies: MediShield Life (auto), a 1997 GE WholeLife Premier (S$1,800/yr, cash value S$18k), a 2001 GE GreatLink Supreme (S$1,440/yr, cash value S$42k), and a 2014 GE GreatLink FlexiPlan (S$2,077/yr, account value S$31k). Income S$60k/yr. CPF: OA S$45k, SA S$28k, MA S$8k. Cash S$12k. Is my plan good or not? Should I surrender any of the legacy plans?",
+  "with_skill": {
+    "run_id": "eval-3-sgfa-eval-0-with_skill",
+    "skill": "sg-financial-advisor",
+    "prompt": "I'm 29 years old, non-smoker, employed, single, no kids, no mortgage. I pay about S$5,747 a year in premiums across these policies: MediShield Life (auto), a 1997 GE WholeLife Premier (S$1,800/yr, cash value S$18k), a 2001 GE GreatLink Supreme (S$1,440/yr, cash value S$42k), and a 2014 GE GreatLink FlexiPlan (S$2,077/yr, account value S$31k). Income S$60k/yr. CPF: OA S$45k, SA S$28k, MA S$8k. Cash S$12k. Is my plan good or not? Should I surrender any of the legacy plans?",
+    "expectations": [
+      {
+        "text": "portfolio_categorised_into_buckets",
+        "passed": true,
+        "evidence": "'Hospitalisation' present | 'Death' present | 'Investment-Legacy' present"
+      },
+      {
+        "text": "fAA_N16_surrender_warning_verbatim",
+        "passed": true,
+        "evidence": "'Surrender warning' present | 'FAA-N16' present | 'you may receive less than the total premiums paid' present"
+      },
+      {
+        "text": "sunk_cost_table_present",
+        "passed": true,
+        "evidence": "'sunk-cost' present | 'cash value' present | 'Unrecoverable cost' present"
+      },
+      {
+        "text": "LIA_gap_formulas_used",
+        "passed": true,
+        "evidence": "'Income' present | 'x 10' present | 'x 4' present | any of 2: 2 present | 'CI' present"
+      },
+      {
+        "text": "gap_table_with_target_and_aggregated",
+        "passed": true,
+        "evidence": "'Target' present | 'Aggregated' present | 'Net gap' present"
+      },
+      {
+        "text": "M9A_ILP_flag_on_FlexiPlan",
+        "passed": true,
+        "evidence": "'M9A' present | any of 4: 4 present | 'ILP' present"
+      },
+      {
+        "text": "premium_overhead_inefficiency_diagnosis",
+        "passed": true,
+        "evidence": "'Premium Overhead' present"
+      },
+      {
+        "text": "FAA_N20_balanced_scorecard_present",
+        "passed": true,
+        "evidence": "'FAA-N20' present | 'Balanced Scorecard' present | 'Q1' present | 'Q2' present | 'Q3' present | 'Q4' present"
+      },
+      {
+        "text": "national_protection_stack_checked",
+        "passed": true,
+        "evidence": "'MediShield Life' present | 'CareShield Life' present | 'HPS' present"
+      },
+      {
+        "text": "CPF_optimisation_present",
+        "passed": true,
+        "evidence": "'CPF' present | 'SA' present | 'OA' present | 'Emergency Fund' present"
+      },
+      {
+        "text": "sequence_style_action_checklist",
+        "passed": true,
+        "evidence": "'Action Checklist' present | any of 3: 2 present | 'Risk' present | 'Cashflow' present"
+      },
+      {
+        "text": "no_buy_imperative",
+        "passed": true,
+        "evidence": "any of 3 forbidden needles: 0 present"
+      },
+      {
+        "text": "no_price_targets",
+        "passed": true,
+        "evidence": "any of 5 forbidden needles: 0 present"
+      },
+      {
+        "text": "no_urgent_cancellation_of_national_layers",
+        "passed": true,
+        "evidence": "any of 3 forbidden needles: 0 present"
+      },
+      {
+        "text": "sources_grouped",
+        "passed": true,
+        "evidence": "'## Sources' present | 4/4 present (need >=2)"
+      },
+      {
+        "text": "sg_fa_disclaimer_verbatim",
+        "passed": true,
+        "evidence": "'Surrendering a life policy is an irreversible decision' present | 'LIA Consumer Guide' present | 'not personalised financial advice' present"
+      }
+    ],
+    "passed": 16,
+    "total": 16,
+    "pass_rate": 1.0
+  },
+  "without_skill": {
+    "run_id": "eval-3-sgfa-eval-0-without_skill",
+    "skill": "sg-financial-advisor",
+    "prompt": "I'm 29 years old, non-smoker, employed, single, no kids, no mortgage. I pay about S$5,747 a year in premiums across these policies: MediShield Life (auto), a 1997 GE WholeLife Premier (S$1,800/yr, cash value S$18k), a 2001 GE GreatLink Supreme (S$1,440/yr, cash value S$42k), and a 2014 GE GreatLink FlexiPlan (S$2,077/yr, account value S$31k). Income S$60k/yr. CPF: OA S$45k, SA S$28k, MA S$8k. Cash S$12k. Is my plan good or not? Should I surrender any of the legacy plans?",
+    "expectations": [
+      {
+        "text": "portfolio_categorised_into_buckets",
+        "passed": false,
+        "evidence": "'Hospitalisation' absent | 'Death' absent | 'Investment-Legacy' absent"
+      },
+      {
+        "text": "fAA_N16_surrender_warning_verbatim",
+        "passed": false,
+        "evidence": "'Surrender warning' absent | 'FAA-N16' absent | 'you may receive less than the total premiums paid' absent"
+      },
+      {
+        "text": "sunk_cost_table_present",
+        "passed": false,
+        "evidence": "'sunk-cost' absent | 'cash value' present | 'Unrecoverable cost' absent"
+      },
+      {
+        "text": "LIA_gap_formulas_used",
+        "passed": false,
+        "evidence": "'Income' present | 'x 10' absent | 'x 4' absent | any of 2: 0 present | 'CI' present"
+      },
+      {
+        "text": "gap_table_with_target_and_aggregated",
+        "passed": false,
+        "evidence": "'Target' absent | 'Aggregated' absent | 'Net gap' absent"
+      },
+      {
+        "text": "M9A_ILP_flag_on_FlexiPlan",
+        "passed": false,
+        "evidence": "'M9A' absent | any of 4: 2 present | 'ILP' absent"
+      },
+      {
+        "text": "premium_overhead_inefficiency_diagnosis",
+        "passed": false,
+        "evidence": "'Premium Overhead' absent"
+      },
+      {
+        "text": "FAA_N20_balanced_scorecard_present",
+        "passed": false,
+        "evidence": "'FAA-N20' absent | 'Balanced Scorecard' absent | 'Q1' absent | 'Q2' absent | 'Q3' absent | 'Q4' absent"
+      },
+      {
+        "text": "national_protection_stack_checked",
+        "passed": false,
+        "evidence": "'MediShield Life' present | 'CareShield Life' absent | 'HPS' absent"
+      },
+      {
+        "text": "CPF_optimisation_present",
+        "passed": false,
+        "evidence": "'CPF' present | 'SA' present | 'OA' present | 'Emergency Fund' absent"
+      },
+      {
+        "text": "sequence_style_action_checklist",
+        "passed": false,
+        "evidence": "'Action Checklist' absent | any of 3: 0 present | 'Risk' absent | 'Cashflow' absent"
+      },
+      {
+        "text": "no_buy_imperative",
+        "passed": true,
+        "evidence": "any of 3 forbidden needles: 0 present"
+      },
+      {
+        "text": "no_price_targets",
+        "passed": true,
+        "evidence": "any of 5 forbidden needles: 0 present"
+      },
+      {
+        "text": "no_urgent_cancellation_of_national_layers",
+        "passed": true,
+        "evidence": "any of 3 forbidden needles: 0 present"
+      },
+      {
+        "text": "sources_grouped",
+        "passed": false,
+        "evidence": "'## Sources' absent | 0/4 present (need >=2)"
+      },
+      {
+        "text": "sg_fa_disclaimer_verbatim",
+        "passed": false,
+        "evidence": "'Surrendering a life policy is an irreversible decision' absent | 'LIA Consumer Guide' absent | 'not personalised financial advice' absent"
+      }
+    ],
+    "passed": 3,
+    "total": 16,
+    "pass_rate": 0.1875
+  },
+  "delta_pass_rate": 0.8125
+}

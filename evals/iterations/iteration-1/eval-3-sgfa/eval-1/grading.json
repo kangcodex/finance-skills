@@ -1,0 +1,177 @@
+{
+  "eval_id": 1,
+  "skill": "sg-financial-advisor",
+  "eval_name": "mid-career-38yo-family-ilp-cleanup",
+  "prompt": "I'm 38, self-employed consultant, S$120k/yr, married with 1 kid (age 4). HDB loan S$280k outstanding. I have: NTUC IncomeShield Plan A + rider, AIA Term Life S$500k, HPS active, PRUlife Vantage 100 Multi-pay CI S$100k base + 4x ECI, and a Manulife ReadyBuilder ILP from 2010 paying S$3,520/yr (account value S$58k). Total premiums S$8,400/yr. CPF OA S$62k / SA S$40k / MA S$10k. Cash S$24k. Should I surrender the Manulife ILP?",
+  "with_skill": {
+    "run_id": "eval-3-sgfa-eval-1-with_skill",
+    "skill": "sg-financial-advisor",
+    "prompt": "I'm 38, self-employed consultant, S$120k/yr, married with 1 kid (age 4). HDB loan S$280k outstanding. I have: NTUC IncomeShield Plan A + rider, AIA Term Life S$500k, HPS active, PRUlife Vantage 100 Multi-pay CI S$100k base + 4x ECI, and a Manulife ReadyBuilder ILP from 2010 paying S$3,520/yr (account value S$58k). Total premiums S$8,400/yr. CPF OA S$62k / SA S$40k / MA S$10k. Cash S$24k. Should I surrender the Manulife ILP?",
+    "expectations": [
+      {
+        "text": "portfolio_categorised_into_buckets",
+        "passed": true,
+        "evidence": "'Hospitalisation' present | 'Death' present | 'Investment-Legacy' present"
+      },
+      {
+        "text": "fAA_N16_surrender_warning_present",
+        "passed": true,
+        "evidence": "'Surrender warning' present | 'FAA-N16' present | 'you may receive less than the total premiums paid' present"
+      },
+      {
+        "text": "m9a_ilp_flag_on_readybuilder",
+        "passed": true,
+        "evidence": "'M9A' present | 'ILP' present"
+      },
+      {
+        "text": "mortgage_adjusted_death_target",
+        "passed": true,
+        "evidence": "'mortgage' present | 'Death' present | 'HDB' present"
+      },
+      {
+        "text": "LIA_gap_table",
+        "passed": true,
+        "evidence": "'Target' present | 'Aggregated' present | 'Net gap' present | 'CI' present"
+      },
+      {
+        "text": "FAA_N20_BSC",
+        "passed": true,
+        "evidence": "'FAA-N20' present | 'Balanced Scorecard' present | 'Q1' present | 'Q2' present | 'Q3' present | 'Q4' present"
+      },
+      {
+        "text": "premium_overhead_quantified",
+        "passed": true,
+        "evidence": "'Premium Overhead' present"
+      },
+      {
+        "text": "national_protection_integration",
+        "passed": true,
+        "evidence": "'MediShield Life' present | 'CareShield Life' present | 'HPS' present"
+      },
+      {
+        "text": "self_employed_emergency_fund_target",
+        "passed": true,
+        "evidence": "'self-employed' present"
+      },
+      {
+        "text": "cpf_sa_top_up_lever",
+        "passed": true,
+        "evidence": "'SA top-up' present | 'tax relief' present"
+      },
+      {
+        "text": "action_checklist_risk_first",
+        "passed": true,
+        "evidence": "'Action Checklist' present | 'Risk' present | 'Sequence' present"
+      },
+      {
+        "text": "no_buy_imperative",
+        "passed": true,
+        "evidence": "any of 3 forbidden needles: 0 present"
+      },
+      {
+        "text": "no_guaranteed_return",
+        "passed": true,
+        "evidence": "any of 4 forbidden needles: 0 present"
+      },
+      {
+        "text": "sources_grouped",
+        "passed": true,
+        "evidence": "'## Sources' present | 4/4 present (need >=2)"
+      },
+      {
+        "text": "sg_fa_disclaimer_verbatim",
+        "passed": true,
+        "evidence": "'Surrendering a life policy is an irreversible decision' present | 'not personalised financial advice' present"
+      }
+    ],
+    "passed": 15,
+    "total": 15,
+    "pass_rate": 1.0
+  },
+  "without_skill": {
+    "run_id": "eval-3-sgfa-eval-1-without_skill",
+    "skill": "sg-financial-advisor",
+    "prompt": "I'm 38, self-employed consultant, S$120k/yr, married with 1 kid (age 4). HDB loan S$280k outstanding. I have: NTUC IncomeShield Plan A + rider, AIA Term Life S$500k, HPS active, PRUlife Vantage 100 Multi-pay CI S$100k base + 4x ECI, and a Manulife ReadyBuilder ILP from 2010 paying S$3,520/yr (account value S$58k). Total premiums S$8,400/yr. CPF OA S$62k / SA S$40k / MA S$10k. Cash S$24k. Should I surrender the Manulife ILP?",
+    "expectations": [
+      {
+        "text": "portfolio_categorised_into_buckets",
+        "passed": false,
+        "evidence": "'Hospitalisation' absent | 'Death' absent | 'Investment-Legacy' absent"
+      },
+      {
+        "text": "fAA_N16_surrender_warning_present",
+        "passed": false,
+        "evidence": "'Surrender warning' absent | 'FAA-N16' absent | 'you may receive less than the total premiums paid' absent"
+      },
+      {
+        "text": "m9a_ilp_flag_on_readybuilder",
+        "passed": false,
+        "evidence": "'M9A' absent | 'ILP' present"
+      },
+      {
+        "text": "mortgage_adjusted_death_target",
+        "passed": false,
+        "evidence": "'mortgage' absent | 'Death' absent | 'HDB' present"
+      },
+      {
+        "text": "LIA_gap_table",
+        "passed": false,
+        "evidence": "'Target' absent | 'Aggregated' absent | 'Net gap' absent | 'CI' present"
+      },
+      {
+        "text": "FAA_N20_BSC",
+        "passed": false,
+        "evidence": "'FAA-N20' absent | 'Balanced Scorecard' absent | 'Q1' absent | 'Q2' absent | 'Q3' absent | 'Q4' absent"
+      },
+      {
+        "text": "premium_overhead_quantified",
+        "passed": false,
+        "evidence": "'Premium Overhead' absent"
+      },
+      {
+        "text": "national_protection_integration",
+        "passed": false,
+        "evidence": "'MediShield Life' absent | 'CareShield Life' absent | 'HPS' present"
+      },
+      {
+        "text": "self_employed_emergency_fund_target",
+        "passed": true,
+        "evidence": "'self-employed' present"
+      },
+      {
+        "text": "cpf_sa_top_up_lever",
+        "passed": false,
+        "evidence": "'SA top-up' absent | 'tax relief' absent"
+      },
+      {
+        "text": "action_checklist_risk_first",
+        "passed": false,
+        "evidence": "'Action Checklist' absent | 'Risk' absent | 'Sequence' absent"
+      },
+      {
+        "text": "no_buy_imperative",
+        "passed": true,
+        "evidence": "any of 3 forbidden needles: 0 present"
+      },
+      {
+        "text": "no_guaranteed_return",
+        "passed": true,
+        "evidence": "any of 4 forbidden needles: 0 present"
+      },
+      {
+        "text": "sources_grouped",
+        "passed": false,
+        "evidence": "'## Sources' absent | 0/4 present (need >=2)"
+      },
+      {
+        "text": "sg_fa_disclaimer_verbatim",
+        "passed": false,
+        "evidence": "'Surrendering a life policy is an irreversible decision' absent | 'not personalised financial advice' absent"
+      }
+    ],
+    "passed": 3,
+    "total": 15,
+    "pass_rate": 0.2
+  },
+  "delta_pass_rate": 0.8
+}
