@@ -1,8 +1,75 @@
+```bash
+curl -fsSL https://raw.githubusercontent.com/kangcodex/finance-skills/main/scripts/install.sh | bash
+```
+
 # finance-skills
 
-A collection of agent skills for financial markets analysis, portfolio construction, smart-money tracking, and Singapore-licensed financial advisory. Each skill bundles a workflow, a curated source map, and reference docs so the agent (Claude Code, Codex, OpenCode, Cursor, etc.) can answer finance questions without making things up.
+A collection of agent skills for financial markets analysis, portfolio construction, smart-money tracking, Singapore-licensed financial advisory, and **autonomous Polymarket weather trading**. Each skill bundles a workflow, a curated source map, and reference docs so the agent (Claude Code, Codex, OpenCode, Cursor, etc.) can answer finance questions without making things up.
 
-## Skills in this repo
+## Skill families
+
+| Family | What it does | Skills |
+|--------|--------------|--------|
+| **Research** | One-shot analysis skills. The user asks a question, the agent produces a cited Markdown report. | `smart-money-tracker`, `daily-market-watch`, `thematic-stock-picker`, `sg-financial-advisor` |
+| **Weather Trading** | Autonomous Polymarket trading agent. Runs unattended on a cron. The user sets up the wallet once, then the agent ticks. | `polymarket-wallet-setup`, `weather-data-fetch`, `signal-gen`, `risk-manage`, `trade-execute` |
+
+Both families share the same flat-skill convention (`SKILL.md` + `references/` + `examples/`). The weather-trading family additionally depends on a **private** `weather_runtime` Python package (sibling repo, not in this tree). The deterministic math + I/O lives in the private runtime; the public SKILL.md files are pure orchestration instructions.
+
+## Install
+
+This repo follows the [vercel-labs/skills](https://github.com/vercel-labs/skills) install pattern. The `skills` CLI works with **OpenCode, Claude Code, Codex, Cursor**, and [68 other agents](https://github.com/vercel-labs/skills#supported-agents).
+
+### Install all skills
+
+```bash
+npx skills add kangcodex/finance-skills
+```
+
+### Install a single skill
+
+```bash
+npx skills add kangcodex/finance-skills --skill thematic-stock-picker
+
+# Direct subpath (works for any agent that resolves GitHub tree URLs)
+npx skills add https://github.com/kangcodex/finance-skills/tree/main/skills/thematic-stock-picker
+```
+
+### Install for a specific agent only
+
+```bash
+npx skills add kangcodex/finance-skills -a claude-code
+npx skills add kangcodex/finance-skills -a opencode
+npx skills add kangcodex/finance-skills -a codex
+```
+
+### Install globally (across all your projects)
+
+```bash
+npx skills add kangcodex/finance-skills -g
+```
+
+### Non-interactive (CI / scripts)
+
+```bash
+npx skills add kangcodex/finance-skills -a claude-code -y
+```
+
+The CLI prompts you to choose between **symlink** (recommended — single source of truth, easy updates) or **copy** (independent copies per agent) on first run. Use `-y` to skip the prompt.
+
+### Manual / local install
+
+If you can't or don't want to use the `npx skills` CLI:
+
+```bash
+git clone https://github.com/kangcodex/finance-skills.git
+cd finance-skills
+mkdir -p ~/.claude/skills
+cp -r skills/thematic-stock-picker ~/.claude/skills/thematic-stock-picker
+```
+
+## Research skills
+
+All four research skills produce **source-cited Markdown reports** and follow a common contract: each has a `SKILL.md` workflow, a `references/` directory with curated source maps or screening criteria, and an `examples/` directory with a sample output for verification.
 
 | Skill | Folder | What it does |
 |-------|--------|--------------|
@@ -11,9 +78,7 @@ A collection of agent skills for financial markets analysis, portfolio construct
 | `thematic-stock-picker` | [`skills/thematic-stock-picker/`](skills/thematic-stock-picker/) | High-conviction 5-year thematic stock picker — 5 distinct policy-anchored themes × 5-8 screened small/mid-cap US/ADR names, with screening workings + sources + DD disclaimer. |
 | `sg-financial-advisor` | [`skills/sg-financial-advisor/`](skills/sg-financial-advisor/) | Singapore-licensed FA Rep skill — diagnose an insurance + CPF portfolio, compute the LIA gap, apply RES5 surrender warning + FAA-N20 BSC + M9A ILP filter, prioritise a Sequence-style action checklist, integrate with the National Protection stack. |
 
-All four skills produce **source-cited Markdown reports** and follow a common contract: each has a `SKILL.md` workflow, a `references/` directory with curated source maps or screening criteria, and an `examples/` directory with a sample output for verification.
-
-## Companion skills (cross-skill orchestration)
+### Companion skills (cross-skill orchestration)
 
 | From | To | Use case |
 |------|----|----------|
@@ -23,11 +88,33 @@ All four skills produce **source-cited Markdown reports** and follow a common co
 | `sg-financial-advisor` | `thematic-stock-picker` | When the LIA gap analysis flags freed-up cashflow (e.g. surrender of legacy plans), direct the surplus to a screened thematic basket. |
 | `sg-financial-advisor` | `daily-market-watch` | When the action checklist calls for deploying surplus to investments, ground the entry in current macro/market context. |
 
-See [`docs/ORCHESTRATION.md`](docs/ORCHESTRATION.md) for the full cross-skill playbook.
+See [`docs/ORCHESTRATION.md`](docs/ORCHESTRATION.md) for the full cross-skill playbook (research + weather-trading).
+
+## Weather trading skills
+
+The weather-trading family is **safe to leave running unattended** on Polygon Amoy (testnet). Mainnet is gated behind two env-var flags and a cold-wallet signature.
+
+The agent reads each skill's `SKILL.md` and follows the workflow. The first time the user wants to start trading, they invoke the `polymarket-wallet-setup` skill. After that, the four tick skills run in order on a cron (or event-driven), driven by the user's scheduling layer.
+
+```
+weather-data-fetch → signal-gen → risk-manage → trade-execute
+                                            ↑ always gates on risk.json.halt
+```
+
+The skills reference the `weather_runtime` Python package, which is **not in this repo**. It lives in a private sibling repo (kept out of source control by design — the runtime encodes the strategy alpha and the session-key custody code). To install it:
+
+```bash
+# One-shot install (fetches the private runtime tarball + sets up venv)
+./scripts/install.sh
+```
+
+The script will print the rest. It defaults to `./weather-agent/` as the install path and refuses to overwrite a non-empty directory.
+
+The 5 weather-trading skills each have 3 evals (15 total) — runtime is unit-tested but the eval grader is on the v1.3 roadmap.
 
 ## Eval coverage
 
-All four skills are evaluated against a 12-prompt test suite with a programmatic grader (`evals/run_evals.py`). Current state: **12/12 evals beat baseline, mean delta +57% (99% with-skill pass rate)**.
+The 4 research skills are evaluated against a 12-prompt test suite with a programmatic grader (`evals/run_evals.py`). Current state: **12/12 evals beat baseline, mean delta +57% (99% with-skill pass rate)**.
 
 | Skill | Eval | with_skill | baseline | delta |
 |-------|------|-----------|----------|-------|
@@ -46,75 +133,14 @@ All four skills are evaluated against a 12-prompt test suite with a programmatic
 
 Run the grader: `make evals`. See [`evals/`](evals/) and [`evals/iterations/benchmark.md`](evals/iterations/benchmark.md).
 
-## Install
-
-This repo follows the [vercel-labs/skills](https://github.com/vercel-labs/skills) install pattern. The `skills` CLI works with **OpenCode, Claude Code, Codex, Cursor**, and [68 other agents](https://github.com/vercel-labs/skills#supported-agents).
-
-### Install all skills from this repo
-
-```bash
-npx skills add kangcodex/finance-skills
-```
-
-### Install a single skill
-
-```bash
-# Specific skill
-npx skills add kangcodex/finance-skills --skill thematic-stock-picker
-
-# Direct subpath (works for any agent that resolves GitHub tree URLs)
-npx skills add https://github.com/kangcodex/finance-skills/tree/main/skills/thematic-stock-picker
-```
-
-### Install for a specific agent only
-
-```bash
-# Claude Code
-npx skills add kangcodex/finance-skills -a claude-code
-
-# OpenCode
-npx skills add kangcodex/finance-skills -a opencode
-
-# Codex
-npx skills add kangcodex/finance-skills -a codex
-```
-
-### Install globally (across all your projects)
-
-```bash
-npx skills add kangcodex/finance-skills -g
-```
-
-### Non-interactive (CI / scripts)
-
-```bash
-npx skills add kangcodex/finance-skills -a claude-code -y
-```
-
-The CLI prompts you to choose between **symlink** (recommended — single source of truth, easy updates) or **copy** (independent copies per agent) on first run. Use `-y` to skip the prompt.
-
-## Manual / local install
-
-If you can't or don't want to use the `npx skills` CLI:
-
-```bash
-# Clone the repo
-git clone https://github.com/kangcodex/finance-skills.git
-cd finance-skills
-
-# Copy the skill into your agent's skills directory
-mkdir -p ~/.claude/skills
-cp -r skills/thematic-stock-picker ~/.claude/skills/thematic-stock-picker
-```
-
 ## Development
 
-This repo uses a Makefile for common tasks. See [`Makefile`](Makefile) for the full list.
-
 ```bash
-make help       # list all targets
-make evals      # run all 12 evals against the canonical examples
-make verify     # evals + smoke-test the smart-money-tracker scripts
+make help              # list all targets
+make evals             # run the 12 research-skill evals
+make install-runtime   # run scripts/install.sh (private runtime fetch + install)
+make verify            # smoke-smart-money + evals (full pre-PR gate)
+make clean             # remove __pycache__/, .pytest_cache/, *.pyc
 ```
 
 ### Repo layout
@@ -124,53 +150,40 @@ finance-skills/
 ├── README.md
 ├── Makefile
 ├── LICENSE
-├── skills/                    # all three skills live here
-│   ├── smart-money-tracker/   # skill 1 (script-driven)
-│   │   ├── SKILL.md
-│   │   ├── scripts/            # 4 thin entrypoint wrappers
-│   │   ├── src/smart_money_tracker/  # importable package
-│   │   ├── examples/           # canonical output structure
-│   │   ├── data/, reports/     # runtime caches and outputs
-│   │   └── tests/              # skill-level tests
-│   ├── daily-market-watch/     # skill 2 (research-driven)
-│   │   ├── SKILL.md
-│   │   ├── references/regional-sources.md
-│   │   ├── references/fed-signals.md
-│   │   └── examples/           # sample-report.md, sample-lite.md
-│   ├── thematic-stock-picker/  # skill 3 (research-driven)
-│   │   ├── SKILL.md
-│   │   ├── references/screening-criteria.md
-│   │   ├── references/sector-themes.md
-│   │   └── examples/           # sample-report.md, sample-ai-infra.md
-│   └── sg-financial-advisor/   # skill 4 (research-driven, SG-licensed FA Rep)
-│       ├── SKILL.md
-│       ├── references/sg-regulatory-map.md
-│       ├── references/lia-gap-formulas.md
-│       ├── references/national-protection.md
-│       ├── references/compliance-engine.md
-│       └── examples/           # sample-report.md, sample-assessment.md, sample-portfolio-review.md
-├── evals/                     # cross-skill eval infrastructure
-│   ├── run_evals.py           # programmatic grader
-│   └── iterations/            # per-iteration benchmark data
-└── docs/                      # architecture decisions, design notes
+├── skills/                            # all skills live here (flat convention)
+│   ├── smart-money-tracker/           # research skill 1
+│   ├── daily-market-watch/            # research skill 2
+│   ├── thematic-stock-picker/         # research skill 3
+│   ├── sg-financial-advisor/          # research skill 4
+│   ├── polymarket-wallet-setup/       # weather-trading skill 1
+│   ├── weather-data-fetch/            # weather-trading skill 2
+│   ├── signal-gen/                    # weather-trading skill 3
+│   ├── risk-manage/                   # weather-trading skill 4
+│   └── trade-execute/                 # weather-trading skill 5
+├── scripts/
+│   └── install.sh                     # one-shot installer for the private runtime
+├── evals/                             # cross-skill eval infrastructure (research)
+└── docs/                              # architecture decisions
     ├── CHANGELOG.md
     ├── ORCHESTRATION.md
-    ├── decisions/             # ADRs
-    ├── api/                   # canonical source maps
-    └── design/                # per-skill design notes
+    └── decisions/                     # ADRs 001-012 (10 weather-trading + 2 design)
 ```
+
+The private `weather_runtime` Python package (the deterministic math + I/O that backs the 5 weather-trading skills) lives in a separate, non-public repo. Install it with `./scripts/install.sh` after installing the skills.
 
 ## Documentation
 
-- [`docs/CHANGELOG.md`](docs/CHANGELOG.md) — version history of the repo
-- [`docs/ORCHESTRATION.md`](docs/ORCHESTRATION.md) — how the four skills work together
-- [`docs/decisions/`](docs/decisions/) — architectural decision records (ADRs)
-- [`docs/api/`](docs/api/) — canonical source maps (Fed/CME/EDGAR/regional news)
+- [`docs/CHANGELOG.md`](docs/CHANGELOG.md) — version history
+- [`docs/ORCHESTRATION.md`](docs/ORCHESTRATION.md) — how all 9 skills work together
+- [`docs/decisions/`](docs/decisions/) — architectural decision records
+- [`scripts/install.sh`](scripts/install.sh) — one-shot installer for the private runtime
 - [`skills/smart-money-tracker/AGENTS.md`](skills/smart-money-tracker/AGENTS.md) — skill testing framework
 
 ## Disclaimer
 
 This software is for informational and educational purposes only. It does not constitute financial advice. Always do your own due diligence before making investment decisions. Past performance is not indicative of future results.
+
+The weather-trading family trades real USDC when run on mainnet. Only deploy with funds you can afford to lose, after reading the full risk framework (in the private runtime's documentation).
 
 ## License
 

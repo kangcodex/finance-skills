@@ -284,11 +284,14 @@ tmbootpicker.efi
 
 openspec/
 
-.issues/
-design/
-issue/
-prd/
 
+design/
+issues/
+prds/
 
 # Test runs / working artifacts (not part of any skill)
 test-runs/
+
+# Runtime state and secrets for the weather-trading family — never commit
+runtime/state/
+runtime/secrets/

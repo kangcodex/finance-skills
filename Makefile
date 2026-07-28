@@ -10,27 +10,31 @@ SMT_VENV_PYTHON ?= skills/smart-money-tracker/.venv/bin/python
 # (no scripts; the SKILL.md is the contract). Their canonical outputs live
 # in each skill's examples/ directory.
 
-# Evals (cross-skill)
+# Evals (cross-skill, research family)
 EVALS_DIR := evals
 EVALS_RUNNER := run_evals.py
 EVALS_ITERATION ?= iteration-1
 
 .PHONY: help evals evals-smart-money evals-daily evals-thematic evals-sg-fa \
-        smoke-smart-money clean verify lint
+        install-runtime smoke-smart-money clean verify lint
 
 help:
 	@echo "Targets:"
+	@echo "  --- Research-skill evals (4 skills, 12 prompts) ---"
 	@echo "  make evals                - run all 12 evals (3 per skill x 4 skills) and write benchmark"
 	@echo "  make evals-smart-money    - run only the smart-money-tracker evals (3 prompts)"
 	@echo "  make evals-daily          - run only the daily-market-watch evals (3 prompts)"
 	@echo "  make evals-thematic       - run only the thematic-stock-picker evals (3 prompts)"
 	@echo "  make evals-sg-fa          - run only the sg-financial-advisor evals (3 prompts)"
+	@echo "  --- Weather-trading runtime (PRIVATE — separate repo) ---"
+	@echo "  make install-runtime      - run scripts/install.sh to fetch + install the private runtime"
+	@echo "  --- Housekeeping ---"
 	@echo "  make smoke-smart-money    - smoke-test the scripts/ wrappers (--help)"
 	@echo "  make verify               - smoke-smart-money + evals (full pre-PR gate)"
 	@echo "  make clean                - remove __pycache__/, .pytest_cache/, *.pyc"
 	@echo "  make lint                 - placeholder (no linter configured for these skills)"
 
-# --- evals ---
+# --- evals (research family) ---
 
 evals:
 	cd $(EVALS_DIR) && $(PYTHON) $(EVALS_RUNNER) --iteration $(EVALS_ITERATION)
@@ -46,6 +50,12 @@ evals-thematic:
 
 evals-sg-fa:
 	cd $(EVALS_DIR) && $(PYTHON) $(EVALS_RUNNER) --iteration $(EVALS_ITERATION) --eval-set eval-3-sgfa
+
+# --- weather-trading runtime install (downloads from a private location) ---
+
+install-runtime:
+	@command -v bash >/dev/null 2>&1 || { echo "ERROR: bash required."; exit 1; }
+	./scripts/install.sh
 
 # --- smoke test for the one script-driven skill ---
 
