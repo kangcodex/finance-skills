@@ -1,0 +1,67 @@
+{
+  "eval_id": 0,
+  "skill": "risk-manage",
+  "eval_name": "decide-halt-on-daily-drawdown",
+  "prompt": "Today's daily PnL is -8.5% of bankroll. Bankroll $50, exposure 18%, no anomalies. Should we halt, and what does the next step look like?",
+  "with_skill": {
+    "run_id": "eval-7-risk-manage-eval-0-with_skill",
+    "skill": "risk-manage",
+    "prompt": "Today's daily PnL is -8.5% of bankroll. Bankroll $50, exposure 18%, no anomalies. Should we halt, and what does the next step look like?",
+    "expectations": [
+      {
+        "text": "uses_halt_matrix",
+        "passed": true,
+        "evidence": "'halt' present"
+      },
+      {
+        "text": "computes_daily_pnl_pct",
+        "passed": true,
+        "evidence": "'daily_pnl_pct' present | '8.5' present"
+      },
+      {
+        "text": "knows_threshold",
+        "passed": true,
+        "evidence": "'10' present | '8.5' present | 'not triggered' present"
+      },
+      {
+        "text": "writes_risk_json",
+        "passed": true,
+        "evidence": "'risk.json' present"
+      }
+    ],
+    "passed": 4,
+    "total": 4,
+    "pass_rate": 1.0
+  },
+  "without_skill": {
+    "run_id": "eval-7-risk-manage-eval-0-without_skill",
+    "skill": "risk-manage",
+    "prompt": "Today's daily PnL is -8.5% of bankroll. Bankroll $50, exposure 18%, no anomalies. Should we halt, and what does the next step look like?",
+    "expectations": [
+      {
+        "text": "uses_halt_matrix",
+        "passed": true,
+        "evidence": "'halt' present"
+      },
+      {
+        "text": "computes_daily_pnl_pct",
+        "passed": false,
+        "evidence": "'daily_pnl_pct' absent | '8.5' present"
+      },
+      {
+        "text": "knows_threshold",
+        "passed": false,
+        "evidence": "'10' absent | '8.5' present | 'not triggered' absent"
+      },
+      {
+        "text": "writes_risk_json",
+        "passed": false,
+        "evidence": "'risk.json' absent"
+      }
+    ],
+    "passed": 1,
+    "total": 4,
+    "pass_rate": 0.25
+  },
+  "delta_pass_rate": 0.75
+}

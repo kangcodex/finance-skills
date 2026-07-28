@@ -1,0 +1,33 @@
+{
+  "eval_id": 2,
+  "skill": "trade-execute",
+  "eval_name": "idempotent-rerun",
+  "prompt": "I just ran trade-execute on signals.json. The orchestrator crashed mid-write. Now I rerun it on the same signals.json. What happens?",
+  "expected_output": "The orchestrator loads existing market_ids from orders.json. Any market already attempted is skipped (status='skipped' or 'placed' is recorded; on re-run it's already present, so no double-place). At most one order per market per tick.",
+  "assertions": [
+    {
+      "id": "A1",
+      "name": "checks_idempotency",
+      "description": "Output must explain the idempotency check",
+      "check": "output contains 'idempot' AND 'orders.json'"
+    },
+    {
+      "id": "A2",
+      "name": "no_double_place",
+      "description": "Output must explicitly say no double-place",
+      "check": "output contains ('no double' or 'not duplicated' or 'reused') AND 'order'"
+    },
+    {
+      "id": "A3",
+      "name": "atomic_write_guarantees",
+      "description": "Output must mention the atomic write that prevents partial state",
+      "check": "output contains 'atomic' AND ('os.replace' or 'tmp' or 'fsync')"
+    },
+    {
+      "id": "A4",
+      "name": "idempotency_key",
+      "description": "Output must reference the market_id as the dedup key",
+      "check": "output contains 'market_id' AND ('dedup' or 'key' or 'skip')"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "eval_id": 0,
+  "skill": "polymarket-wallet-setup",
+  "eval_name": "set-me-up-on-amoy",
+  "prompt": "Set me up on Polygon Amoy for Polymarket trading.",
+  "expected_output": "Amoy setup workflow: env vars (RUNTIME_CHAIN=amoy, RUNTIME_BANKROLL_USDC), keypair, USDC faucet, save_key with chmod 600, CLOB auth, test order pass.",
+  "assertions": [
+    {
+      "id": "A1",
+      "name": "amoy_default",
+      "description": "Output must specify Amoy (testnet) as the default chain",
+      "check": "output contains 'amoy' AND 'testnet'"
+    },
+    {
+      "id": "A2",
+      "name": "env_vars_listed",
+      "description": "Output must mention the required env vars for setup",
+      "check": "output contains at least 2 of: 'RUNTIME_CHAIN', 'RUNTIME_BANKROLL_USDC', 'RUNTIME_ALLOW_MAINNET', 'RUNTIME_PAID_SOURCE'"
+    },
+    {
+      "id": "A3",
+      "name": "no_secret_committed",
+      "description": "Output must NOT tell the user to git commit or push the wallet secrets",
+      "check": "output does NOT contain 'commit the wallet' or 'push the wallet' or 'git add wallet' or 'commit wallet.<chain>.json'"
+    },
+    {
+      "id": "A4",
+      "name": "chmod_600_referenced",
+      "description": "Output must reference chmod 600 for the secret files",
+      "check": "output contains 'chmod 600'"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "eval_id": 1,
+  "skill": "trade-execute",
+  "eval_name": "slippage-exceeds-tolerance",
+  "prompt": "Signal has reference_price=0.50 and the current CLOB best_ask is 0.52 (4% slippage). What happens?",
+  "with_skill": {
+    "run_id": "eval-8-trade-execute-eval-1-with_skill",
+    "skill": "trade-execute",
+    "prompt": "Signal has reference_price=0.50 and the current CLOB best_ask is 0.52 (4% slippage). What happens?",
+    "expectations": [
+      {
+        "text": "computes_slippage",
+        "passed": true,
+        "evidence": "'slippage' present"
+      },
+      {
+        "text": "tolerance_threshold",
+        "passed": true,
+        "evidence": "'2%' present | 'tolerance' present"
+      },
+      {
+        "text": "skips_order",
+        "passed": true,
+        "evidence": "any of 3: 2 present"
+      },
+      {
+        "text": "writes_audit",
+        "passed": true,
+        "evidence": "any of 2: 2 present"
+      }
+    ],
+    "passed": 4,
+    "total": 4,
+    "pass_rate": 1.0
+  },
+  "without_skill": {
+    "run_id": "eval-8-trade-execute-eval-1-without_skill",
+    "skill": "trade-execute",
+    "prompt": "Signal has reference_price=0.50 and the current CLOB best_ask is 0.52 (4% slippage). What happens?",
+    "expectations": [
+      {
+        "text": "computes_slippage",
+        "passed": true,
+        "evidence": "'slippage' present"
+      },
+      {
+        "text": "tolerance_threshold",
+        "passed": false,
+        "evidence": "'2%' absent | 'tolerance' absent"
+      },
+      {
+        "text": "skips_order",
+        "passed": true,
+        "evidence": "any of 3: 2 present"
+      },
+      {
+        "text": "writes_audit",
+        "passed": true,
+        "evidence": "any of 2: 1 present"
+      }
+    ],
+    "passed": 3,
+    "total": 4,
+    "pass_rate": 0.75
+  },
+  "delta_pass_rate": 0.25
+}

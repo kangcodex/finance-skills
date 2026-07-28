@@ -1,0 +1,67 @@
+{
+  "eval_id": 0,
+  "skill": "weather-data-fetch",
+  "eval_name": "fetch-forecasts-for-3-markets",
+  "prompt": "Pull the latest forecasts and market state for 3 Polymarket weather markets and write runtime/state/forecasts.json + markets.json.",
+  "with_skill": {
+    "run_id": "eval-5-data-fetch-eval-0-with_skill",
+    "skill": "weather-data-fetch",
+    "prompt": "Pull the latest forecasts and market state for 3 Polymarket weather markets and write runtime/state/forecasts.json + markets.json.",
+    "expectations": [
+      {
+        "text": "uses_runtime_state_paths",
+        "passed": true,
+        "evidence": "'forecasts.json' present | 'markets.json' present | 'runtime/state' present"
+      },
+      {
+        "text": "calls_both_sources",
+        "passed": true,
+        "evidence": "2/5 present (need >=2)"
+      },
+      {
+        "text": "normalizes_p_yes",
+        "passed": true,
+        "evidence": "'normalize' present | any of 2: 1 present"
+      },
+      {
+        "text": "handles_source_failure",
+        "passed": true,
+        "evidence": "'all_sources_failed' present"
+      }
+    ],
+    "passed": 4,
+    "total": 4,
+    "pass_rate": 1.0
+  },
+  "without_skill": {
+    "run_id": "eval-5-data-fetch-eval-0-without_skill",
+    "skill": "weather-data-fetch",
+    "prompt": "Pull the latest forecasts and market state for 3 Polymarket weather markets and write runtime/state/forecasts.json + markets.json.",
+    "expectations": [
+      {
+        "text": "uses_runtime_state_paths",
+        "passed": false,
+        "evidence": "'forecasts.json' absent | 'markets.json' absent | 'runtime/state' absent"
+      },
+      {
+        "text": "calls_both_sources",
+        "passed": true,
+        "evidence": "4/5 present (need >=2)"
+      },
+      {
+        "text": "normalizes_p_yes",
+        "passed": false,
+        "evidence": "'normalize' absent | any of 2: 0 present"
+      },
+      {
+        "text": "handles_source_failure",
+        "passed": false,
+        "evidence": "'all_sources_failed' absent"
+      }
+    ],
+    "passed": 1,
+    "total": 4,
+    "pass_rate": 0.25
+  },
+  "delta_pass_rate": 0.75
+}

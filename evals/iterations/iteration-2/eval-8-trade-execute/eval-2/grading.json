@@ -1,0 +1,67 @@
+{
+  "eval_id": 2,
+  "skill": "trade-execute",
+  "eval_name": "idempotent-rerun",
+  "prompt": "I just ran trade-execute on signals.json. The orchestrator crashed mid-write. Now I rerun it on the same signals.json. What happens?",
+  "with_skill": {
+    "run_id": "eval-8-trade-execute-eval-2-with_skill",
+    "skill": "trade-execute",
+    "prompt": "I just ran trade-execute on signals.json. The orchestrator crashed mid-write. Now I rerun it on the same signals.json. What happens?",
+    "expectations": [
+      {
+        "text": "checks_idempotency",
+        "passed": true,
+        "evidence": "'idempot' present | 'orders.json' present"
+      },
+      {
+        "text": "no_double_place",
+        "passed": true,
+        "evidence": "any of 3: 1 present | 'order' present"
+      },
+      {
+        "text": "atomic_write_guarantees",
+        "passed": true,
+        "evidence": "'atomic' present"
+      },
+      {
+        "text": "idempotency_key",
+        "passed": true,
+        "evidence": "'market_id' present"
+      }
+    ],
+    "passed": 4,
+    "total": 4,
+    "pass_rate": 1.0
+  },
+  "without_skill": {
+    "run_id": "eval-8-trade-execute-eval-2-without_skill",
+    "skill": "trade-execute",
+    "prompt": "I just ran trade-execute on signals.json. The orchestrator crashed mid-write. Now I rerun it on the same signals.json. What happens?",
+    "expectations": [
+      {
+        "text": "checks_idempotency",
+        "passed": true,
+        "evidence": "'idempot' present | 'orders.json' present"
+      },
+      {
+        "text": "no_double_place",
+        "passed": false,
+        "evidence": "any of 3: 0 present | 'order' present"
+      },
+      {
+        "text": "atomic_write_guarantees",
+        "passed": false,
+        "evidence": "'atomic' absent"
+      },
+      {
+        "text": "idempotency_key",
+        "passed": false,
+        "evidence": "'market_id' absent"
+      }
+    ],
+    "passed": 1,
+    "total": 4,
+    "pass_rate": 0.25
+  },
+  "delta_pass_rate": 0.75
+}

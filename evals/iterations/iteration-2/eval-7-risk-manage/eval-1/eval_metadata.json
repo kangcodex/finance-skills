@@ -1,0 +1,33 @@
+{
+  "eval_id": 1,
+  "skill": "risk-manage",
+  "eval_name": "halt-on-consecutive-tx-failures",
+  "prompt": "The last 3 order attempts on trade-execute returned 'tx failed' with no detailed error. What does risk-manage do?",
+  "expected_output": "Halt condition #3 (CONSECUTIVE_TX_FAILURES >= 3) is triggered. halt=true, halt_reason=CONSECUTIVE_TX_FAILURES. No new orders until human resumes.",
+  "assertions": [
+    {
+      "id": "A1",
+      "name": "consecutive_failures_threshold",
+      "description": "Output must reference the 3-consecutive-failures threshold",
+      "check": "output contains '3' AND 'consecutive' AND 'failures'"
+    },
+    {
+      "id": "A2",
+      "name": "halt_set",
+      "description": "Output must set halt=true",
+      "check": "output contains 'halt' AND 'true' AND 'CONSECUTIVE_TX_FAILURES'"
+    },
+    {
+      "id": "A3",
+      "name": "human_resume_only",
+      "description": "Output must explicitly say only a human can resume",
+      "check": "output contains 'human' AND 'resume'"
+    },
+    {
+      "id": "A4",
+      "name": "writes_risk_json",
+      "description": "Output must mention writing risk.json",
+      "check": "output contains 'risk.json'"
+    }
+  ]
+}

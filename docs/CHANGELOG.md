@@ -19,8 +19,17 @@ All notable changes to this repo are documented here. Versions follow [Semantic 
 - `docs/issues/`, `docs/prds/`, `docs/api/` — gitignored, not part of the public scope.
 
 ### Test counts
-- Research-skill evals: 12/12 passing, mean delta +57% (unchanged from v1.1.0).
+- Research-skill evals (iteration-1): 12/12 passing, mean delta +57% (unchanged from v1.1.0).
+- **Weather-trading skill evals (NEW, iteration-2): 15/15 at 4/4 (100% with_skill pass rate, mean delta +70%).** Aggregate 60/60 with_skill vs 18/60 baseline. All 15 with_skill beat baseline. See `evals/iterations/iteration-2/benchmark.md`.
 - Runtime tests: 201/201 (run from the private runtime repo after install).
+
+### Added (iteration-2 weather-trading evals)
+- `evals/iterations/iteration-2/eval-4-wallet/` — 3 prompts (set-me-up-on-amoy, mainnet-upgrade-with-cold-wallet, check-status-and-rotate-session). Asserts env-var setup, chmod 600, no commit secrets, mainnet gate, cold-wallet signature, auto-renewal thresholds.
+- `evals/iterations/iteration-2/eval-5-data-fetch/` — 3 prompts (fetch-forecasts-for-3-markets, single-market-one-source-down, all-sources-failed-mark-and-skip). Asserts NOAA + Open-Meteo + paid source, normalize [0,1], `all_sources_failed` flag, `consecutive_failures` counter, atomic write.
+- `evals/iterations/iteration-2/eval-6-signal-gen/` — 3 prompts (compute-signals-from-forecasts, edge-too-small-no-trade, within-last-hour-skip). Asserts reading 3 input files, `compute_signal`, `edge > 0.05` threshold, T-1h resolution buffer, atomic write.
+- `evals/iterations/iteration-2/eval-7-risk-manage/` — 3 prompts (decide-halt-on-daily-drawdown, halt-on-consecutive-tx-failures, human-pause-action). Asserts 8-condition halt matrix, `bankroll`/`exposure`/`daily_pnl_pct` computation, human-only resume, atomic write, `USER_PAUSED` reason.
+- `evals/iterations/iteration-2/eval-8-trade-execute/` — 3 prompts (execute-skip-when-halt-true, slippage-exceeds-tolerance, idempotent-rerun). Asserts `pre_trade_check`, 6-condition gate, slippage tolerance, idempotency on re-run, atomic write, no override of halt.
+- `Makefile` — new `evals-weather`, `evals-weather-wallet`, `evals-weather-data-fetch`, `evals-weather-signal-gen`, `evals-weather-risk-manage`, `evals-weather-trade-execute` targets. `make evals` now runs both iteration-1 and iteration-2.
 
 ## [1.1.0] — 2026-06-30
 

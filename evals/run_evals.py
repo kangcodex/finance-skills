@@ -348,10 +348,12 @@ def main() -> int:
             })
 
     # Aggregate
-    benchmark_path = root / "benchmark.json"
+    iter_dir = root / benchmark["iteration"]
+    iter_dir.mkdir(parents=True, exist_ok=True)
+    benchmark_path = iter_dir / "benchmark.json"
     benchmark_path.write_text(json.dumps(benchmark, indent=2), encoding="utf-8")
-    md_path = root / "benchmark.md"
-    lines = ["# Benchmark — iteration-1\n"]
+    md_path = iter_dir / "benchmark.md"
+    lines = [f"# Benchmark — {benchmark['iteration']}\n"]
     lines.append("| Skill | Eval | with_skill | without_skill | delta |")
     lines.append("| --- | --- | --- | --- | --- |")
     for e in benchmark["evals"]:

@@ -1,0 +1,33 @@
+{
+  "eval_id": 2,
+  "skill": "polymarket-wallet-setup",
+  "eval_name": "check-status-and-rotate-session",
+  "prompt": "Show me the current wallet status, and tell me when the session key needs to be re-minted.",
+  "expected_output": "Calls status_snapshot(state) which returns chain/address/balance/auth (and session fields if mainnet). Explains the two triggers: <24h to expiry OR <10% spend remaining.",
+  "assertions": [
+    {
+      "id": "A1",
+      "name": "shows_wallet_status",
+      "description": "Output must mention the status fields",
+      "check": "output contains 'status' AND ('chain' or 'address' or 'balance')"
+    },
+    {
+      "id": "A2",
+      "name": "session_needs_renewal",
+      "description": "Output must reference the session_needs_renewal logic",
+      "check": "output contains 'session_needs_renewal' or ('24h' AND '10%' AND 'session')"
+    },
+    {
+      "id": "A3",
+      "name": "two_triggers_explained",
+      "description": "Output must explain both the expiry and spend triggers",
+      "check": "output contains 'expir' AND ('spend' or 'remaining')"
+    },
+    {
+      "id": "A4",
+      "name": "human_only_remint",
+      "description": "Output must say the cold-wallet signature is required for re-mint",
+      "check": "output contains 'cold' AND ('sign' or 'signature')"
+    }
+  ]
+}

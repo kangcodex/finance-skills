@@ -1,0 +1,138 @@
+{
+  "iteration": "iteration-1",
+  "skills": [],
+  "evals": [
+    {
+      "skill": "smart-money-tracker",
+      "eval_name": "show-me-whales-buying-this-quarter",
+      "with_skill_pass_rate": 1.0,
+      "without_skill_pass_rate": 0.25,
+      "delta": 0.75,
+      "with_skill_passed": 4,
+      "with_skill_total": 4,
+      "without_skill_passed": 1,
+      "without_skill_total": 4
+    },
+    {
+      "skill": "smart-money-tracker",
+      "eval_name": "pelosi-tech-buys",
+      "with_skill_pass_rate": 1.0,
+      "without_skill_pass_rate": 0.5,
+      "delta": 0.5,
+      "with_skill_passed": 4,
+      "with_skill_total": 4,
+      "without_skill_passed": 2,
+      "without_skill_total": 4
+    },
+    {
+      "skill": "smart-money-tracker",
+      "eval_name": "q1-2026-smart-money-report",
+      "with_skill_pass_rate": 0.75,
+      "without_skill_pass_rate": 0.5,
+      "delta": 0.25,
+      "with_skill_passed": 3,
+      "with_skill_total": 4,
+      "without_skill_passed": 2,
+      "without_skill_total": 4
+    },
+    {
+      "skill": "daily-market-watch",
+      "eval_name": "default-global-7day-report",
+      "with_skill_pass_rate": 0.8,
+      "without_skill_pass_rate": 0.3,
+      "delta": 0.5,
+      "with_skill_passed": 8,
+      "with_skill_total": 10,
+      "without_skill_passed": 3,
+      "without_skill_total": 10
+    },
+    {
+      "skill": "daily-market-watch",
+      "eval_name": "china-region-zoom",
+      "with_skill_pass_rate": 0.8,
+      "without_skill_pass_rate": 0.0,
+      "delta": 0.8,
+      "with_skill_passed": 4,
+      "with_skill_total": 5,
+      "without_skill_passed": 0,
+      "without_skill_total": 5
+    },
+    {
+      "skill": "daily-market-watch",
+      "eval_name": "executive-summary-only",
+      "with_skill_pass_rate": 1.0,
+      "without_skill_pass_rate": 0.75,
+      "delta": 0.25,
+      "with_skill_passed": 4,
+      "with_skill_total": 4,
+      "without_skill_passed": 3,
+      "without_skill_total": 4
+    },
+    {
+      "skill": "thematic-stock-picker",
+      "eval_name": "default-5-themes-2031",
+      "with_skill_pass_rate": 0.8333333333333334,
+      "without_skill_pass_rate": 0.4166666666666667,
+      "delta": 0.4166666666666667,
+      "with_skill_passed": 10,
+      "with_skill_total": 12,
+      "without_skill_passed": 5,
+      "without_skill_total": 12
+    },
+    {
+      "skill": "thematic-stock-picker",
+      "eval_name": "single-theme-ai-infrastructure",
+      "with_skill_pass_rate": 0.8,
+      "without_skill_pass_rate": 0.2,
+      "delta": 0.6000000000000001,
+      "with_skill_passed": 4,
+      "with_skill_total": 5,
+      "without_skill_passed": 1,
+      "without_skill_total": 5
+    },
+    {
+      "skill": "thematic-stock-picker",
+      "eval_name": "screen-defense-stocks",
+      "with_skill_pass_rate": 0.6666666666666666,
+      "without_skill_pass_rate": 0.3333333333333333,
+      "delta": 0.3333333333333333,
+      "with_skill_passed": 4,
+      "with_skill_total": 6,
+      "without_skill_passed": 2,
+      "without_skill_total": 6
+    },
+    {
+      "skill": "sg-financial-advisor",
+      "eval_name": "default-29yo-legacy-ilp",
+      "with_skill_pass_rate": 1.0,
+      "without_skill_pass_rate": 0.1875,
+      "delta": 0.8125,
+      "with_skill_passed": 16,
+      "with_skill_total": 16,
+      "without_skill_passed": 3,
+      "without_skill_total": 16
+    },
+    {
+      "skill": "sg-financial-advisor",
+      "eval_name": "mid-career-38yo-family-ilp-cleanup",
+      "with_skill_pass_rate": 1.0,
+      "without_skill_pass_rate": 0.2,
+      "delta": 0.8,
+      "with_skill_passed": 15,
+      "with_skill_total": 15,
+      "without_skill_passed": 3,
+      "without_skill_total": 15
+    },
+    {
+      "skill": "sg-financial-advisor",
+      "eval_name": "lite-portfolio-no-legacy",
+      "with_skill_pass_rate": 1.0,
+      "without_skill_pass_rate": 0.2,
+      "delta": 0.8,
+      "with_skill_passed": 10,
+      "with_skill_total": 10,
+      "without_skill_passed": 2,
+      "without_skill_total": 10
+    }
+  ]
+}

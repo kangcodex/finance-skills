@@ -1,0 +1,67 @@
+{
+  "eval_id": 0,
+  "skill": "signal-gen",
+  "eval_name": "compute-signals-from-forecasts",
+  "prompt": "Given the latest forecasts.json + markets.json + source_weights.json, compute the blended signal for every market and write signals.json.",
+  "with_skill": {
+    "run_id": "eval-6-signal-gen-eval-0-with_skill",
+    "skill": "signal-gen",
+    "prompt": "Given the latest forecasts.json + markets.json + source_weights.json, compute the blended signal for every market and write signals.json.",
+    "expectations": [
+      {
+        "text": "reads_three_inputs",
+        "passed": true,
+        "evidence": "'forecasts.json' present | 'markets.json' present | 'source_weights.json' present"
+      },
+      {
+        "text": "calls_compute_signal",
+        "passed": true,
+        "evidence": "'compute_signal' present"
+      },
+      {
+        "text": "writes_signals_json",
+        "passed": true,
+        "evidence": "'signals.json' present"
+      },
+      {
+        "text": "explains_trade_flag",
+        "passed": true,
+        "evidence": "'edge' present | '0.05' present | 'f_size_raw' present"
+      }
+    ],
+    "passed": 4,
+    "total": 4,
+    "pass_rate": 1.0
+  },
+  "without_skill": {
+    "run_id": "eval-6-signal-gen-eval-0-without_skill",
+    "skill": "signal-gen",
+    "prompt": "Given the latest forecasts.json + markets.json + source_weights.json, compute the blended signal for every market and write signals.json.",
+    "expectations": [
+      {
+        "text": "reads_three_inputs",
+        "passed": false,
+        "evidence": "'forecasts.json' absent | 'markets.json' absent | 'source_weights.json' absent"
+      },
+      {
+        "text": "calls_compute_signal",
+        "passed": false,
+        "evidence": "'compute_signal' absent"
+      },
+      {
+        "text": "writes_signals_json",
+        "passed": false,
+        "evidence": "'signals.json' absent"
+      },
+      {
+        "text": "explains_trade_flag",
+        "passed": false,
+        "evidence": "'edge' present | '0.05' absent | 'f_size_raw' absent"
+      }
+    ],
+    "passed": 0,
+    "total": 4,
+    "pass_rate": 0.0
+  },
+  "delta_pass_rate": 1.0
+}

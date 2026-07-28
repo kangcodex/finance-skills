@@ -1,0 +1,67 @@
+{
+  "eval_id": 0,
+  "skill": "polymarket-wallet-setup",
+  "eval_name": "set-me-up-on-amoy",
+  "prompt": "Set me up on Polygon Amoy for Polymarket trading.",
+  "with_skill": {
+    "run_id": "eval-4-wallet-eval-0-with_skill",
+    "skill": "polymarket-wallet-setup",
+    "prompt": "Set me up on Polygon Amoy for Polymarket trading.",
+    "expectations": [
+      {
+        "text": "amoy_default",
+        "passed": true,
+        "evidence": "'amoy' present | 'testnet' present"
+      },
+      {
+        "text": "env_vars_listed",
+        "passed": true,
+        "evidence": "3/4 present (need >=2)"
+      },
+      {
+        "text": "no_secret_committed",
+        "passed": true,
+        "evidence": "any of 4 forbidden needles: 0 present"
+      },
+      {
+        "text": "chmod_600_referenced",
+        "passed": true,
+        "evidence": "'chmod 600' present"
+      }
+    ],
+    "passed": 4,
+    "total": 4,
+    "pass_rate": 1.0
+  },
+  "without_skill": {
+    "run_id": "eval-4-wallet-eval-0-without_skill",
+    "skill": "polymarket-wallet-setup",
+    "prompt": "Set me up on Polygon Amoy for Polymarket trading.",
+    "expectations": [
+      {
+        "text": "amoy_default",
+        "passed": true,
+        "evidence": "'amoy' present | 'testnet' present"
+      },
+      {
+        "text": "env_vars_listed",
+        "passed": false,
+        "evidence": "0/4 present (need >=2)"
+      },
+      {
+        "text": "no_secret_committed",
+        "passed": true,
+        "evidence": "any of 4 forbidden needles: 0 present"
+      },
+      {
+        "text": "chmod_600_referenced",
+        "passed": false,
+        "evidence": "'chmod 600' absent"
+      }
+    ],
+    "passed": 2,
+    "total": 4,
+    "pass_rate": 0.5
+  },
+  "delta_pass_rate": 0.5
+}

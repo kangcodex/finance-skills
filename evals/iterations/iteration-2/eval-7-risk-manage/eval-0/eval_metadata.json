@@ -1,0 +1,33 @@
+{
+  "eval_id": 0,
+  "skill": "risk-manage",
+  "eval_name": "decide-halt-on-daily-drawdown",
+  "prompt": "Today's daily PnL is -8.5% of bankroll. Bankroll $50, exposure 18%, no anomalies. Should we halt, and what does the next step look like?",
+  "expected_output": "Computes daily_pnl_pct, evaluates halt conditions, returns halt=false (under 10% threshold), writes risk.json with the bankroll/exposure/pnl/halt fields.",
+  "assertions": [
+    {
+      "id": "A1",
+      "name": "uses_halt_matrix",
+      "description": "Output must reference the halt matrix / 8-condition check",
+      "check": "output contains 'halt' AND ('check_halt_conditions' or 'halt matrix' or '8 conditions')"
+    },
+    {
+      "id": "A2",
+      "name": "computes_daily_pnl_pct",
+      "description": "Output must compute daily_pnl_pct",
+      "check": "output contains 'daily_pnl_pct' AND '8.5'"
+    },
+    {
+      "id": "A3",
+      "name": "knows_threshold",
+      "description": "Output must reference the 10% drawdown and conclude not-yet-halt at 8.5%",
+      "check": "output contains '10' AND '8.5' AND 'not triggered'"
+    },
+    {
+      "id": "A4",
+      "name": "writes_risk_json",
+      "description": "Output must mention writing risk.json",
+      "check": "output contains 'risk.json'"
+    }
+  ]
+}

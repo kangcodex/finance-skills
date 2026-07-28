@@ -1,0 +1,67 @@
+{
+  "eval_id": 1,
+  "skill": "polymarket-wallet-setup",
+  "eval_name": "mainnet-upgrade-with-cold-wallet",
+  "prompt": "I have a cold wallet at 0xAbC...123 and a $50 bankroll. Walk me through the mainnet upgrade from Amoy.",
+  "with_skill": {
+    "run_id": "eval-4-wallet-eval-1-with_skill",
+    "skill": "polymarket-wallet-setup",
+    "prompt": "I have a cold wallet at 0xAbC...123 and a $50 bankroll. Walk me through the mainnet upgrade from Amoy.",
+    "expectations": [
+      {
+        "text": "mainnet_gate_required",
+        "passed": true,
+        "evidence": "'RUNTIME_ALLOW_MAINNET' present | '1' present"
+      },
+      {
+        "text": "cold_wallet_required",
+        "passed": true,
+        "evidence": "'RUNTIME_COLD_WALLET_ADDRESS' present"
+      },
+      {
+        "text": "session_capped",
+        "passed": true,
+        "evidence": "'RUNTIME_SESSION_MAX_SPEND' present"
+      },
+      {
+        "text": "auto_renewal_logic",
+        "passed": true,
+        "evidence": "'24h' present | '10%' present"
+      }
+    ],
+    "passed": 4,
+    "total": 4,
+    "pass_rate": 1.0
+  },
+  "without_skill": {
+    "run_id": "eval-4-wallet-eval-1-without_skill",
+    "skill": "polymarket-wallet-setup",
+    "prompt": "I have a cold wallet at 0xAbC...123 and a $50 bankroll. Walk me through the mainnet upgrade from Amoy.",
+    "expectations": [
+      {
+        "text": "mainnet_gate_required",
+        "passed": false,
+        "evidence": "'RUNTIME_ALLOW_MAINNET' absent | '1' present"
+      },
+      {
+        "text": "cold_wallet_required",
+        "passed": false,
+        "evidence": "'RUNTIME_COLD_WALLET_ADDRESS' absent"
+      },
+      {
+        "text": "session_capped",
+        "passed": false,
+        "evidence": "'RUNTIME_SESSION_MAX_SPEND' absent"
+      },
+      {
+        "text": "auto_renewal_logic",
+        "passed": false,
+        "evidence": "'24h' absent | '10%' absent"
+      }
+    ],
+    "passed": 0,
+    "total": 4,
+    "pass_rate": 0.0
+  },
+  "delta_pass_rate": 1.0
+}

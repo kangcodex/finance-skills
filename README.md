@@ -110,11 +110,15 @@ The skills reference the `weather_runtime` Python package, which is **not in thi
 
 The script will print the rest. It defaults to `./weather-agent/` as the install path and refuses to overwrite a non-empty directory.
 
-The 5 weather-trading skills each have 3 evals (15 total) — runtime is unit-tested but the eval grader is on the v1.3 roadmap.
+The 5 weather-trading skills each have 3 evals (15 total) — see `evals/iterations/iteration-2/`.
 
 ## Eval coverage
 
-The 4 research skills are evaluated against a 12-prompt test suite with a programmatic grader (`evals/run_evals.py`). Current state: **12/12 evals beat baseline, mean delta +57% (99% with-skill pass rate)**.
+Two iteration dirs cover the two skill families. Both are evaluated by the same grader (`evals/run_evals.py`).
+
+**Research skills (iteration-1):** 12/12 evals beat baseline, mean delta +57% (90.5% with-skill pass rate).
+
+**Weather-trading skills (iteration-2):** 15/15 evals at 4/4 (100% with-skill pass rate, mean delta +70%).
 
 | Skill | Eval | with_skill | baseline | delta |
 |-------|------|-----------|----------|-------|
@@ -131,13 +135,34 @@ The 4 research skills are evaluated against a 12-prompt test suite with a progra
 | sg-financial-advisor | mid-career-38yo-family-ilp-cleanup | 15/15 | 3/15 | +80% |
 | sg-financial-advisor | lite-portfolio-no-legacy | 10/10 | 2/10 | +80% |
 
-Run the grader: `make evals`. See [`evals/`](evals/) and [`evals/iterations/benchmark.md`](evals/iterations/benchmark.md).
+**Weather-trading skills (iteration-2):**
+
+| Skill | Eval | with_skill | baseline | delta |
+|-------|------|-----------|----------|-------|
+| polymarket-wallet-setup | set-me-up-on-amoy | 4/4 | 2/4 | +50% |
+| polymarket-wallet-setup | mainnet-upgrade-with-cold-wallet | 4/4 | 0/4 | +100% |
+| polymarket-wallet-setup | check-status-and-rotate-session | 4/4 | 2/4 | +50% |
+| weather-data-fetch | fetch-forecasts-for-3-markets | 4/4 | 1/4 | +75% |
+| weather-data-fetch | single-market-one-source-down | 4/4 | 2/4 | +50% |
+| weather-data-fetch | all-sources-failed-mark-and-skip | 4/4 | 0/4 | +100% |
+| signal-gen | compute-signals-from-forecasts | 4/4 | 0/4 | +100% |
+| signal-gen | edge-too-small-no-trade | 4/4 | 2/4 | +50% |
+| signal-gen | within-last-hour-skip | 4/4 | 1/4 | +75% |
+| risk-manage | decide-halt-on-daily-drawdown | 4/4 | 1/4 | +75% |
+| risk-manage | halt-on-consecutive-tx-failures | 4/4 | 1/4 | +75% |
+| risk-manage | human-pause-action | 4/4 | 0/4 | +100% |
+| trade-execute | execute-skip-when-halt-true | 4/4 | 2/4 | +50% |
+| trade-execute | slippage-exceeds-tolerance | 4/4 | 3/4 | +25% |
+| trade-execute | idempotent-rerun | 4/4 | 1/4 | +75% |
+
+Run the grader: `make evals` (runs both iterations) or `make evals-weather` (iteration-2 only). See [`evals/`](evals/) and `evals/iterations/iteration-2/benchmark.md`.
 
 ## Development
 
 ```bash
 make help              # list all targets
-make evals             # run the 12 research-skill evals
+make evals             # run 12 research evals + 15 weather evals
+make evals-weather     # run only the 15 weather-trading evals
 make install-runtime   # run scripts/install.sh (private runtime fetch + install)
 make verify            # smoke-smart-money + evals (full pre-PR gate)
 make clean             # remove __pycache__/, .pytest_cache/, *.pyc

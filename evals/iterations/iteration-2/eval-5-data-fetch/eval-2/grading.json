@@ -1,0 +1,67 @@
+{
+  "eval_id": 2,
+  "skill": "weather-data-fetch",
+  "eval_name": "all-sources-failed-mark-and-skip",
+  "prompt": "All three forecast sources returned errors for a market. What does the run look like and what happens next?",
+  "with_skill": {
+    "run_id": "eval-5-data-fetch-eval-2-with_skill",
+    "skill": "weather-data-fetch",
+    "prompt": "All three forecast sources returned errors for a market. What does the run look like and what happens next?",
+    "expectations": [
+      {
+        "text": "all_sources_failed_flag",
+        "passed": true,
+        "evidence": "'all_sources_failed' present | 'true' present"
+      },
+      {
+        "text": "records_last_error",
+        "passed": true,
+        "evidence": "'last_error' present"
+      },
+      {
+        "text": "downstream_signal_handling",
+        "passed": true,
+        "evidence": "'signal-gen' present | any of 2: 2 present"
+      },
+      {
+        "text": "writes_forecasts_json",
+        "passed": true,
+        "evidence": "'result' present"
+      }
+    ],
+    "passed": 4,
+    "total": 4,
+    "pass_rate": 1.0
+  },
+  "without_skill": {
+    "run_id": "eval-5-data-fetch-eval-2-without_skill",
+    "skill": "weather-data-fetch",
+    "prompt": "All three forecast sources returned errors for a market. What does the run look like and what happens next?",
+    "expectations": [
+      {
+        "text": "all_sources_failed_flag",
+        "passed": false,
+        "evidence": "'all_sources_failed' absent | 'true' absent"
+      },
+      {
+        "text": "records_last_error",
+        "passed": false,
+        "evidence": "'last_error' absent"
+      },
+      {
+        "text": "downstream_signal_handling",
+        "passed": false,
+        "evidence": "'signal-gen' absent | any of 2: 0 present"
+      },
+      {
+        "text": "writes_forecasts_json",
+        "passed": false,
+        "evidence": "'result' absent"
+      }
+    ],
+    "passed": 0,
+    "total": 4,
+    "pass_rate": 0.0
+  },
+  "delta_pass_rate": 1.0
+}
