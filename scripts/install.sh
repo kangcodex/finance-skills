@@ -63,7 +63,7 @@ cat <<'NEXT'
        $EDITOR .env
 
   2. Run the test suite to confirm everything works:
-       uv run pytest          # ~201 tests, <1s
+       make test              # ~201 tests, <1s (PYTHONNOUSERSITE=1 is set by the Makefile)
 
   3. Install the 5 weather-trading skills into your agent (OpenCode, Claude
      Code, Codex, Cursor, etc.):
