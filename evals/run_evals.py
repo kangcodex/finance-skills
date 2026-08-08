@@ -351,6 +351,14 @@ def main() -> int:
     iter_dir = root / benchmark["iteration"]
     iter_dir.mkdir(parents=True, exist_ok=True)
     benchmark_path = iter_dir / "benchmark.json"
+    # When run with --eval-set (subset), merge prior benchmark rows so a
+    # partial re-run never truncates the other eval sets' results.
+    if args.eval_set and benchmark_path.exists():
+        old = json.loads(benchmark_path.read_text(encoding="utf-8"))
+        known = {(e["skill"], e["eval_name"]) for e in benchmark["evals"]}
+        for e in old.get("evals", []):
+            if (e["skill"], e["eval_name"]) not in known:
+                benchmark["evals"].append(e)
     benchmark_path.write_text(json.dumps(benchmark, indent=2), encoding="utf-8")
     md_path = iter_dir / "benchmark.md"
     lines = [f"# Benchmark — {benchmark['iteration']}\n"]
