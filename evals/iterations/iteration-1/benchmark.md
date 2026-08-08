@@ -2,6 +2,9 @@
 
 | Skill | Eval | with_skill | without_skill | delta |
 | --- | --- | --- | --- | --- |
+| news-rss-watch | comprehensive-outlook-poll | 6/6 | 1/6 | +83% |
+| news-rss-watch | singapore-focus | 5/5 | 1/5 | +80% |
+| news-rss-watch | json-contract-poll | 5/5 | 1/5 | +80% |
 | smart-money-tracker | show-me-whales-buying-this-quarter | 4/4 | 1/4 | +75% |
 | smart-money-tracker | pelosi-tech-buys | 4/4 | 2/4 | +50% |
 | smart-money-tracker | q1-2026-smart-money-report | 3/4 | 2/4 | +25% |

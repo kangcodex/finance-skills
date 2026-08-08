@@ -10,7 +10,7 @@ A collection of agent skills for financial markets analysis, portfolio construct
 
 | Family | What it does | Skills |
 |--------|--------------|--------|
-| **Research** | One-shot analysis skills. The user asks a question, the agent produces a cited Markdown report. | `smart-money-tracker`, `daily-market-watch`, `thematic-stock-picker`, `sg-financial-advisor` |
+| **Research** | One-shot analysis skills. The user asks a question, the agent produces a cited Markdown report. | `smart-money-tracker`, `daily-market-watch`, `thematic-stock-picker`, `sg-financial-advisor`, `news-rss-watch` |
 | **Weather Trading** | Autonomous Polymarket trading agent. Runs unattended on a cron. The user sets up the wallet once, then the agent ticks. | `polymarket-wallet-setup`, `weather-data-fetch`, `signal-gen`, `risk-manage`, `trade-execute` |
 
 Both families share the same flat-skill convention (`SKILL.md` + `references/` + `examples/`). The weather-trading family additionally depends on a **private** `weather_runtime` Python package (sibling repo, not in this tree). The deterministic math + I/O lives in the private runtime; the public SKILL.md files are pure orchestration instructions.
@@ -73,7 +73,7 @@ All four research skills produce **source-cited Markdown reports** and follow a 
 
 | Skill | Folder | What it does |
 |-------|--------|--------------|
-| `smart-money-tracker` | [`skills/smart-money-tracker/`](skills/smart-money-tracker/) | Track SEC 13F institutional holdings + congressional STOCK Act trades + House Clerk disclosures. Convergence analysis between whales, politicians, retail flows. |
+| `news-rss-watch` | [`skills/news-rss-watch/`](skills/news-rss-watch/) | Deterministic RSS/Atom watcher over a 40-feed seed registry (US, China, Singapore, markets, important, arXiv research). Per-feed watermark dedup, cross-feed story clustering + importance scoring, per-category budget, nightly digest mode, Google News search-as-feed for gaps. 27 offline unit tests. |
 | `daily-market-watch` | [`skills/daily-market-watch/`](skills/daily-market-watch/) | Global finance news report — 6 sections (Market Overview, Value, Momentum, Allocation, Options, Trends/Risks/Events), 12 region zoom-ins, Fed signals integration. |
 | `thematic-stock-picker` | [`skills/thematic-stock-picker/`](skills/thematic-stock-picker/) | High-conviction 5-year thematic stock picker — 5 distinct policy-anchored themes × 5-8 screened small/mid-cap US/ADR names, with screening workings + sources + DD disclaimer. |
 | `sg-financial-advisor` | [`skills/sg-financial-advisor/`](skills/sg-financial-advisor/) | Singapore-licensed FA Rep skill — diagnose an insurance + CPF portfolio, compute the LIA gap, apply RES5 surrender warning + FAA-N20 BSC + M9A ILP filter, prioritise a Sequence-style action checklist, integrate with the National Protection stack. |
@@ -84,6 +84,7 @@ All four research skills produce **source-cited Markdown reports** and follow a 
 |------|----|----------|
 | `smart-money-tracker` | `thematic-stock-picker` | When picking a theme, corroborate the basket against institutional positioning (13F) and congressional trades (STOCK Act). |
 | `daily-market-watch` | `thematic-stock-picker` | When picking a theme, ground the macro/policy backdrop in the current market tape (Fed signals, rate path, sentiment). |
+| `news-rss-watch` | `daily-market-watch` | Poll feeds first for raw new stories; hand the JSON to daily-market-watch when the user wants a synthesized source-cited report instead of raw items. |
 | `thematic-stock-picker` | `smart-money-tracker` | When the convergence report flags a ticker, add it to the watchlist and pull a deeper thematic context. |
 | `sg-financial-advisor` | `thematic-stock-picker` | When the LIA gap analysis flags freed-up cashflow (e.g. surrender of legacy plans), direct the surplus to a screened thematic basket. |
 | `sg-financial-advisor` | `daily-market-watch` | When the action checklist calls for deploying surplus to investments, ground the entry in current macro/market context. |
@@ -116,7 +117,7 @@ The 5 weather-trading skills each have 3 evals (15 total) — see `evals/iterati
 
 Two iteration dirs cover the two skill families. Both are evaluated by the same grader (`evals/run_evals.py`).
 
-**Research skills (iteration-1):** 12/12 evals beat baseline, mean delta +57% (90.5% with-skill pass rate).
+**Research skills (iteration-1):** 15/15 evals beat baseline, mean delta +62% (91.9% with-skill pass rate).
 
 **Weather-trading skills (iteration-2):** 15/15 evals at 4/4 (100% with-skill pass rate, mean delta +70%).
 
@@ -134,6 +135,9 @@ Two iteration dirs cover the two skill families. Both are evaluated by the same 
 | sg-financial-advisor | default-29yo-legacy-ilp | 16/16 | 3/16 | +81% |
 | sg-financial-advisor | mid-career-38yo-family-ilp-cleanup | 15/15 | 3/15 | +80% |
 | sg-financial-advisor | lite-portfolio-no-legacy | 10/10 | 2/10 | +80% |
+| news-rss-watch | comprehensive-outlook-poll | 6/6 | 1/6 | +83% |
+| news-rss-watch | singapore-focus | 5/5 | 1/5 | +80% |
+| news-rss-watch | json-contract-poll | 5/5 | 1/5 | +80% |
 
 **Weather-trading skills (iteration-2):**
 
@@ -180,6 +184,7 @@ finance-skills/
 │   ├── daily-market-watch/            # research skill 2
 │   ├── thematic-stock-picker/         # research skill 3
 │   ├── sg-financial-advisor/          # research skill 4
+│   ├── news-rss-watch/                # research skill 5 (deterministic feed watcher)
 │   ├── polymarket-wallet-setup/       # weather-trading skill 1
 │   ├── weather-data-fetch/            # weather-trading skill 2
 │   ├── signal-gen/                    # weather-trading skill 3

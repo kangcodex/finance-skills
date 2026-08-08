@@ -5,6 +5,7 @@ All notable changes to this repo are documented here. Versions follow [Semantic 
 ## [Unreleased]
 
 ### Added
+- `news-rss-watch` — deterministic, agent-agnostic RSS/Atom news watcher skill. 40-feed seed registry (US, China, Singapore, markets, important, arXiv research), per-feed watermark dedup, cross-feed story clustering + importance scoring, per-category budget, nightly digest mode (`--action digest`), Google News search-as-feed (`--action add-search`), arXiv topic watcher (`watch_arxiv.py`). Stdlib-only Python, strict JSON/markdown CLI contract, 27 offline unit tests (`make test-news-rss`).
 - 5 weather-trading skills (orchestration-only, no executable code): `polymarket-wallet-setup`, `weather-data-fetch`, `signal-gen`, `risk-manage`, `trade-execute`. Each is a flat `SKILL.md` that references the `weather_runtime` Python package.
 - `scripts/install.sh` — one-shot installer for the **private** runtime. Fetches the runtime tarball, runs `uv sync` + editable install, drops a `.env` from `.env.example`, and prints the next-step commands. Env-overridable: `INSTALL_DIR`, `RUNTIME_REPO` (default `kangcodex/weather-runtime`), `RUNTIME_REF` (default `main`).
 - `docs/decisions/ADR-003` through `ADR-012` — 10 ADRs covering the 5-skill family, taxonomy, Amoy-default, custody, signal blend, sizing, cron, fixed strategy, autohalt, docs structure.
@@ -19,9 +20,15 @@ All notable changes to this repo are documented here. Versions follow [Semantic 
 - `docs/issues/`, `docs/prds/`, `docs/api/` — gitignored, not part of the public scope.
 
 ### Test counts
-- Research-skill evals (iteration-1): 12/12 passing, mean delta +57% (unchanged from v1.1.0).
+- Research-skill evals (iteration-1): 15/15 evals beat baseline, mean delta +62% (91.9% with_skill pass rate). News-rss-watch: 16/16 with_skill vs 3/16 baseline.
 - **Weather-trading skill evals (NEW, iteration-2): 15/15 at 4/4 (100% with_skill pass rate, mean delta +70%).** Aggregate 60/60 with_skill vs 18/60 baseline. All 15 with_skill beat baseline. See `evals/iterations/iteration-2/benchmark.md`.
 - Runtime tests: 201/201 (run from the private runtime repo after install).
+
+### Added (iteration-1 news-rss-watch evals)
+- `evals/iterations/iteration-1/eval-4-news-rss-watch/` — 3 prompts (comprehensive-outlook-poll, singapore-focus, json-contract-poll). Asserts all 5 category sections, source URLs, importance scores, cross-feed dedup evidence, region-scope isolation, and the JSON contract fields (count/results/clusters/errors).
+
+### Fixed
+- `run_evals.py` — partial `--eval-set` runs now merge prior benchmark rows instead of truncating the benchmark to the selected set.
 
 ### Added (iteration-2 weather-trading evals)
 - `evals/iterations/iteration-2/eval-4-wallet/` — 3 prompts (set-me-up-on-amoy, mainnet-upgrade-with-cold-wallet, check-status-and-rotate-session). Asserts env-var setup, chmod 600, no commit secrets, mainnet gate, cold-wallet signature, auto-renewal thresholds.

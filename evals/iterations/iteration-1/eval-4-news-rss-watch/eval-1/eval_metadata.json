@@ -1,0 +1,39 @@
+{
+  "eval_id": 1,
+  "skill": "news-rss-watch",
+  "eval_name": "singapore-focus",
+  "prompt": "Just Singapore news today please — local news and SG market news. Nothing else.",
+  "expected_output": "Poll scoped to the singapore category only: local sources (CNA, Straits Times, Business Times, Google News SG), no other category sections",
+  "assertions": [
+    {
+      "id": "A1",
+      "name": "singapore_section_present",
+      "description": "Output must contain the singapore category section heading (anchored line match — a title starting with 'US' must not count as a section)",
+      "check": "output contains 1 instances of '^# singapore$'"
+    },
+    {
+      "id": "A2",
+      "name": "scope_excludes_other_regions",
+      "description": "Output must have exactly ONE section heading — singapore — and no us/china/markets/important/research sections",
+      "check": "output contains 1 instances of '^# (us|china|singapore|markets|important|research)$'"
+    },
+    {
+      "id": "A3",
+      "name": "local_sg_sources",
+      "description": "Representative stories must link to local SG outlets (CNA, Straits Times, Business Times)",
+      "check": "output contains at least 1 of: 'channelnewsasia.com', 'straitstimes.com', 'businesstimes.com.sg'"
+    },
+    {
+      "id": "A4",
+      "name": "story_urls_present",
+      "description": "Output must carry at least 3 source URLs",
+      "check": "output contains 3 instances of 'https://'"
+    },
+    {
+      "id": "A5",
+      "name": "no_crash_output",
+      "description": "Output must not contain a Python traceback",
+      "check": "output does NOT contain 'Traceback'"
+    }
+  ]
+}

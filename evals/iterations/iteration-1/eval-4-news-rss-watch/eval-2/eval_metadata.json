@@ -1,0 +1,39 @@
+{
+  "eval_id": 2,
+  "skill": "news-rss-watch",
+  "eval_name": "json-contract-poll",
+  "prompt": "Poll all feeds and give me the raw JSON output, don't summarize it.",
+  "expected_output": "Strict JSON following the skill's contract: count, results with per-category clusters (cluster_id, score, matched_keywords, other_sources, items), errors array",
+  "assertions": [
+    {
+      "id": "A1",
+      "name": "top_level_fields",
+      "description": "Output must contain the top-level contract fields: count, results, errors",
+      "check": "output contains '\"count\"' AND output contains '\"results\"' AND output contains '\"errors\"'"
+    },
+    {
+      "id": "A2",
+      "name": "cluster_fields",
+      "description": "Output must contain cluster-level fields: clusters, matched_keywords, other_sources",
+      "check": "output contains '\"clusters\"' AND output contains '\"matched_keywords\"' AND output contains '\"other_sources\"'"
+    },
+    {
+      "id": "A3",
+      "name": "item_and_score_fields",
+      "description": "Output must contain item-level fields: feed_id, score, cluster_size",
+      "check": "output contains '\"feed_id\"' AND output contains '\"score\"' AND output contains '\"cluster_size\"'"
+    },
+    {
+      "id": "A4",
+      "name": "timestamp_field",
+      "description": "Output must contain the polled_at timestamp field",
+      "check": "output contains '\"polled_at\"'"
+    },
+    {
+      "id": "A5",
+      "name": "no_crash_output",
+      "description": "Output must not contain a Python traceback",
+      "check": "output does NOT contain 'Traceback'"
+    }
+  ]
+}

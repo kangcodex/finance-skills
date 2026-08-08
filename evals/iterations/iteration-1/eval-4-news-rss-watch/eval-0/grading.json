@@ -1,0 +1,87 @@
+{
+  "eval_id": 0,
+  "skill": "news-rss-watch",
+  "eval_name": "comprehensive-outlook-poll",
+  "prompt": "Check the news for a comprehensive outlook \u2014 US, China, Singapore, markets, and important world news. What's new since yesterday?",
+  "with_skill": {
+    "run_id": "eval-4-news-rss-watch-eval-0-with_skill",
+    "skill": "news-rss-watch",
+    "prompt": "Check the news for a comprehensive outlook \u2014 US, China, Singapore, markets, and important world news. What's new since yesterday?",
+    "expectations": [
+      {
+        "text": "all_five_category_sections",
+        "passed": true,
+        "evidence": "'# us' present | '# china' present | '# singapore' present | '# markets' present | '# important' present"
+      },
+      {
+        "text": "story_urls_present",
+        "passed": true,
+        "evidence": "regex /https:/// matched 40 times (need 20)"
+      },
+      {
+        "text": "scores_present",
+        "passed": true,
+        "evidence": "regex /\u2014 score/ matched 40 times (need 8)"
+      },
+      {
+        "text": "cross_feed_dedup_visible",
+        "passed": true,
+        "evidence": "regex /also:/ matched 7 times (need 3)"
+      },
+      {
+        "text": "no_crash_output",
+        "passed": true,
+        "evidence": "'Traceback' absent"
+      },
+      {
+        "text": "research_excluded_by_scope",
+        "passed": true,
+        "evidence": "regex /^# (us|china|singapore|markets|important|research)$/ matched 5 times (need 5)"
+      }
+    ],
+    "passed": 6,
+    "total": 6,
+    "pass_rate": 1.0
+  },
+  "without_skill": {
+    "run_id": "eval-4-news-rss-watch-eval-0-without_skill",
+    "skill": "news-rss-watch",
+    "prompt": "Check the news for a comprehensive outlook \u2014 US, China, Singapore, markets, and important world news. What's new since yesterday?",
+    "expectations": [
+      {
+        "text": "all_five_category_sections",
+        "passed": false,
+        "evidence": "'# us' absent | '# china' absent | '# singapore' absent | '# markets' absent | '# important' absent"
+      },
+      {
+        "text": "story_urls_present",
+        "passed": false,
+        "evidence": "regex /https:/// matched 0 times (need 20)"
+      },
+      {
+        "text": "scores_present",
+        "passed": false,
+        "evidence": "regex /\u2014 score/ matched 0 times (need 8)"
+      },
+      {
+        "text": "cross_feed_dedup_visible",
+        "passed": false,
+        "evidence": "regex /also:/ matched 0 times (need 3)"
+      },
+      {
+        "text": "no_crash_output",
+        "passed": true,
+        "evidence": "'Traceback' absent"
+      },
+      {
+        "text": "research_excluded_by_scope",
+        "passed": false,
+        "evidence": "regex /^# (us|china|singapore|markets|important|research)$/ matched 0 times (need 5)"
+      }
+    ],
+    "passed": 1,
+    "total": 6,
+    "pass_rate": 0.16666666666666666
+  },
+  "delta_pass_rate": 0.8333333333333334
+}

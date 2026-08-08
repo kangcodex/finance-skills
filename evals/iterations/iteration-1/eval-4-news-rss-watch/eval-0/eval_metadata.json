@@ -1,0 +1,45 @@
+{
+  "eval_id": 0,
+  "skill": "news-rss-watch",
+  "eval_name": "comprehensive-outlook-poll",
+  "prompt": "Check the news for a comprehensive outlook — US, China, Singapore, markets, and important world news. What's new since yesterday?",
+  "expected_output": "Clustered markdown poll covering all 5 categories (us, china, singapore, markets, important), each story with title + URL + score, cross-feed dedup visible as '(also: ...)', no errors",
+  "assertions": [
+    {
+      "id": "A1",
+      "name": "all_five_category_sections",
+      "description": "Output must contain all 5 requested category sections (us, china, singapore, markets, important)",
+      "check": "output contains '# us' AND output contains '# china' AND output contains '# singapore' AND output contains '# markets' AND output contains '# important'"
+    },
+    {
+      "id": "A2",
+      "name": "story_urls_present",
+      "description": "Output must carry source URLs for the stories (at least 20 https:// links)",
+      "check": "output contains 20 instances of 'https://'"
+    },
+    {
+      "id": "A3",
+      "name": "scores_present",
+      "description": "Each rendered story must carry its importance score ('— score N.N')",
+      "check": "output contains 8 instances of '— score'"
+    },
+    {
+      "id": "A4",
+      "name": "cross_feed_dedup_visible",
+      "description": "Output must show dedup evidence: the same story picked up by multiple feeds rendered once with '(also: ...)' source list",
+      "check": "output contains 3 instances of 'also:'"
+    },
+    {
+      "id": "A5",
+      "name": "no_crash_output",
+      "description": "Output must not contain a Python traceback (per-feed failures must be isolated, not crash the batch)",
+      "check": "output does NOT contain 'Traceback'"
+    },
+    {
+      "id": "A6",
+      "name": "research_excluded_by_scope",
+      "description": "Requested categories exclude research; output must have exactly the 5 requested section headings and no research section (anchored line regex — title words like 'US' must not false-positive)",
+      "check": "output contains 5 instances of '^# (us|china|singapore|markets|important|research)$'"
+    }
+  ]
+}

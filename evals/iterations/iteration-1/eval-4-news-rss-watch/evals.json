@@ -1,0 +1,26 @@
+{
+  "skill_name": "news-rss-watch",
+  "evals": [
+    {
+      "id": 1,
+      "name": "comprehensive-outlook-poll",
+      "prompt": "Check the news for a comprehensive outlook — US, China, Singapore, markets, and important world news. What's new since yesterday?",
+      "expected_output": "Clustered markdown poll covering all 5 categories (us, china, singapore, markets, important), each story with title + URL + score, cross-feed dedup visible as '(also: ...)', no errors",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "singapore-focus",
+      "prompt": "Just Singapore news today please — local news and SG market news. Nothing else.",
+      "expected_output": "Poll scoped to the singapore category only: local sources (CNA, Straits Times, Business Times, Google News SG), no other category sections",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "json-contract-poll",
+      "prompt": "Poll all feeds and give me the raw JSON output, don't summarize it.",
+      "expected_output": "Strict JSON following the skill's contract: count, results with per-category clusters (cluster_id, score, matched_keywords, other_sources, items), errors array",
+      "files": []
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "eval_id": 1,
+  "skill": "news-rss-watch",
+  "eval_name": "singapore-focus",
+  "prompt": "Just Singapore news today please \u2014 local news and SG market news. Nothing else.",
+  "with_skill": {
+    "run_id": "eval-4-news-rss-watch-eval-1-with_skill",
+    "skill": "news-rss-watch",
+    "prompt": "Just Singapore news today please \u2014 local news and SG market news. Nothing else.",
+    "expectations": [
+      {
+        "text": "singapore_section_present",
+        "passed": true,
+        "evidence": "regex /^# singapore$/ matched 1 times (need 1)"
+      },
+      {
+        "text": "scope_excludes_other_regions",
+        "passed": true,
+        "evidence": "regex /^# (us|china|singapore|markets|important|research)$/ matched 1 times (need 1)"
+      },
+      {
+        "text": "local_sg_sources",
+        "passed": true,
+        "evidence": "3/3 present (need >=1)"
+      },
+      {
+        "text": "story_urls_present",
+        "passed": true,
+        "evidence": "regex /https:/// matched 8 times (need 3)"
+      },
+      {
+        "text": "no_crash_output",
+        "passed": true,
+        "evidence": "'Traceback' absent"
+      }
+    ],
+    "passed": 5,
+    "total": 5,
+    "pass_rate": 1.0
+  },
+  "without_skill": {
+    "run_id": "eval-4-news-rss-watch-eval-1-without_skill",
+    "skill": "news-rss-watch",
+    "prompt": "Just Singapore news today please \u2014 local news and SG market news. Nothing else.",
+    "expectations": [
+      {
+        "text": "singapore_section_present",
+        "passed": false,
+        "evidence": "regex /^# singapore$/ matched 0 times (need 1)"
+      },
+      {
+        "text": "scope_excludes_other_regions",
+        "passed": false,
+        "evidence": "regex /^# (us|china|singapore|markets|important|research)$/ matched 0 times (need 1)"
+      },
+      {
+        "text": "local_sg_sources",
+        "passed": false,
+        "evidence": "0/3 present (need >=1)"
+      },
+      {
+        "text": "story_urls_present",
+        "passed": false,
+        "evidence": "regex /https:/// matched 0 times (need 3)"
+      },
+      {
+        "text": "no_crash_output",
+        "passed": true,
+        "evidence": "'Traceback' absent"
+      }
+    ],
+    "passed": 1,
+    "total": 5,
+    "pass_rate": 0.2
+  },
+  "delta_pass_rate": 0.8
+}

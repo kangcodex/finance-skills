@@ -16,9 +16,10 @@ EVALS_RUNNER := run_evals.py
 EVALS_ITERATION ?= iteration-1
 
 .PHONY: help evals evals-smart-money evals-daily evals-thematic evals-sg-fa \
+        evals-news-rss \
         evals-weather evals-weather-wallet evals-weather-data-fetch \
         evals-weather-signal-gen evals-weather-risk-manage evals-weather-trade-execute \
-        install-runtime smoke-smart-money clean verify lint
+        install-runtime smoke-smart-money test-news-rss clean verify lint
 
 help:
 	@echo "Targets:"
@@ -28,6 +29,7 @@ help:
 	@echo "  make evals-daily          - run only the daily-market-watch evals (3 prompts)"
 	@echo "  make evals-thematic       - run only the thematic-stock-picker evals (3 prompts)"
 	@echo "  make evals-sg-fa          - run only the sg-financial-advisor evals (3 prompts)"
+	@echo "  make evals-news-rss       - run only the news-rss-watch evals (3 prompts)"
 	@echo "  --- Weather-trading skill evals (5 skills, 15 prompts, iteration-2) ---"
 	@echo "  make evals-weather                  - run all 15 weather-trading evals"
 	@echo "  make evals-weather-wallet           - run only polymarket-wallet-setup (3)"
@@ -38,6 +40,7 @@ help:
 	@echo "  --- Weather-trading runtime (PRIVATE — separate repo) ---"
 	@echo "  make install-runtime      - run scripts/install.sh to fetch + install the private runtime"
 	@echo "  --- Housekeeping ---"
+	@echo "  make test-news-rss      - run the 27 offline news-rss-watch unit tests"
 	@echo "  make smoke-smart-money    - smoke-test the scripts/ wrappers (--help)"
 	@echo "  make verify               - smoke-smart-money + evals (full pre-PR gate)"
 	@echo "  make clean                - remove __pycache__/, .pytest_cache/, *.pyc"
@@ -58,8 +61,16 @@ evals-daily:
 evals-thematic:
 	cd $(EVALS_DIR) && $(PYTHON) $(EVALS_RUNNER) --iteration $(EVALS_ITERATION) --eval-set eval-2-thematic
 
+# --- news-rss-watch unit tests (offline, stdlib unittest) ---
+
+test-news-rss:
+	$(PYTHON) -m unittest discover -s skills/news-rss-watch/tests
+
 evals-sg-fa:
 	cd $(EVALS_DIR) && $(PYTHON) $(EVALS_RUNNER) --iteration $(EVALS_ITERATION) --eval-set eval-3-sgfa
+
+evals-news-rss:
+	cd $(EVALS_DIR) && $(PYTHON) $(EVALS_RUNNER) --iteration $(EVALS_ITERATION) --eval-set eval-4-news-rss-watch
 
 # --- weather-trading skill evals (iteration-2) ---
 

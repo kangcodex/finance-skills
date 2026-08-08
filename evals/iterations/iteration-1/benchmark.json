@@ -3,6 +3,39 @@
   "skills": [],
   "evals": [
     {
+      "skill": "news-rss-watch",
+      "eval_name": "comprehensive-outlook-poll",
+      "with_skill_pass_rate": 1.0,
+      "without_skill_pass_rate": 0.16666666666666666,
+      "delta": 0.8333333333333334,
+      "with_skill_passed": 6,
+      "with_skill_total": 6,
+      "without_skill_passed": 1,
+      "without_skill_total": 6
+    },
+    {
+      "skill": "news-rss-watch",
+      "eval_name": "singapore-focus",
+      "with_skill_pass_rate": 1.0,
+      "without_skill_pass_rate": 0.2,
+      "delta": 0.8,
+      "with_skill_passed": 5,
+      "with_skill_total": 5,
+      "without_skill_passed": 1,
+      "without_skill_total": 5
+    },
+    {
+      "skill": "news-rss-watch",
+      "eval_name": "json-contract-poll",
+      "with_skill_pass_rate": 1.0,
+      "without_skill_pass_rate": 0.2,
+      "delta": 0.8,
+      "with_skill_passed": 5,
+      "with_skill_total": 5,
+      "without_skill_passed": 1,
+      "without_skill_total": 5
+    },
+    {
       "skill": "smart-money-tracker",
       "eval_name": "show-me-whales-buying-this-quarter",
       "with_skill_pass_rate": 1.0,
