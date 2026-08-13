@@ -289,6 +289,9 @@ design/
 issues/
 prds/
 
+# Polymarket skills — kept local, never tracked
+skills/polymarket-*/
+
 # Test runs / working artifacts (not part of any skill)
 test-runs/
 
