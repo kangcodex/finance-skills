@@ -289,12 +289,5 @@ design/
 issues/
 prds/
 
-# Polymarket skills — kept local, never tracked
-skills/polymarket-*/
-
 # Test runs / working artifacts (not part of any skill)
 test-runs/
-
-# Runtime state and secrets for the weather-trading family — never commit
-runtime/state/
-runtime/secrets/

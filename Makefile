@@ -10,35 +10,23 @@ SMT_VENV_PYTHON ?= skills/smart-money-tracker/.venv/bin/python
 # (no scripts; the SKILL.md is the contract). Their canonical outputs live
 # in each skill's examples/ directory.
 
-# Evals (cross-skill, research + weather-trading families)
+# Evals (research skills)
 EVALS_DIR := evals
 EVALS_RUNNER := run_evals.py
 EVALS_ITERATION ?= iteration-1
 
 .PHONY: help evals evals-smart-money evals-daily evals-thematic evals-sg-fa \
-        evals-news-rss \
-        evals-weather evals-weather-wallet evals-weather-data-fetch \
-        evals-weather-signal-gen evals-weather-risk-manage evals-weather-trade-execute \
-        install-runtime smoke-smart-money test-news-rss clean verify lint
+        evals-news-rss smoke-smart-money test-news-rss clean verify lint
 
 help:
 	@echo "Targets:"
-	@echo "  --- Research-skill evals (4 skills, 12 prompts, iteration-1) ---"
-	@echo "  make evals                - run all 12 research + 15 weather evals (iteration-1 + iteration-2)"
+	@echo "  --- Research-skill evals (5 skills, 15 prompts, iteration-1) ---"
+	@echo "  make evals                - run all research evals"
 	@echo "  make evals-smart-money    - run only the smart-money-tracker evals (3 prompts)"
 	@echo "  make evals-daily          - run only the daily-market-watch evals (3 prompts)"
 	@echo "  make evals-thematic       - run only the thematic-stock-picker evals (3 prompts)"
 	@echo "  make evals-sg-fa          - run only the sg-financial-advisor evals (3 prompts)"
 	@echo "  make evals-news-rss       - run only the news-rss-watch evals (3 prompts)"
-	@echo "  --- Weather-trading skill evals (5 skills, 15 prompts, iteration-2) ---"
-	@echo "  make evals-weather                  - run all 15 weather-trading evals"
-	@echo "  make evals-weather-wallet           - run only polymarket-wallet-setup (3)"
-	@echo "  make evals-weather-data-fetch       - run only weather-data-fetch (3)"
-	@echo "  make evals-weather-signal-gen       - run only signal-gen (3)"
-	@echo "  make evals-weather-risk-manage      - run only risk-manage (3)"
-	@echo "  make evals-weather-trade-execute    - run only trade-execute (3)"
-	@echo "  --- Weather-trading runtime (PRIVATE — separate repo) ---"
-	@echo "  make install-runtime      - run scripts/install.sh to fetch + install the private runtime"
 	@echo "  --- Housekeeping ---"
 	@echo "  make test-news-rss      - run the 27 offline news-rss-watch unit tests"
 	@echo "  make smoke-smart-money    - smoke-test the scripts/ wrappers (--help)"
@@ -50,7 +38,6 @@ help:
 
 evals:
 	cd $(EVALS_DIR) && $(PYTHON) $(EVALS_RUNNER) --iteration $(EVALS_ITERATION)
-	cd $(EVALS_DIR) && $(PYTHON) $(EVALS_RUNNER) --iteration iteration-2
 
 evals-smart-money:
 	cd $(EVALS_DIR) && $(PYTHON) $(EVALS_RUNNER) --iteration $(EVALS_ITERATION) --eval-set eval-0-smart-money
@@ -71,32 +58,6 @@ evals-sg-fa:
 
 evals-news-rss:
 	cd $(EVALS_DIR) && $(PYTHON) $(EVALS_RUNNER) --iteration $(EVALS_ITERATION) --eval-set eval-4-news-rss-watch
-
-# --- weather-trading skill evals (iteration-2) ---
-
-evals-weather:
-	cd $(EVALS_DIR) && $(PYTHON) $(EVALS_RUNNER) --iteration iteration-2
-
-evals-weather-wallet:
-	cd $(EVALS_DIR) && $(PYTHON) $(EVALS_RUNNER) --iteration iteration-2 --eval-set eval-4-wallet
-
-evals-weather-data-fetch:
-	cd $(EVALS_DIR) && $(PYTHON) $(EVALS_RUNNER) --iteration iteration-2 --eval-set eval-5-data-fetch
-
-evals-weather-signal-gen:
-	cd $(EVALS_DIR) && $(PYTHON) $(EVALS_RUNNER) --iteration iteration-2 --eval-set eval-6-signal-gen
-
-evals-weather-risk-manage:
-	cd $(EVALS_DIR) && $(PYTHON) $(EVALS_RUNNER) --iteration iteration-2 --eval-set eval-7-risk-manage
-
-evals-weather-trade-execute:
-	cd $(EVALS_DIR) && $(PYTHON) $(EVALS_RUNNER) --iteration iteration-2 --eval-set eval-8-trade-execute
-
-# --- weather-trading runtime install (downloads from a private location) ---
-
-install-runtime:
-	@command -v bash >/dev/null 2>&1 || { echo "ERROR: bash required."; exit 1; }
-	./scripts/install.sh
 
 # --- smoke test for the one script-driven skill ---
 
